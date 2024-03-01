@@ -31,6 +31,15 @@ CREATE TABLE SistemaOperativo(
 	
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+
+CREATE TABLE TipoEquipo(
+	id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	nombre varchar (70) NOT NULL,
+	
+	CONSTRAINT PK_idTipoEquipo PRIMARY KEY (id)
+	
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 CREATE TABLE Equipo(
     id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
     codigoEquipo varchar(10) NULL,
@@ -46,13 +55,17 @@ CREATE TABLE Equipo(
     observaciones varchar(500) NULL,
 	valorEquipo DECIMAL (7,2) NULL,
     idLinea TINYINT UNSIGNED NOT NULL,
+	idTipoEquipo TINYINT UNSIGNED NOT NULL,
 	idSistemaOperativo TINYINT UNSIGNED NOT NULL,
 	
 	CONSTRAINT PK_idEquipo PRIMARY KEY (id),
 	CONSTRAINT FK_Linea_id FOREIGN KEY (idLinea) REFERENCES Linea(id),
+	CONSTRAINT FK_TipoEquipo_id FOREIGN KEY (idTipoEquipo) REFERENCES TipoEquipo(id),
 	CONSTRAINT FK_SistemaOperativo_id FOREIGN KEY (idSistemaOperativo) REFERENCES SistemaOperativo(id),
 	CONSTRAINT UQ_Equipo_codigoEquipo UNIQUE (codigoEquipo)
 
+	--PONER LOS CHECKS DE QUE NO SE PUEDAN INTRODUCIR SISTEMAS OPERATIVOS EN FOTOCOPIADORAS
+	
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 CREATE TABLE Mantenimiento(
