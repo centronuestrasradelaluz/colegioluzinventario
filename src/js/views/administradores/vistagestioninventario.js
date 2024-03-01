@@ -14,7 +14,7 @@ export class VistaGestionInventario extends Vista {
 
         this.divListadoEquipos = this.div.querySelector('#divListadoEquipos');
         this.divAltaEquipos = this.div.querySelector('#divAltaEquipos');
-
+        this.divConsultaEquipos = this.div.querySelector('#divConsultaEquipo');
        //Elementos vista Listado
 
        this.thead = this.div.getElementsByTagName('thead')[0];
@@ -22,10 +22,18 @@ export class VistaGestionInventario extends Vista {
        this.busqueda = ""
        this.cargarEncabezado();
 
+       //Elmentos consulta equipo
+
+       this.theadConsulta = this.div.getElementsByTagName('thead')[1];
+       this.tbodyConsulta = this.div.getElementsByTagName('tbody')[1];
+
        //Botones de la vista
        this.botonVolverAltaEquipos = this.div.querySelector('#botonVolverAltaEquipos');
        this.botonVolverAltaEquipos.addEventListener('click', this.volver.bind(this));
 
+       this.botonVolverConsultaEquipos = this.div.querySelector('#botonVolverConsultaEquipos');
+       this.botonVolverConsultaEquipos.addEventListener('click', this.volver.bind(this));
+       
        this.botonAnadir = this.div.querySelector('#aceptar')
        this.botonAnadir.addEventListener('click', this.ingresarEquipo.bind(this));
 
@@ -38,7 +46,7 @@ export class VistaGestionInventario extends Vista {
 
        this.esModificacion = false
         this.controlador.dameEquipos("")
-        this.mostrarOcultarCrud(true,false,false)
+        this.mostrarOcultarCrud(true,false,false,false)
         
     }
      /**
@@ -60,7 +68,7 @@ export class VistaGestionInventario extends Vista {
 
      //metodo para ocultar el crud de la gestion de hijos
 
-     mostrarOcultarCrud(listado, alta, modificacion){
+     mostrarOcultarCrud(listado, alta, modificacion,consulta){
 
     
         if (alta && !modificacion){
@@ -73,20 +81,23 @@ export class VistaGestionInventario extends Vista {
         if (listado){
             this.esModificacion = false;
         }
+        if(consulta){
+            this.esModificacion = false
+        }
 
         this.divAltaEquipos.style.display = alta ? 'block' : 'none';
         this.divListadoEquipos.style.display = listado ? 'block' : 'none';
-
+        this.divConsultaEquipos.style.display = consulta ? 'block': 'none';
        
         console.log('modificacion global', this.esModificacion)
     }
     anadir() {
-        this.mostrarOcultarCrud(false, true, false);
+        this.mostrarOcultarCrud(false, true, false,false);
        
     }
     //modificar arrelo a los campos de los equipos
     modificar(equipo){
-        this.mostrarOcultarCrud(false,true,true)
+        this.mostrarOcultarCrud(false,true,true,false)
         this.campoEstado.style.display = "block"
         this.idUsuario = usuario.id;
         this.inputsAlta[0].value = usuario.nombre;
@@ -118,7 +129,7 @@ export class VistaGestionInventario extends Vista {
 
     volver() {
 
-        this.mostrarOcultarCrud(true, false,false)
+        this.mostrarOcultarCrud(true, false,false,false)
 
         this.formAlta.reset()
 
@@ -294,14 +305,22 @@ export class VistaGestionInventario extends Vista {
                 tr.appendChild(tdUbicacion);
                 tdUbicacion.textContent = equipo.ubicacion
 
-                let tdRol = document.createElement('td');
-                tr.appendChild(tdRol);
+               /* let tdRol = document.createElement('td');
+                tr.appendChild(tdRol);*/
 
 
                 let td2 = document.createElement('td');
                 td2.classList.add('tdOperaciones');
                 td2.setAttribute('colspan', '2');
                 tr.appendChild(td2);
+
+               
+                let iconoConsultar = document.createElement('img');
+                iconoConsultar.setAttribute('src','./img/icons/edit_children.svg');
+                iconoConsultar.setAttribute('alt', 'Consultar usuario');
+                iconoConsultar.setAttribute('title','Consultar usuario');
+                iconoConsultar.addEventListener('click', this.consultar.bind(this, equipo));
+                td2.appendChild(iconoConsultar);
 
                 let iconoEditar = document.createElement('img');
                 iconoEditar.setAttribute('src','./img/icons/edit_children.svg');
@@ -319,6 +338,145 @@ export class VistaGestionInventario extends Vista {
             }
 
         } 
+    }
+
+    consultar(equipo){
+
+        this.mostrarOcultarCrud(false,false,false,true)
+
+        this.theadConsulta.innerHTML = '';
+
+        let trTitulo = document.createElement('tr');
+        let tdTitulo = document.createElement('td');
+        tdTitulo.textContent = 'Equipo Codigo ' + equipo.codigoEquipo;
+        tdTitulo.setAttribute('colspan', '2');
+        trTitulo.appendChild(tdTitulo);
+
+        let trInformacion = document.createElement('tr');
+        let tdInformacion = document.createElement('td');
+        tdInformacion.textContent = 'Campo'
+
+        let tdDato = document.createElement('td');
+
+        trInformacion.appendChild(tdInformacion);
+        trInformacion.appendChild(tdDato);
+
+        this.theadConsulta.appendChild(trTitulo);
+        this.theadConsulta.appendChild(trInformacion);
+
+
+        this.tbodyConsulta.innerHTML = '';
+
+        let trProveedor = document.createElement('tr')
+        let tdProveedor = document.createElement('td')
+        tdProveedor.textContent = "Proveedor"
+        let tdDatoProveedor = document.createElement('td')
+        tdDatoProveedor.textContent = equipo.proveedor
+        this.tbodyConsulta.appendChild(trProveedor)
+
+        trProveedor.appendChild(tdProveedor)
+        trProveedor.appendChild(tdDatoProveedor)
+
+        let trMarca = document.createElement('tr')
+        let tdMarca = document.createElement('td')
+        tdMarca.textContent = "Marca"
+        let tdDatoMarca = document.createElement('td')
+        tdDatoMarca.textContent = equipo.marca
+        this.tbodyConsulta.appendChild(trMarca)
+
+        trMarca.appendChild(tdMarca)
+        trMarca.appendChild(tdDatoMarca)
+
+        let trMonitor = document.createElement('tr')
+        let tdMonitor = document.createElement('td')
+        tdMonitor.textContent = "Monitor"
+        let tdDatoMonitor = document.createElement('td')
+        tdDatoMonitor.textContent = equipo.monitor
+        this.tbodyConsulta.appendChild(trMonitor)
+
+        trMarca.appendChild(tdMonitor)
+        trMarca.appendChild(tdDatoMonitor)
+
+        let trRam = document.createElement('tr')
+        let tdRam = document.createElement('td')
+        tdRam.textContent = "Ram"
+        let tdDatoRam = document.createElement('td')
+        tdDatoRam.textContent = equipo.ram
+        this.tbodyConsulta.appendChild(trRam)
+
+        trRam.appendChild(tdRam)
+        trRam.appendChild(tdDatoRam)
+
+        let trDiscoDuro = document.createElement('tr')
+        let tdDiscoDuro = document.createElement('td')
+        tdDiscoDuro.textContent = "DiscoDuro"
+        let tdDatoDiscoDuro = document.createElement('td')
+        tdDatoDiscoDuro.textContent = equipo.discoDuro
+        this.tbodyConsulta.appendChild(trDiscoDuro)
+
+        trDiscoDuro.appendChild(tdDiscoDuro)
+        trDiscoDuro.appendChild(tdDatoDiscoDuro)
+
+        let trProcesador = document.createElement('tr')
+        let tdProcesador = document.createElement('td')
+        tdProcesador.textContent = "Procesador"
+        let tdDatoProcesador = document.createElement('td')
+        tdDatoProcesador.textContent = equipo.procesador
+        this.tbodyConsulta.appendChild(trProcesador)
+
+        trProcesador.appendChild(tdProcesador)
+        trProcesador.appendChild(tdDatoProcesador)
+
+         let trUbicacion = document.createElement('tr')
+        let tdUbicacion = document.createElement('td')
+        tdUbicacion.textContent = "Ubicacion"
+        let tdDatoUbicacion = document.createElement('td')
+        tdDatoUbicacion.textContent = equipo.ubicacion
+        this.tbodyConsulta.appendChild(trUbicacion)
+
+        trUbicacion.appendChild(tdUbicacion)
+        trUbicacion.appendChild(tdDatoUbicacion)
+
+        let trGrafica = document.createElement('tr')
+        let tdGrafica = document.createElement('td')
+        tdGrafica.textContent = "Grafica"
+        let tdDatoGrafica = document.createElement('td')
+        tdDatoGrafica.textContent = equipo.grafica
+        this.tbodyConsulta.appendChild(trGrafica)
+
+        trGrafica.appendChild(tdGrafica)
+        trGrafica.appendChild(tdDatoGrafica)
+
+        let trFechaCompra = document.createElement('tr')
+        let tdFechaCompra = document.createElement('td')
+        tdFechaCompra.textContent = "FechaCompra"
+        let tdDatoFechaCompra = document.createElement('td')
+        tdDatoFechaCompra.textContent = equipo.fechaCompra
+        this.tbodyConsulta.appendChild(trFechaCompra)
+
+        trFechaCompra.appendChild(tdFechaCompra)
+        trFechaCompra.appendChild(tdDatoFechaCompra)
+ 
+
+        let trObservaciones = document.createElement('tr')
+        let tdObservaciones = document.createElement('td')
+        tdObservaciones.textContent = "Observaciones"
+        let tdDatoObservaciones = document.createElement('td')
+        tdDatoObservaciones.textContent = equipo.observaciones
+        this.tbodyConsulta.appendChild(trObservaciones)
+
+        trObservaciones.appendChild(tdObservaciones)
+        trObservaciones.appendChild(tdDatoObservaciones)
+    
+        let trValorEconomico = document.createElement('tr')
+        let tdValorEconomico = document.createElement('td')
+        tdValorEconomico.textContent = "ValorEconomico"
+        let tdDatoValorEconomico = document.createElement('td')
+        tdDatoValorEconomico.textContent = equipo.valorEquipo
+        this.tbodyConsulta.appendChild(trValorEconomico)
+
+        trValorEconomico.appendChild(tdValorEconomico)
+        trValorEconomico.appendChild(tdDatoValorEconomico)
     }
 
     eliminarEquipo(id) {
