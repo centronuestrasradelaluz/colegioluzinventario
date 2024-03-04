@@ -156,6 +156,34 @@
 
         /*INVENTARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo */
 
+
+        public static function obtenerSeleccionados() {
+           
+            if (!BD::iniciarTransaccion())
+                throw new Exception('No es posible iniciar la transacción.');
+           
+             $sql = 'SELECT * FROM Linea';
+
+             $linea = BD::seleccionar($sql, null);
+
+             $sql = 'SELECT * FROM SistemaOperativo';
+
+             $sistemaOperativo = BD::seleccionar($sql, null);
+
+             $sql = 'SELECT * FROM TipoEquipo';
+
+             $tipoEquipo = BD::seleccionar($sql, null);
+
+             $seleccionados = array(
+                'linea' => $linea,
+                'sistemaOperativo' => $sistemaOperativo,
+                'tipoEquipo' => $tipoEquipo
+            );
+
+
+            return $seleccionados;
+        }
+
         /**
          * Genera un objeto de tipo usuario.
          * @param array $resultSet Array de datos.
@@ -195,7 +223,7 @@
          */
         public static function altaEquipo($datos) {
             $sql = 'INSERT INTO Equipo(codigoEquipo, proveedor, marca, monitor, ram, discoDuro, procesador, ubicacion,';
-            $sql -= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idTipoEquipo, idSistemaOperativo)';
+            $sql .= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idTipoEquipo, idSistemaOperativo)';
             $sql .= ' VALUES(:codigoEquipo, :proveedor, :marca, :monitor, :ram, :discoDuro, :procesador, :ubicacion,';
             $sql .= ' :grafica, :fechaCompra, :observaciones, :valorEquipo, :idLinea, :idTipoEquipo, :idSistemaOperativo)';
 

@@ -91,6 +91,10 @@
                 require_once('./controllers/inventario.php');
                 $controlador = new Inventario();
                 break;
+            case 'seleccionados':
+                require_once('./controllers/seleccionados.php');
+                $controlador = new Seleccionados();
+                break;
 
             default:
                 header('HTTP/1.1 501 Not Implemented');

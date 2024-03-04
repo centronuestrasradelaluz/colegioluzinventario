@@ -88,6 +88,18 @@ class ControladorAdministradores {
         this.vistaGestionInventario.mostrar(false);
     }
 
+      /**
+     * Devuelve array de Lineas a vista de gestión de hijos.
+     */
+      obtenerDesplegables() {
+        this.modelo.obtenerDesplegables()
+        .then(resultados => {
+             this.vistaGestionInventario.rellenarSelects(resultados);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
 
      /**
      * Devuelve los usuarios registrados a la gestión de usuarios.

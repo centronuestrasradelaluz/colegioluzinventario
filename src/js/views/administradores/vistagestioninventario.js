@@ -40,15 +40,23 @@ export class VistaGestionInventario extends Vista {
        //Formulario de la vista e inputs
        this.formAlta = this.div.getElementsByTagName('form')[0];
        this.inputsAlta = this.formAlta.getElementsByTagName('input');
+       this.selectsAlta = this.formAlta.getElementsByTagName('select');
 
        this.divExitoAlta = this.div.querySelector('#divExito');
        this.divCargandoAlta = this.div.querySelector('#loadingImg');
 
        this.esModificacion = false
-        this.controlador.dameEquipos("")
+      
+       this.controlador.obtenerDesplegables()
+
+       this.selectLinea = this.div.querySelector("#selectLinea")
+       this.selectOS = this.div.querySelector("#selectSistemaOperativo")
+       this.selectTE = this.div.querySelector("#selectTipoEquipo")
+    this.controlador.dameEquipos("")
         this.mostrarOcultarCrud(true,false,false,false)
         
     }
+    
      /**
      * Informar al usuario del alta exitosa.
      * @param {Boolean} activar Activa o no mensaje éxito.
@@ -64,6 +72,47 @@ export class VistaGestionInventario extends Vista {
         this.divCargandoAlta.style.display = 'none';
         this.divExitoAlta.style.display = activar ? 'block' : 'none';
 
+    }
+    rellenarSelects(resultados) {
+      /*  for (const curso of cursos) {
+            let optionAlta = document.createElement('option');
+            optionAlta.textContent = curso.nombre;
+            optionAlta.value = curso.id;
+
+            // Crear otro option igual para el select de modificar, porque no se puede usar el mismo para ambos :/
+            let optionMod = document.createElement('option');   
+            optionMod.textContent = curso.nombre;
+            optionMod.value = curso.id;
+            
+            this.selectAlta.appendChild(optionAlta);
+            this.selectModificacion.appendChild(optionMod);
+        }*/
+
+        for (const li of resultados["linea"]){
+            let optionLinea = document.createElement('option')
+            optionLinea.value = li.id;
+            optionLinea.textContent = li.nombre
+
+            this.selectLinea.appendChild(optionLinea);
+          
+        }
+        for (const so of resultados["sistemaOperativo"]){
+            let optionSO = document.createElement('option')
+            optionSO.value = so.id;
+            optionSO.textContent = so.nombre
+
+            this.selectOS.appendChild(optionSO);
+        }
+        for (const te of resultados["tipoEquipo"]){
+            let optionTE = document.createElement('option')
+            optionTE.value = te.id;
+            optionTE.textContent = te.nombre
+
+            this.selectTE.appendChild(optionTE)
+        }
+
+       
+        
     }
 
      //metodo para ocultar el crud de la gestion de hijos
@@ -141,68 +190,44 @@ export class VistaGestionInventario extends Vista {
     }
  //ingresar arrelo a los campos de los equipos
     ingresarEquipo() {
-        let cont;
-        let total = this.inputsAlta.length;
+        console.log(this.selectsAlta)
 
-        console.log(this.inputsAlta)
-
-        let radioButton = ""
-
-        let radioButton1 = null
-
-        for (cont=0; cont<total; cont++) {
-            if (!this.inputsAlta[cont].checkValidity()) break;
+        if(this.esModificacion){
+            const datos = {
+                'id': this.idEquipo,
+                'codigoEquipo': this.inputsAlta[0].value,
+                'proveedor': this.inputsAlta[1].value,
+                'marca': this.inputsAlta[2].value,
+                'monitor': this.inputsAlta[3].value,
+                'discoDuro': this.inputsAlta[4].value,
+                'procesador': this.inputsAlta[5].value,
+                'ubicacion': this.inputsAlta[6].value,
+                'grafica': this.inputsAlta[7].value,
+                'fechaCompra': this.inputsAlta[8].value,
+                'idLinea': this.selectsAlta[0].value,
+                'idSistemaOperativo': this.selectsAlta[1].value,
+                'idTipoEquipo': this.selecsAlta[2].value
+            };
+            this.divCargandoAlta.style.display = 'block';
+            this.controlador.modificarEquipo(datos);
         }
-        console.log(this.inputsAlta[3])
-        this.inputsAlta[7].setCustomValidity('');
-        this.formAlta.classList.add('was-validated');
-        if (cont == total) {
-            // Check de contraseñas
-            if (this.inputsAlta[6].value === this.inputsAlta[7].value) {
-                
-                if(this.inputsAlta[2].checked){
-                     radioButton = "pro"
-                }
-                else if (this.inputsAlta[3].checked)
-                {
-                     radioButton = "adm"
-                }
-
-                if(this.inputsAlta[4].checked){
-                    radioButton1 = 0
-                }else if (this.inputsAlta[5].checked){
-                    radioButton1 = 1
-                }
-                
-
-                if(this.esModificacion){
-                    const datos = {
-                        'id': this.idUsuario,
-                        'nombre': this.inputsAlta[0].value,
-                        'correo': this.inputsAlta[1].value,
-                        'rol': radioButton,
-                        'estado': radioButton1,
-                        'contrasenia': this.inputsAlta[6].value
-                    };
-                    this.divCargandoAlta.style.display = 'block';
-                    this.controlador.modificarUsuarios(datos);
-                }
-                if(!this.esModificacion){
-                    const datos = {
-
-                        'nombre': this.inputsAlta[0].value,
-                        'correo': this.inputsAlta[1].value,
-                        'rol': radioButton,
-                        'contrasenia': this.inputsAlta[6].value
-                    };
-                    this.divCargandoAlta.style.display = 'block';
-                    this.controlador.ingresarUsuarios(datos);
-                }
-            }
-            else {
-                this.inputsAlta[7].setCustomValidity('Las contraseñas no coindicen.');
-                this.inputsAlta[7].reportValidity();
-            }
+        if(!this.esModificacion){
+            const datos = {
+                'codigoEquipo': this.inputsAlta[0].value,
+                'proveedor': this.inputsAlta[1].value,
+                'marca': this.inputsAlta[2].value,
+                'monitor': this.inputsAlta[3].value,
+                'discoDuro': this.inputsAlta[4].value,
+                'procesador': this.inputsAlta[5].value,
+                'ubicacion': this.inputsAlta[6].value,
+                'grafica': this.inputsAlta[7].value,
+                'fechaCompra': this.inputsAlta[8].value,
+                'idLinea': parseInt(this.selectsAlta[0].value),
+                'idSistemaOperativo': parseInt(this.selectsAlta[1].value),
+                'idTipoEquipo': parseInt(this.selectsAlta[2].value)
+            };
+            this.divCargandoAlta.style.display = 'block';
+            this.controlador.ingresarEquipos(datos);
         }
     }
 

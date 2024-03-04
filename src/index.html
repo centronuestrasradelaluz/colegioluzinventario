@@ -128,43 +128,76 @@
                 <button id="botonVolverAltaEquipos">VOLVER</button>
                 <form method="post" class="needs-validation" autocomplete="off" novalidate>
                     <div class="formItem">
-                        <label for="nombre">
-                            Nombre usuario (*) <input type="text" class="form-control" name="nombre" maxlength="50" required/>
-                            <div class="invalid-feedback">Por favor, introduzca su nombre.</div>
+                        <label for="codigoEquipo">
+                            Código del equipo (*) <input type="text" class="form-control" name="codigoEquipo" maxlength="50" required/>
                         </label>
                     </div>
                     <div class="formItem">
-                        <label for="correo">
-                            Dirección de email (*) <input type="email" class="form-control" name="correo" minlength="8"maxlength="90" required/>
-                            <div class="invalid-feedback">Por favor, introduzca su email.</div>
-                        </label>
-                    </div>
-                    <div class="form-group text-center">
-                        <label class="radio-inline">
-                            Profesional<input type="radio" name="tipo" value="0" checked/>
-                        </label>
-                        <label class="radio-inline">
-                            Tecnico<input type="radio" name="tipo" value="1"/>
-                        </label>
-                    </div>
-                    <div id="estado" class="form-group text-center">
-                        <label class="radio-inline">
-                            Inactivo<input type="radio" name="estado" value="0" checked/>
-                        </label>
-                        <label class="radio-inline">
-                            Activo<input type="radio" name="estado" value="1"/>
+                        <label for="proveedor">
+                            Proveedor <input type="text" class="form-control" name="proveedor"/>
                         </label>
                     </div>
                     <div class="formItem">
-                        <label for="contrasenia">
-                            Contraseña (*) <input type="password" class="form-control" name="contrasenia" minlength="8" maxlength="90" required/>
-                            <div class="invalid-feedback">Por favor, introduzca una contraseña de<br> 8 caracteres mínimo.</div>
+                        <label for="marca">
+                            Marca <input type="text" class="form-control" name="marca"/>
                         </label>
                     </div>
                     <div class="formItem">
-                        <label for="contrasenia2">
-                            Repita la contraseña (*) <input type="password" class="form-control" name="contrasenia2" minlength="8" maxlength="90" required/>
-                            <div class="invalid-feedback">Por favor, repita la misma contraseña.</div>
+                        <label for="monitor">
+                            Monitor <input type="text" class="form-control" name="monitor">
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="discoDuro">
+                            Disco duro <input type="text" class="form-control" name="discoDuro"/>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="procesador">
+                            Procesador <input type="text" class="form-control" name="procesador"/>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="ubicacion">
+                            Ubicación <input type="text" class="form-control" name="ubicacion"/>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="grafica">
+                            Gráfica <input type="text" class="form-control" name="grafica"/>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="fechaCompra">
+                            Fecha de compra <input type="date" class="form-control" name="fechaCompra"/>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="observaciones">
+                            Observaciones <input type="text" class="form-control" name="observaciones"/>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="linea">
+                            linea <select id="selectLinea" class="form-control" name="linea"><option value="-1" selected>Elija linea</option></select>
+                            <div class="invalid-feedback">Por favor, seleccione una Línea.</div>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="sistemaOperativo">
+                            linea <select id="selectSistemaOperativo" class="form-control" name="sistemaOperativo"><option value="-1" selected>Elija sistema</option></select>
+                            <div class="invalid-feedback">Por favor, seleccione un sistema.</div>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="tipoEquipo">
+                            linea <select id="selectTipoEquipo" class="form-control" name="tipoEquipo"><option value="-1" selected>Elija tipo Equipo</option></select>
+                            <div class="invalid-feedback">Por favor, seleccione un tipo Equipo.</div>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="valorEquipo">
+                            Valor del Equipo <input type="number" class="form-control" name="valorEquipo" min="0" pattern="^[0-9]+"/>
                         </label>
                     </div>
                     <div class="formItem" id="loadingImg">

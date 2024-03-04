@@ -36,6 +36,8 @@ export class Modelo {
     }
 
     ingresarEquipos(datos) {
+
+        console.log(datos)
        
         return Rest.post('inventario', [], datos, false);
     }
@@ -49,6 +51,14 @@ export class Modelo {
 
         return Rest.put('inventario', [], datos, false);
     }
+
+    obtenerDesplegables(){
+        return Rest.get('seleccionados',[], [] )
+    }
+
+
+
+
 
 
    
