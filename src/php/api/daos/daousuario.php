@@ -174,8 +174,8 @@
 
             }else{
                
-                $sql = 'SELECT id, codigoEquipo, proveedor, marca, monitor, ram, discoDuro, ubicacion,';
-                $sql .= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idSistemaOperativo';
+                $sql = 'SELECT id, codigoEquipo, proveedor, marca, monitor, ram, discoDuro, procesador, ubicacion,';
+                $sql .= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idTipoEquipo, idSistemaOperativo';
                 $sql .= ' FROM Equipo';
                 $sql .= ' WHERE codigoEquipo';
                 $sql .= ' LIKE :busqueda';
@@ -194,10 +194,10 @@
          * @return int ID de la fila insertada.
          */
         public static function altaEquipo($datos) {
-            $sql = 'INSERT INTO Equipo(codigoEquipo, proveedor, marca, monitor, ram, discoDuro, ubicacion,';
-            $sql -= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idSistemaOperativo)';
-            $sql .= ' VALUES(:codigoEquipo, :proveedor, :marca, :monitor, :ram, :discoDuro, :ubicacion,';
-            $sql .= ' :grafica, :fechaCompra, :observaciones, :valorEquipo, :idLinea, :idSistemaOperativo)';
+            $sql = 'INSERT INTO Equipo(codigoEquipo, proveedor, marca, monitor, ram, discoDuro, procesador, ubicacion,';
+            $sql -= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idTipoEquipo, idSistemaOperativo)';
+            $sql .= ' VALUES(:codigoEquipo, :proveedor, :marca, :monitor, :ram, :discoDuro, :procesador, :ubicacion,';
+            $sql .= ' :grafica, :fechaCompra, :observaciones, :valorEquipo, :idLinea, :idTipoEquipo, :idSistemaOperativo)';
 
 
             $params = array(
@@ -207,12 +207,14 @@
                 'monitor'=> $datos->monitor,
                 'ram'=> $datos->ram,
                 'discoDuro'=> $datos->discoDuro,
+                'procesador'=> $datos->procesador,
                 'ubicacion'=> $datos->ubicacion,
                 'grafica'=> $datos->grafica,
                 'fechaCompra'=> $datos->fechaCompra,
                 'observaciones'=> $datos->observaciones,
                 'valorEquipo'=> $datos->valorEquipo,
                 'idLinea'=> $datos->idLinea,
+                'idTipoEquipo'=> $datos->idTipoEquipo,
                 'idSistemaOperativo'=> $datos->idSistemaOperativo
             );
 
@@ -230,9 +232,9 @@
 
         public static function modificarEquipo($datos) {
             $sql = 'UPDATE Equipo SET codigoEquipo=:codigoEquipo, proveedor=:proveedor, marca=:marca,';
-            $sql .= ' monitor=:monitor, ram=:ram, discoDuro=:discoDuro, ubicacion=:ubicacion, grafica=:grafica,';
+            $sql .= ' monitor=:monitor, ram=:ram, discoDuro=:discoDuro, procesador=:procesador, ubicacion=:ubicacion, grafica=:grafica,';
             $sql .= ' fechaCompra=:fechaCompra, observaciones=:observaciones, valorEquipo=:valorEquipo,';
-            $sql .= ' idLinea=:idLinea, idSistemaOperativo=:idSistemaOperativo';
+            $sql .= ' idLinea=:idLinea, idTipoEquipo=:idTipoEquipo, idSistemaOperativo=:idSistemaOperativo';
             $sql .= ' WHERE id=:id';
 
          
@@ -244,12 +246,14 @@
                 'monitor'=> $datos->monitor,
                 'ram'=> $datos->ram,
                 'discoDuro'=> $datos->discoDuro,
+                'procesador'=> $datos->procesador,
                 'ubicacion'=> $datos->ubicacion,
                 'grafica'=> $datos->grafica,
                 'fechaCompra'=> $datos->fechaCompra,
                 'observaciones'=> $datos->observaciones,
                 'valorEquipo'=> $datos->valorEquipo,
                 'idLinea'=> $datos->idLinea,
+                'idTipoEquipo'=> $datos->idTipoEquipo,
                 'idSistemaOperativo'=> $datos->idSistemaOperativo
             );
 
