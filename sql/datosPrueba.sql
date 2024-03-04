@@ -8,3 +8,6 @@ INSERT INTO `Usuario` (`nombre`, `correo`, `contrasenia`, `estado`, `rol`) VALUE
 INSERT INTO `Usuario` (`nombre`, `correo`, `contrasenia`, `estado`, `rol`) VALUES ('Sergio Rivera Salgado', 'email1@gmail.com', '123456789', 1, 'adm');
 
 INSERT INTO `Usuario` (`nombre`, `correo`, `contrasenia`, `estado`, `rol`) VALUES ('JuanJo Pizarro Pérez', 'email2@gmail.com', '123456789', 0, 'pro');
+
+INSERT INTO `Equipo` (`codigoEquipo`, `proveedor`, `marca`, `monitor`, `ram`, `discoDuro`, `procesador`,`grafica`, `observaciones`,`valorEquipo`, `idLinea`, `idTipoEquipo`, `idSistemaOperativo`) 
+VALUES('N7-09', 'nosesabe', 'nosesabe', 'nosesabe','nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 200, 1, 1, 1);

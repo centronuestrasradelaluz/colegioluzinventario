@@ -64,7 +64,7 @@ CREATE TABLE Equipo(
 	CONSTRAINT FK_SistemaOperativo_id FOREIGN KEY (idSistemaOperativo) REFERENCES SistemaOperativo(id),
 	CONSTRAINT UQ_Equipo_codigoEquipo UNIQUE (codigoEquipo)
 
-	--PONER LOS CHECKS DE QUE NO SE PUEDAN INTRODUCIR SISTEMAS OPERATIVOS EN FOTOCOPIADORAS
+	/*PONER LOS CHECKS DE QUE NO SE PUEDAN INTRODUCIR SISTEMAS OPERATIVOS EN FOTOCOPIADORAS*/
 	
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -93,10 +93,16 @@ VALUES ('Windows'),
 		('Android');
 
 INSERT INTO Linea (nombre) 
-VALUES ('N1'),
-        ('N2'),
-        ('N3'),
-		('N4'),
-		('N4 - Inf'),
-		('N5'),
-		('N6');
+VALUES ('Línea 1'),
+        ('Línea 2'),
+        ('Línea 3'),
+		('Línea 4'),
+		('Línea 4 - Inf'),
+		('Línea 5'),
+		('Línea 6');
+INSERT INTO TipoEquipo (nombre) 
+VALUES ('PC'),
+		('Router'),
+		('Punto de acceso'),
+		('Firewall');
+
