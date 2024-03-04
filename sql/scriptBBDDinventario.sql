@@ -101,8 +101,12 @@ VALUES ('Línea 1'),
 		('Línea 5'),
 		('Línea 6');
 INSERT INTO TipoEquipo (nombre) 
-VALUES ('PC'),
+VALUES ('Torre'),
 		('Router'),
 		('Punto de acceso'),
-		('Firewall');
+		('Firewall'),
+		('Switch'),
+		('Portátil'),
+		('Impresora'),
+		('Tablet');
 
