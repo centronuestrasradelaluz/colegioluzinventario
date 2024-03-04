@@ -73,20 +73,7 @@ export class VistaGestionInventario extends Vista {
         this.divExitoAlta.style.display = activar ? 'block' : 'none';
 
     }
-    rellenarSelects(resultados) {
-      /*  for (const curso of cursos) {
-            let optionAlta = document.createElement('option');
-            optionAlta.textContent = curso.nombre;
-            optionAlta.value = curso.id;
-
-            // Crear otro option igual para el select de modificar, porque no se puede usar el mismo para ambos :/
-            let optionMod = document.createElement('option');   
-            optionMod.textContent = curso.nombre;
-            optionMod.value = curso.id;
-            
-            this.selectAlta.appendChild(optionAlta);
-            this.selectModificacion.appendChild(optionMod);
-        }*/
+  /*  rellenarSelects(resultados) {
 
         for (const li of resultados["linea"]){
             let optionLinea = document.createElement('option')
@@ -110,9 +97,21 @@ export class VistaGestionInventario extends Vista {
 
             this.selectTE.appendChild(optionTE)
         }
+    }*/
 
-       
-        
+    rellenarSelects(resultados) {
+        this.llenarSelect(resultados["linea"], this.selectLinea);
+        this.llenarSelect(resultados["sistemaOperativo"], this.selectOS);
+        this.llenarSelect(resultados["tipoEquipo"], this.selectTE);
+    }
+    
+    llenarSelect(items, selectElement) {
+        for (const item of items) {
+            let option = document.createElement('option');
+            option.value = item.id;
+            option.textContent = item.nombre;
+            selectElement.appendChild(option);
+        }
     }
 
      //metodo para ocultar el crud de la gestion de hijos
@@ -147,33 +146,20 @@ export class VistaGestionInventario extends Vista {
     //modificar arrelo a los campos de los equipos
     modificar(equipo){
         this.mostrarOcultarCrud(false,true,true,false)
-        this.campoEstado.style.display = "block"
-        this.idUsuario = usuario.id;
-        this.inputsAlta[0].value = usuario.nombre;
-        this.inputsAlta[1].value = usuario.correo;
+        this.idEquipo = equipo.id;
+        this.inputsAlta[0].value = equipo.codigoEquipo;
+        this.inputsAlta[1].value = equipo.proveedor;
+        this.inputsAlta[2].value = equipo.marca;
+        this.inputsAlta[3].value = equipo.monitor;
+        this.inputsAlta[4].value = equipo.discoDuro;
+        this.inputsAlta[5].value = equipo.procesador;
+        this.inputsAlta[6].value = equipo.grafica;
+        this.inputsAlta[7].value = equipo.fechaCompra;
+        this.inputsAlta[8].value = equipo.observaciones;
 
-        if (usuario.rol == "adm"){
-            this.inputsAlta[2].checked = false
-            this.inputsAlta[3].checked = true
-        }
-        if (usuario.rol == "pro"){
-            this.inputsAlta[2].checked = true
-            this.inputsAlta[3].checked = false
-        }
-        if (usuario.estado == 1){
-            this.inputsAlta[4].checked = false
-            this.inputsAlta[5].checked = true
-        }
-        if (usuario.estado == 0){
-            this.inputsAlta[4].checked = true
-            this.inputsAlta[5].checked = false
-        }
-
-        this.inputsAlta[6].value = usuario.contrasenia;
-        this.inputsAlta[7].value = usuario.contrasenia;
-
-        
-       
+        this.selectsAlta[0].value = equipo.idLinea;
+        this.selectsAlta[1].value = equipo.idSistemaOperativo;
+        this.selectsAlta[2].value = equipo.idTipoEquipo;
     }
 
     volver() {
