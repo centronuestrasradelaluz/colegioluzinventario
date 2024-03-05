@@ -11,3 +11,6 @@ INSERT INTO `Usuario` (`nombre`, `correo`, `contrasenia`, `estado`, `rol`) VALUE
 
 INSERT INTO `Equipo` (`id`, `codigoEquipo`, `proveedor`, `marca`, `monitor`, `ram`, `discoDuro`, `procesador`, `ubicacion`, `grafica`, `fechaCompra`, `observaciones`,`valorEquipo`, `idLinea`, `idTipoEquipo`, `idSistemaOperativo`) 
 VALUES(1000, 'N7-09', 'nosesabe', 'nosesabe', 'nosesabe','nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'fecha','observaciones', 200, 1, 1, 1);
+
+
+INSERT INTO `Mantenimiento` (idEquipo, idUsuario, fechaIncidencia) VALUES (1000, 2, '2024-03-05');
