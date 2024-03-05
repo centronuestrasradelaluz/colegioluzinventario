@@ -3,7 +3,6 @@ import { VistaInicio } from "../views/administradores/vistainicio.js";
 import { VistaMenu } from "../views/administradores/vistamenu.js";
 import { VistaGestionUsuarios } from "../views/administradores/vistagestionusuarios.js";
 import { Rest } from "../services/rest.js";
-import { Vista } from "../views/vista.js";
 import { VistaGestionInventario } from "../views/administradores/vistagestioninventario.js";
 import { VistaGestionMantenimiento } from "../views/administradores/vistagestionmantenimiento.js";
 
@@ -32,6 +31,7 @@ class ControladorAdministradores {
         if (this.#usuario.rol != 'adm')
             window.location.href = 'login.html';
 
+        // Se genera la autorizacion para usar el servicio rest
         Rest.setAutorizacion(this.#usuario.autorizacion);
 
         this.modelo = new Modelo();
@@ -41,12 +41,11 @@ class ControladorAdministradores {
         this.vistaGestionInventario = new VistaGestionInventario(this, document.getElementById('gestionInventario'))
         this.vistaGestionMantenimiento = new VistaGestionMantenimiento(this, document.getElementById('gestionMantenimiento'))
        
+        //Vista pedreterminada al iniciar la app
         this.verVistaInicio();
         this.vistaInicio.bienvenida(this.#usuario)
         
     }
-
-
     /**
      * Cambia a la vista de inicio.
      */
@@ -202,7 +201,7 @@ class ControladorAdministradores {
 
     //MANTENIMIENTOOOOOOOOOOOOOOOOOo
 
-    
+
 
     /**
      * Cierra la sesión del usuario.
