@@ -309,12 +309,17 @@ export class VistaGestionInventario extends Vista {
      * Carga tabla con los hijos.
      * @param {Array} usuarios Listado de hijos.
      */
-     cargarListado(equipos) {
-        
+     cargarListado(equiposConMantenimiento) {
+        console.log(equiposConMantenimiento)
+
         this.tbody.innerHTML = '';  // Limpiar tabla para sustituirla con nuevos datos.
 
-        if (equipos != null) {
-            for (const equipo of equipos) {
+        if (equiposConMantenimiento != null) {
+            for (const equipoConMantenimiento of equiposConMantenimiento) {
+
+                const equipo = equipoConMantenimiento.equipo
+              
+
                 let tr = document.createElement('tr');
                 this.tbody.appendChild(tr);
                 
@@ -340,7 +345,7 @@ export class VistaGestionInventario extends Vista {
                 iconoConsultar.setAttribute('src','./img/icons/edit_children.svg');
                 iconoConsultar.setAttribute('alt', 'Consultar usuario');
                 iconoConsultar.setAttribute('title','Consultar usuario');
-                iconoConsultar.addEventListener('click', this.consultar.bind(this, equipo));
+                iconoConsultar.addEventListener('click', this.consultar.bind(this, equipoConMantenimiento));
                 td2.appendChild(iconoConsultar);
 
                 let iconoEditar = document.createElement('img');
@@ -361,8 +366,12 @@ export class VistaGestionInventario extends Vista {
         } 
     }
 
-    consultar(equipo){
+    consultar(equipoConMantenimiento){
 
+        const equipo = equipoConMantenimiento.equipo
+     
+        const mantenimiento = equipoConMantenimiento.mantenimientos
+       
         this.mostrarOcultarCrud(false,false,false,true)
 
         this.theadConsulta.innerHTML = '';
@@ -498,6 +507,13 @@ export class VistaGestionInventario extends Vista {
 
         trValorEconomico.appendChild(tdValorEconomico)
         trValorEconomico.appendChild(tdDatoValorEconomico)
+
+        for(const mant of mantenimiento){
+       
+            console.log(mant)
+            console.log("fin de un mantenimiento")
+        }
+        
     }
 
     eliminarEquipo(id) {

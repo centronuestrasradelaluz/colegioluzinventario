@@ -14,3 +14,4 @@ VALUES(1000, 'N7-09', 'nosesabe', 'nosesabe', 'nosesabe','nosesabe', 'nosesabe',
 
 
 INSERT INTO `Mantenimiento` (idEquipo, idUsuario, fechaIncidencia) VALUES (1000, 2, '2024-03-05');
+INSERT INTO `Mantenimiento` (idEquipo, idUsuario, fechaIncidencia) VALUES (1000, 2, '2024-02-05');

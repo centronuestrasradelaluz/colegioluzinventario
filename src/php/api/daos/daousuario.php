@@ -213,7 +213,34 @@
                 
             }
 
-            return $equipos;
+            $sqlMantenimientos = 'SELECT * FROM Mantenimiento';
+            
+            $mantenimientos = BD::seleccionar($sqlMantenimientos, null);
+
+            $equiposConMantenimientos = array();
+
+            foreach ($equipos as $equipo) {
+                // Inicializamos un array para los mantenimientos de este equipo
+                $mantenimientosDeEquipo = array();
+            
+                // Iteramos sobre los mantenimientos para encontrar los asociados a este equipo
+                foreach ($mantenimientos as $mantenimiento) {
+                    // Verificamos si el mantenimiento está asociado al equipo actual
+                    if ($mantenimiento['idEquipo'] === $equipo['id']) {
+                        // Agregamos el mantenimiento al array de mantenimientos de este equipo
+                        $mantenimientosDeEquipo[] = $mantenimiento;
+                    }
+                }
+                // Agregamos el equipo junto con sus mantenimientos al nuevo array
+                $equiposConMantenimientos[] = array(
+                    'equipo' => $equipo,
+                    'mantenimientos' => $mantenimientosDeEquipo
+                );
+            }
+
+            return $equiposConMantenimientos;
+
+           // return $equipos;
         }
 
          /**
