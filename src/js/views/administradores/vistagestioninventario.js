@@ -145,6 +145,7 @@ export class VistaGestionInventario extends Vista {
     }
     //modificar arrelo a los campos de los equipos
     modificar(equipo){
+
         this.mostrarOcultarCrud(false,true,true,false)
         this.idEquipo = equipo.id;
         this.inputsAlta[0].value = equipo.codigoEquipo;
@@ -153,9 +154,12 @@ export class VistaGestionInventario extends Vista {
         this.inputsAlta[3].value = equipo.monitor;
         this.inputsAlta[4].value = equipo.discoDuro;
         this.inputsAlta[5].value = equipo.procesador;
-        this.inputsAlta[6].value = equipo.grafica;
-        this.inputsAlta[7].value = equipo.fechaCompra;
-        this.inputsAlta[8].value = equipo.observaciones;
+        this.inputsAlta[6].value = equipo.ubicacion;
+        this.inputsAlta[7].value = equipo.ram;
+        this.inputsAlta[8].value = equipo.grafica;
+        this.inputsAlta[9].value = equipo.fechaCompra;
+        this.inputsAlta[10].value = equipo.observaciones;
+        this.inputsAlta[11].value = equipo.valorEquipo;
 
         this.selectsAlta[0].value = equipo.idLinea;
         this.selectsAlta[1].value = equipo.idSistemaOperativo;
@@ -188,14 +192,17 @@ export class VistaGestionInventario extends Vista {
                 'discoDuro': this.inputsAlta[4].value,
                 'procesador': this.inputsAlta[5].value,
                 'ubicacion': this.inputsAlta[6].value,
-                'grafica': this.inputsAlta[7].value,
-                'fechaCompra': this.inputsAlta[8].value,
-                'idLinea': this.selectsAlta[0].value,
-                'idSistemaOperativo': this.selectsAlta[1].value,
-                'idTipoEquipo': this.selecsAlta[2].value
+                'ram': this.inputsAlta[7].value,
+                'grafica': this.inputsAlta[8].value,
+                'fechaCompra': this.inputsAlta[9].value,
+                'observaciones': this.inputsAlta[10].value,
+                'valorEquipo': parseFloat(this.inputsAlta[11].value),
+                'idLinea': parseInt(this.selectsAlta[0].value),
+                'idSistemaOperativo': parseInt(this.selectsAlta[1].value),
+                'idTipoEquipo': parseInt(this.selectsAlta[2].value)
             };
             this.divCargandoAlta.style.display = 'block';
-            this.controlador.modificarEquipo(datos);
+            this.controlador.modificarEquipos(datos);
         }
         if(!this.esModificacion){
             const datos = {
@@ -206,8 +213,11 @@ export class VistaGestionInventario extends Vista {
                 'discoDuro': this.inputsAlta[4].value,
                 'procesador': this.inputsAlta[5].value,
                 'ubicacion': this.inputsAlta[6].value,
-                'grafica': this.inputsAlta[7].value,
-                'fechaCompra': this.inputsAlta[8].value,
+                'ram': this.inputsAlta[7].value,
+                'grafica': this.inputsAlta[8].value,
+                'fechaCompra': this.inputsAlta[9].value,
+                'observaciones': this.inputsAlta[10].value,
+                'valorEquipo': parseFloat(this.inputsAlta[11].value),
                 'idLinea': parseInt(this.selectsAlta[0].value),
                 'idSistemaOperativo': parseInt(this.selectsAlta[1].value),
                 'idTipoEquipo': parseInt(this.selectsAlta[2].value)
@@ -405,8 +415,8 @@ export class VistaGestionInventario extends Vista {
         tdDatoMonitor.textContent = equipo.monitor
         this.tbodyConsulta.appendChild(trMonitor)
 
-        trMarca.appendChild(tdMonitor)
-        trMarca.appendChild(tdDatoMonitor)
+        trMonitor.appendChild(tdMonitor)
+        trMonitor.appendChild(tdDatoMonitor)
 
         let trRam = document.createElement('tr')
         let tdRam = document.createElement('td')
