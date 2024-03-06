@@ -56,6 +56,10 @@ export class Modelo {
         return Rest.get('seleccionados',[], [] )
     }
 
+    dameMantenimientos(){
+        return Rest.get('mantenimiento', [texto], []);
+    }
+
 
 
 

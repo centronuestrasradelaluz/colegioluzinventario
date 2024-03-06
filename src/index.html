@@ -230,6 +230,42 @@
 
         <div id="gestionMantenimiento">
             <h1 class="text-center my-4">Gestión de Mantenimiento</h1>
+
+            <div id="divListadoMantenimientos">
+                <table id="tablaMantenimientos">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div id="divAltaMantenimientos">
+                <button id="botonVolverAltaMantenimientos">VOLVER</button>
+                <form method="post" class="needs-validation" autocomplete="off" novalidate>
+                    <div class="formItem">
+                        <label for="descripcion">
+                           Descripcion de la incidencia<input type="textarea" class="form-control" name="descripcion" />
+                        </label>
+                    </div>
+
+                    <div class="formItem">
+                        <label for="solucion">
+                           Solucion del problema<input type="textarea" class="form-control" name="solucion" />
+                        </label>
+                    </div>
+                    
+                    <div class="formItem" id="loadingImg">
+                        <img src="./img/loading.gif"/>
+                    </div>
+                    <div class="formItem">
+                        <button type="button" class="btn btn-danger">Cancelar</button>
+                        <button id="aceptar" type="button" class="btn btn-success">Registrarse</button>
+                    </div>
+                </form>
+                <div id="divExito" class="w-75 p-1 container alert alert-success text-center rounded my-2">
+                    <p>Te has registrado exitosamente. Redirigiendo.</p>
+                </div>
+                <div id="divError" class="w-75 p-1 container alert alert-danger text-center rounded my-2"></div>
+            </div>
         </div>
 
         <script type="module" src="./js/controllers/administradores.js"></script>

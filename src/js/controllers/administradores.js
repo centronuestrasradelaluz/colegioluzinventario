@@ -106,7 +106,7 @@ class ControladorAdministradores {
      */
      
      dameUsuarios(texto) {
-        console.log(texto+"hola")
+        console.log(texto)
         this.modelo.dameUsuarios(texto)
          .then(usuarios => {
              this.vistaGestionUsuarios.cargarListado(usuarios);
@@ -200,6 +200,31 @@ class ControladorAdministradores {
     }
 
     //MANTENIMIENTOOOOOOOOOOOOOOOOOo
+
+    dameMantenimientos(){
+        this.modelo.dameMantenimientos()
+        .then(mantenimientos => {
+            this.vistaGestionMantenimiento.cargarListado(mantenimientos);
+        })
+        .catch(e => {
+            console.error(e)
+        })
+    }
+
+    ingresarMantenimiento(datos) {
+        this.modelo.ingresarMantenimiento(datos)
+         .then(() => {
+            // this.vistaGestionHijos.bloquearBotonesAlta(false);
+             this.vistaGestionMantenimiento.exitoAlta(true);
+             this.dameMantenimientos(); // Actualizar lista de usuarios
+         })
+         .catch(e => {
+             //this.vistaGestionHijos.bloquearBotonesAlta(false);
+             console.error(e);
+         })
+    }
+
+
 
 
 

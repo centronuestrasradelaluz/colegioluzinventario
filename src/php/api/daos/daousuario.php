@@ -240,7 +240,69 @@
 
             return $equiposConMantenimientos;
 
-           // return $equipos;
+            //FORMA MAS CORRECTA
+            /*
+            public static function obtenerEquipos($busqueda) {
+    if (!BD::iniciarTransaccion())
+        throw new Exception('No es posible iniciar la transacción.');
+    
+    // Construir la consulta principal para obtener equipos y sus mantenimientos
+    $sql = 'SELECT e.id, e.codigoEquipo, e.proveedor, e.marca, e.monitor, e.ram, e.discoDuro, e.ubicacion,';
+    $sql .= ' e.grafica, e.fechaCompra, e.observaciones, e.valorEquipo, e.idLinea, e.idSistemaOperativo,';
+    $sql .= ' m.id AS idMantenimiento, m.fecha AS fechaMantenimiento, m.descripcion AS descripcionMantenimiento';
+    $sql .= ' FROM Equipo e';
+    $sql .= ' LEFT JOIN Mantenimiento m ON e.id = m.idEquipo';
+    if($busqueda != "null"){
+        $sql .= ' WHERE e.codigoEquipo LIKE :busqueda';
+        $params = array('busqueda' => '%'. $busqueda . '%');
+    } else {
+        $params = null;
+    }
+    
+    // Ejecutar la consulta
+    $equiposConMantenimientos = BD::seleccionar($sql, $params);
+    
+    // Organizar resultados en una estructura más adecuada
+    $equipos = array();
+    foreach ($equiposConMantenimientos as $row) {
+        $idEquipo = $row['id'];
+        // Si el equipo aún no está en el arreglo, agregarlo
+        if (!isset($equipos[$idEquipo])) {
+            $equipos[$idEquipo] = array(
+                'equipo' => array(
+                    'id' => $row['id'],
+                    'codigoEquipo' => $row['codigoEquipo'],
+                    'proveedor' => $row['proveedor'],
+                    'marca' => $row['marca'],
+                    'monitor' => $row['monitor'],
+                    'ram' => $row['ram'],
+                    'discoDuro' => $row['discoDuro'],
+                    'ubicacion' => $row['ubicacion'],
+                    'grafica' => $row['grafica'],
+                    'fechaCompra' => $row['fechaCompra'],
+                    'observaciones' => $row['observaciones'],
+                    'valorEquipo' => $row['valorEquipo'],
+                    'idLinea' => $row['idLinea'],
+                    'idSistemaOperativo' => $row['idSistemaOperativo']
+                ),
+                'mantenimientos' => array()
+            );
+        }
+        // Agregar el mantenimiento al equipo correspondiente
+        if ($row['idMantenimiento'] !== null) {
+            $equipos[$idEquipo]['mantenimientos'][] = array(
+                'id' => $row['idMantenimiento'],
+                'fecha' => $row['fechaMantenimiento'],
+                'descripcion' => $row['descripcionMantenimiento']
+            );
+        }
+    }
+    
+    return array_values($equipos); // Reindexar el arreglo y devolverlo
+}
+
+             */
+
         }
 
          /**
@@ -313,6 +375,16 @@
             );
 
            return BD::actualizar($sql,$params);
+        }
+
+        public static function obtenerMantenimientos(){
+
+            if (!BD::iniciarTransaccion())
+            throw new Exception('No es posible iniciar la transacción.');
+
+            $sql = 'SELECT * FROM Mantenimiento';
+           
+            return BD::seleccionar($sql, null);
         }
     }
 

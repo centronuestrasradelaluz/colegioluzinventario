@@ -95,6 +95,10 @@
                 require_once('./controllers/seleccionados.php');
                 $controlador = new Seleccionados();
                 break;
+            case 'mantenimiento':
+                require_once('./controllers/matenimiento.php');
+                $controlador = new Seleccionados();
+                break;
 
             default:
                 header('HTTP/1.1 501 Not Implemented');
