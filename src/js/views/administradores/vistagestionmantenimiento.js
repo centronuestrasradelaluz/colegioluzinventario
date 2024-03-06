@@ -16,7 +16,7 @@ export class VistaGestionMantenimiento extends Vista {
 
        this.divListado = this.div.querySelector('#divListadoMantenimientos');
        this.divAlta = this.div.querySelector('#divAltaMantenimientos');
-       this.divConsulta = this.div.querySelector('#divConsultaMantenimientos');
+      // this.divConsulta = this.div.querySelector('#divConsultaMantenimientos');
 
        //Elementos vista Listado
 
@@ -30,7 +30,7 @@ export class VistaGestionMantenimiento extends Vista {
        this.botonVolver.addEventListener('click', this.volver.bind(this));
 
        this.botonAnadir = this.div.querySelector('#aceptar')
-       this.botonAnadir.addEventListener('click', this.ingresarMantenimiento.bind(this));
+       this.botonAnadir.addEventListener('click', this.ingresarMantenimientos.bind(this));
 
        //Formulario de la vista e inputs
        this.formAlta = this.div.getElementsByTagName('form')[0];
@@ -87,7 +87,7 @@ export class VistaGestionMantenimiento extends Vista {
 
         this.divAlta.style.display = alta ? 'block' : 'none';
         this.divListado.style.display = listado ? 'block' : 'none';
-        this.divConsulta.style.display = consulta ? 'block': 'none';
+       // this.divConsulta.style.display = consulta ? 'block': 'none';
        
         console.log('modificacion global', this.esModificacion)
     }
@@ -214,14 +214,14 @@ export class VistaGestionMantenimiento extends Vista {
                 iconoConsultar.setAttribute('src','./img/icons/edit_children.svg');
                 iconoConsultar.setAttribute('alt', 'Consultar usuario');
                 iconoConsultar.setAttribute('title','Consultar usuario');
-                iconoConsultar.addEventListener('click', this.consultar.bind(this, mantenimiento));
+                //iconoConsultar.addEventListener('click', this.consultar.bind(this, mantenimiento));
                 td2.appendChild(iconoConsultar);
 
                 let iconoEditar = document.createElement('img');
                 iconoEditar.setAttribute('src','./img/icons/edit_children.svg');
                 iconoEditar.setAttribute('alt', 'Modificar usuario');
                 iconoEditar.setAttribute('title','Modificar usuario');
-                iconoEditar.addEventListener('click', this.modificar.bind(this, mantenimiento));
+                //iconoEditar.addEventListener('click', this.modificar.bind(this, mantenimiento));
                 td2.appendChild(iconoEditar);
 
                 let iconoEliminar = document.createElement('img');
@@ -233,6 +233,11 @@ export class VistaGestionMantenimiento extends Vista {
             }
 
         } 
+    }
+
+    anadir() {
+        this.mostrarOcultarCrud(false, true, false,false);
+       
     }
 
     //ingresar arrelo a los campos de los equipos
@@ -265,6 +270,13 @@ export class VistaGestionMantenimiento extends Vista {
         this.busqueda = texto
         this.controlador.dameMantenimientos(texto)
      }
+
+     eliminar(id) {
+        if(confirm("¿Estas seguro de eliminar el equipo? Este proceso será irreversible"))
+        {
+            this.controlador.eliminarEquipo(id)
+        }
+    }
 
 
 

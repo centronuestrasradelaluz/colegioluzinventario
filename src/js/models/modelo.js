@@ -56,7 +56,7 @@ export class Modelo {
         return Rest.get('seleccionados',[], [] )
     }
 
-    dameMantenimientos(){
+    dameMantenimientos(texto){
         return Rest.get('mantenimiento', [texto], []);
     }
 

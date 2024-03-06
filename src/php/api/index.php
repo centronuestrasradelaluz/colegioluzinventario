@@ -96,8 +96,8 @@
                 $controlador = new Seleccionados();
                 break;
             case 'mantenimiento':
-                require_once('./controllers/matenimiento.php');
-                $controlador = new Seleccionados();
+                require_once('./controllers/mantenimiento.php');
+                $controlador = new Mantenimiento();
                 break;
 
             default:
