@@ -513,8 +513,52 @@ export class VistaGestionInventario extends Vista {
             console.log(mant)
             console.log("fin de un mantenimiento")
         }
+
+        /*consultar(equipoConMantenimiento) {
+            const equipo = equipoConMantenimiento.equipo;
+            const mantenimiento = equipoConMantenimiento.mantenimientos;
         
-    }
+            this.mostrarOcultarCrud(false, false, false, true);
+            this.theadConsulta.innerHTML = '';
+            this.tbodyConsulta.innerHTML = '';
+        
+            // Función para agregar una fila a la tabla de consulta
+            const agregarFila = (nombreCampo, valorCampo) => {
+                const tr = document.createElement('tr');
+                const tdNombre = document.createElement('td');
+                const tdValor = document.createElement('td');
+        
+                tdNombre.textContent = nombreCampo;
+                tdValor.textContent = valorCampo;
+        
+                tr.appendChild(tdNombre);
+                tr.appendChild(tdValor);
+        
+                this.tbodyConsulta.appendChild(tr);
+            };
+        
+            // Agregar filas para cada atributo del equipo
+            agregarFila('Equipo Codigo', equipo.codigoEquipo);
+            agregarFila('Proveedor', equipo.proveedor);
+            agregarFila('Marca', equipo.marca);
+            agregarFila('Monitor', equipo.monitor);
+            agregarFila('RAM', equipo.ram);
+            agregarFila('Disco Duro', equipo.discoDuro);
+            agregarFila('Procesador', equipo.procesador);
+            agregarFila('Ubicación', equipo.ubicacion);
+            agregarFila('Gráfica', equipo.grafica);
+            agregarFila('Fecha de Compra', equipo.fechaCompra);
+            agregarFila('Observaciones', equipo.observaciones);
+            agregarFila('Valor Económico', equipo.valorEquipo);
+        
+            // Iterar sobre los mantenimientos y hacer algo con ellos (aquí puedes agregar lógica para mostrarlos en la tabla)
+            mantenimiento.forEach(mant => {
+                console.log(mant);
+                console.log("fin de un mantenimiento");
+            });*/
+        }
+        
+        
 
     eliminarEquipo(id) {
         if(confirm("¿Estas seguro de eliminar el equipo? Este proceso será irreversible"))
