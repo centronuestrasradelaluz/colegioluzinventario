@@ -75,12 +75,20 @@ export class VistaGestionInventario extends Vista {
     }
 
     rellenarSelects(resultados) {
-        this.llenarSelect(resultados["linea"], this.selectLinea);
-        this.llenarSelect(resultados["sistemaOperativo"], this.selectOS);
-        this.llenarSelect(resultados["tipoEquipo"], this.selectTE);
+        this.llenarSelect(resultados["linea"], this.selectLinea,"Elija una linea");
+        this.llenarSelect(resultados["sistemaOperativo"], this.selectOS, "Elija un Sistema Operativo");
+        this.llenarSelect(resultados["tipoEquipo"], this.selectTE, "Elija un tipo de Equipo");
     }
     
-    llenarSelect(items, selectElement) {
+    llenarSelect(items, selectElement, titulo) {
+
+        selectElement.innerHTML=""
+
+        let tituloSelect = document.createElement('option');
+        tituloSelect.value = "-1"
+        tituloSelect.textContent = titulo
+        selectElement.appendChild(tituloSelect);
+
         for (const item of items) {
             let option = document.createElement('option');
             option.value = item.id;
@@ -116,6 +124,7 @@ export class VistaGestionInventario extends Vista {
     }
     anadir() {
         this.mostrarOcultarCrud(false, true, false,false);
+        this.controlador.obtenerDesplegables("inventario")
        
     }
     //modificar arrelo a los campos de los equipos

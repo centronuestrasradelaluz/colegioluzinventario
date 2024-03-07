@@ -242,6 +242,12 @@
                 <button id="botonVolverMantenimientos">VOLVER</button>
                 <form method="post" class="needs-validation" autocomplete="off" novalidate>
                     <div class="formItem">
+                        <label for="codigoEquipo">
+                            Codigo Equipo<select id="selectCodigoEquipo" class="form-control" name="selectCodigoEquipo"><option value="-1" selected>Seleccione Codigo de Equipo</option></select>
+                            <div class="invalid-feedback">Por favor, seleccione un tipo Equipo.</div>
+                        </label>
+                    </div>
+                    <div class="formItem">
                         <label for="descripcion">
                            Descripcion de la incidencia<input type="textarea" class="form-control" name="descripcion" />
                         </label>

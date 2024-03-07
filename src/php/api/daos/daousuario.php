@@ -182,8 +182,20 @@
                    );
                    
        
-                   return $seleccionados;
                 }
+
+                if($pantalla == 'mantenimiento'){
+
+                    $sql = 'SELECT id, codigoEquipo FROM Equipo';
+
+                    $equipo = BD::seleccionar($sql, null);
+
+                    $seleccionados = array(
+                        'codigoEquipo' => $equipo,
+                    );
+                }
+
+                return $seleccionados;
           
         }
 

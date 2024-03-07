@@ -96,7 +96,12 @@ class ControladorAdministradores {
       obtenerDesplegables(pantalla) {
         this.modelo.obtenerDesplegables(pantalla)
         .then(resultados => {
-             this.vistaGestionInventario.rellenarSelects(resultados);
+          
+            if(pantalla == 'inventario')
+            this.vistaGestionInventario.rellenarSelects(resultados);
+            if(pantalla == 'mantenimiento')
+            this.vistaGestionMantenimiento.rellenarSelects(resultados);
+
         })
         .catch(error => {
             console.error(error);

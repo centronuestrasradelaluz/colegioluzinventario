@@ -36,6 +36,8 @@ export class VistaGestionMantenimiento extends Vista {
        this.formAlta = this.div.getElementsByTagName('form')[0];
        this.inputsAlta = this.formAlta.getElementsByTagName('input');
 
+       this.selectCodigoEquipo = this.div.querySelector("#selectCodigoEquipo")
+
        this.divExitoAlta = this.div.querySelector('#divExito');
        this.divCargandoAlta = this.div.querySelector('#loadingImg');
 
@@ -49,14 +51,23 @@ export class VistaGestionMantenimiento extends Vista {
     }
 
     rellenarSelects(resultados) {
-        this.llenarSelect(resultados["equipos"], this.selectEquipos);
+        this.llenarSelect(resultados["codigoEquipo"], this.selectCodigoEquipo, "Elija Codigo de Equipo");
     }
     
-    llenarSelect(items, selectElement) {
+    llenarSelect(items, selectElement,titulo) {
+
+        selectElement.innerHTML=""
+
+        let tituloSelect = document.createElement('option');
+        tituloSelect.value = "-1"
+        tituloSelect.textContent = titulo
+        selectElement.appendChild(tituloSelect);
+
         for (const item of items) {
             let option = document.createElement('option');
             option.value = item.id;
-            option.textContent = item.nombre;
+            option.textContent = item.codigoEquipo;
+          
             selectElement.appendChild(option);
         }
     }
@@ -250,6 +261,7 @@ export class VistaGestionMantenimiento extends Vista {
 
     anadir() {
         this.mostrarOcultarCrud(false, true, false,false);
+        this.controlador.obtenerDesplegables("mantenimiento");
        
     }
 
