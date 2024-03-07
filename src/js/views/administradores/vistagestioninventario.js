@@ -73,31 +73,6 @@ export class VistaGestionInventario extends Vista {
         this.divExitoAlta.style.display = activar ? 'block' : 'none';
 
     }
-  /*  rellenarSelects(resultados) {
-
-        for (const li of resultados["linea"]){
-            let optionLinea = document.createElement('option')
-            optionLinea.value = li.id;
-            optionLinea.textContent = li.nombre
-
-            this.selectLinea.appendChild(optionLinea);
-          
-        }
-        for (const so of resultados["sistemaOperativo"]){
-            let optionSO = document.createElement('option')
-            optionSO.value = so.id;
-            optionSO.textContent = so.nombre
-
-            this.selectOS.appendChild(optionSO);
-        }
-        for (const te of resultados["tipoEquipo"]){
-            let optionTE = document.createElement('option')
-            optionTE.value = te.id;
-            optionTE.textContent = te.nombre
-
-            this.selectTE.appendChild(optionTE)
-        }
-    }*/
 
     rellenarSelects(resultados) {
         this.llenarSelect(resultados["linea"], this.selectLinea);
@@ -147,7 +122,7 @@ export class VistaGestionInventario extends Vista {
     modificar(equipo){
 
         this.mostrarOcultarCrud(false,true,true,false)
-        this.controlador.obtenerDesplegables()
+        this.controlador.obtenerDesplegables("inventario")
         this.idEquipo = equipo.id;
         this.inputsAlta[0].value = equipo.codigoEquipo;
         this.inputsAlta[1].value = equipo.proveedor;

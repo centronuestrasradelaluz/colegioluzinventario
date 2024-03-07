@@ -157,31 +157,34 @@
         /*INVENTARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo */
 
 
-        public static function obtenerSeleccionados() {
+        public static function obtenerSeleccionados($pantalla) {
            
             if (!BD::iniciarTransaccion())
                 throw new Exception('No es posible iniciar la transacción.');
            
-             $sql = 'SELECT * FROM Linea';
+                if($pantalla == 'inventario'){
+                    $sql = 'SELECT * FROM Linea';
 
-             $linea = BD::seleccionar($sql, null);
-
-             $sql = 'SELECT * FROM SistemaOperativo';
-
-             $sistemaOperativo = BD::seleccionar($sql, null);
-
-             $sql = 'SELECT * FROM TipoEquipo';
-
-             $tipoEquipo = BD::seleccionar($sql, null);
-
-             $seleccionados = array(
-                'linea' => $linea,
-                'sistemaOperativo' => $sistemaOperativo,
-                'tipoEquipo' => $tipoEquipo
-            );
-
-
-            return $seleccionados;
+                    $linea = BD::seleccionar($sql, null);
+       
+                    $sql = 'SELECT * FROM SistemaOperativo';
+       
+                    $sistemaOperativo = BD::seleccionar($sql, null);
+       
+                    $sql = 'SELECT * FROM TipoEquipo';
+       
+                    $tipoEquipo = BD::seleccionar($sql, null);
+       
+                    $seleccionados = array(
+                       'linea' => $linea,
+                       'sistemaOperativo' => $sistemaOperativo,
+                       'tipoEquipo' => $tipoEquipo
+                   );
+                   
+       
+                   return $seleccionados;
+                }
+          
         }
 
         /**

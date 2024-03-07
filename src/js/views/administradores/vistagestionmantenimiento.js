@@ -48,6 +48,19 @@ export class VistaGestionMantenimiento extends Vista {
         
     }
 
+    rellenarSelects(resultados) {
+        this.llenarSelect(resultados["equipos"], this.selectEquipos);
+    }
+    
+    llenarSelect(items, selectElement) {
+        for (const item of items) {
+            let option = document.createElement('option');
+            option.value = item.id;
+            option.textContent = item.nombre;
+            selectElement.appendChild(option);
+        }
+    }
+
       
      /**
      * Informar al usuario del alta exitosa.

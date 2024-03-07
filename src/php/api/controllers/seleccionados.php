@@ -15,12 +15,23 @@
            
             // Si no existe $usuario, es porque la autorización ha fallado.
             if (!$usuario) {
-                header('HTTP/1.1 401 Unauthorized');
+            header('HTTP/1.1 401 Unauthorized');
                 die();
             }
+
+             if (count($queryParams) && isset($queryParams['pantalla'])) {
+          
+                
+                    $seleccionados = DAOUsuario::obtenerSeleccionados($queryParams['pantalla']);
+                    sleep(1);
+              
+            }
+        else {
+            header('HTTP/1.1 400 Bad Request');
+            die();
+        }
                
-                $seleccionados = DAOUsuario::obtenerSeleccionados();
-                sleep(1);
+              
           
             if (!$seleccionados) {
                 header('HTTP/1.1 404 Not Found');
@@ -32,6 +43,8 @@
             echo json_encode($seleccionados);
             die();
         }
+
+       
 
       
 

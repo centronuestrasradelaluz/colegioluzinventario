@@ -93,8 +93,8 @@ class ControladorAdministradores {
       /**
      * Devuelve array de Lineas a vista de gestión de hijos.
      */
-      obtenerDesplegables() {
-        this.modelo.obtenerDesplegables()
+      obtenerDesplegables(pantalla) {
+        this.modelo.obtenerDesplegables(pantalla)
         .then(resultados => {
              this.vistaGestionInventario.rellenarSelects(resultados);
         })
