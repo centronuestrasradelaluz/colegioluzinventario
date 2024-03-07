@@ -47,7 +47,7 @@ export class VistaGestionInventario extends Vista {
 
        this.esModificacion = false
       
-       this.controlador.obtenerDesplegables()
+       
 
        this.selectLinea = this.div.querySelector("#selectLinea")
        this.selectOS = this.div.querySelector("#selectSistemaOperativo")
@@ -147,6 +147,7 @@ export class VistaGestionInventario extends Vista {
     modificar(equipo){
 
         this.mostrarOcultarCrud(false,true,true,false)
+        this.controlador.obtenerDesplegables()
         this.idEquipo = equipo.id;
         this.inputsAlta[0].value = equipo.codigoEquipo;
         this.inputsAlta[1].value = equipo.proveedor;

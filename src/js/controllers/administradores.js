@@ -65,6 +65,7 @@ class ControladorAdministradores {
         this.vistaGestionUsuarios.mostrar(true);
         this.vistaGestionMantenimiento.mostrar(false);
         this.vistaGestionInventario.mostrar(false);
+       
         
     }
     /**
@@ -75,6 +76,7 @@ class ControladorAdministradores {
         this.vistaGestionUsuarios.mostrar(false);
         this.vistaGestionMantenimiento.mostrar(false);
         this.vistaGestionInventario.mostrar(true);
+        
     }
 
     /**
@@ -85,6 +87,7 @@ class ControladorAdministradores {
         this.vistaGestionUsuarios.mostrar(false);
         this.vistaGestionMantenimiento.mostrar(true);
         this.vistaGestionInventario.mostrar(false);
+       
     }
 
       /**
@@ -222,6 +225,30 @@ class ControladorAdministradores {
              //this.vistaGestionHijos.bloquearBotonesAlta(false);
              console.error(e);
          })
+    }
+
+
+    eliminarMantenimiento(id){
+        this.modelo.eliminarMantenimiento(id)
+        .then(() =>{
+            this.dameMantenimientos();
+        })
+        .catch(e => {
+            console.error(e)
+        })
+    }
+
+    modificarMantenimiento(datos){
+        this.modelo.modificarMantenimiento(datos)
+        .then(() => {
+              // this.vistaGestionHijos.bloquearBotonesAlta(false);
+            this.vistaGestionMantenimiento.exitoAlta(true);
+            this.dameMantenimientos();// Actualizar lista de mantenimientos
+        })
+        .catch(e => {
+            //this.vistaGestionHijos.bloquearBotonesAlta(false);
+            console.error(e);
+        })
     }
 
 

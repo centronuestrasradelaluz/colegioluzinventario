@@ -271,12 +271,18 @@ export class VistaGestionMantenimiento extends Vista {
         this.controlador.dameMantenimientos(texto)
      }
 
-     eliminar(id) {
+    eliminar(id) {
         if(confirm("¿Estas seguro de eliminar el equipo? Este proceso será irreversible"))
         {
-            this.controlador.eliminarEquipo(id)
+            this.controlador.eliminarMantenimiento(id)
         }
     }
+
+    modificar(){
+
+    }
+
+
 
 
 
