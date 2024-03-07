@@ -43,6 +43,7 @@ class ControladorAdministradores {
        
         //Vista pedreterminada al iniciar la app
         this.verVistaInicio();
+        this.obtenerDesplegables()
         this.vistaInicio.bienvenida(this.#usuario)
         
     }
@@ -94,12 +95,9 @@ class ControladorAdministradores {
      * Devuelve array de Lineas a vista de gestión de hijos.
      */
       obtenerDesplegables(pantalla) {
-        this.modelo.obtenerDesplegables(pantalla)
+        this.modelo.obtenerDesplegables()
         .then(resultados => {
-          
-            if(pantalla == 'inventario')
             this.vistaGestionInventario.rellenarSelects(resultados);
-            if(pantalla == 'mantenimiento')
             this.vistaGestionMantenimiento.rellenarSelects(resultados);
 
         })
@@ -219,7 +217,8 @@ class ControladorAdministradores {
         })
     }
 
-    ingresarMantenimiento(datos) {
+    ingresarMantenimientos(datos) {
+       datos.idUsuario = this.#usuario.id
         this.modelo.ingresarMantenimiento(datos)
          .then(() => {
             // this.vistaGestionHijos.bloquearBotonesAlta(false);

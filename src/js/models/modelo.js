@@ -52,15 +52,19 @@ export class Modelo {
         return Rest.put('inventario', [], datos, false);
     }
 
-    obtenerDesplegables(pantalla){
-        const queryParams = new Map();
-        queryParams.set('pantalla', pantalla);
-        return Rest.get('seleccionados', [], queryParams);
-        //return Rest.get('seleccionados',[], [] )
+    obtenerDesplegables(){
+
+        return Rest.get('seleccionados',[], [] )
     }
 
     dameMantenimientos(texto){
         return Rest.get('mantenimiento', [texto], []);
+    }
+
+    ingresarMantenimiento(datos){
+        console.log(datos)
+
+        return Rest.post('mantenimiento',[], datos, false);
     }
 
 

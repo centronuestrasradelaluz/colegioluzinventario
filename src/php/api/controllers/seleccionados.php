@@ -19,17 +19,13 @@
                 die();
             }
 
-             if (count($queryParams) && isset($queryParams['pantalla'])) {
+            
           
                 
-                    $seleccionados = DAOUsuario::obtenerSeleccionados($queryParams['pantalla']);
+                    $seleccionados = DAOUsuario::obtenerSeleccionados();
                     sleep(1);
               
-            }
-        else {
-            header('HTTP/1.1 400 Bad Request');
-            die();
-        }
+        
                
               
           

@@ -156,13 +156,11 @@
 
         /*INVENTARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo */
 
-
-        public static function obtenerSeleccionados($pantalla) {
+        public static function obtenerSeleccionados() {
            
             if (!BD::iniciarTransaccion())
                 throw new Exception('No es posible iniciar la transacción.');
            
-                if($pantalla == 'inventario'){
                     $sql = 'SELECT * FROM Linea';
 
                     $linea = BD::seleccionar($sql, null);
@@ -174,27 +172,19 @@
                     $sql = 'SELECT * FROM TipoEquipo';
        
                     $tipoEquipo = BD::seleccionar($sql, null);
-       
-                    $seleccionados = array(
-                       'linea' => $linea,
-                       'sistemaOperativo' => $sistemaOperativo,
-                       'tipoEquipo' => $tipoEquipo
-                   );
-                   
-       
-                }
-
-                if($pantalla == 'mantenimiento'){
-
+          
                     $sql = 'SELECT id, codigoEquipo FROM Equipo';
 
                     $equipo = BD::seleccionar($sql, null);
 
+       
                     $seleccionados = array(
-                        'codigoEquipo' => $equipo,
-                    );
-                }
-
+                       'linea' => $linea,
+                       'sistemaOperativo' => $sistemaOperativo,
+                       'tipoEquipo' => $tipoEquipo,
+                       'codigoEquipo' => $equipo
+                   );
+                   
                 return $seleccionados;
           
         }
@@ -400,6 +390,28 @@
             $sql = 'SELECT * FROM Mantenimiento';
            
             return BD::seleccionar($sql, null);
+        }
+
+        public static function altaMantenimiento($datos){
+
+            if(!BD::iniciarTransaccion()){
+                throw new Exception('No es posible iniciar la transacción.');
+            }
+
+            $sql = 'INSERT INTO Mantenimiento';
+           
+            $sql .= '(idEquipo, idUsuario, fechaIncidencia,descripcion)';
+            $sql .= ' VALUES(:idEquipo, :idUsuario, CURDATE(), :descripcion)';
+
+
+            $params = array(
+                'idEquipo' => 1000,
+                'idUsuario'=>$datos->idUsuario,
+                'descripcion' =>$datos->descripcion
+
+            );
+           
+            return BD::insertar($sql, $params);
         }
     }
 

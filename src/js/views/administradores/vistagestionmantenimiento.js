@@ -46,6 +46,7 @@ export class VistaGestionMantenimiento extends Vista {
         
         this.esModificacion = false
         this.controlador.dameMantenimientos("")
+      
         this.mostrarOcultarCrud(true,false,false,false)
         
     }
@@ -261,19 +262,17 @@ export class VistaGestionMantenimiento extends Vista {
 
     anadir() {
         this.mostrarOcultarCrud(false, true, false,false);
-        this.controlador.obtenerDesplegables("mantenimiento");
        
     }
 
     //ingresar arrelo a los campos de los equipos
     ingresarMantenimientos() {
-        
-
-      /*  if(this.esModificacion){
+    
+       if(this.esModificacion){
             const datos = {
                 'id': this.idMantenimiento,
                 'solucion': this.inputsAlta[1].value,
-                'fechaSolucion':  this.inputsAlta[1].value,
+                'fechaSolucion':  this.inputsAlta[2].value,
                 'quienSoluciona': this.inputsAlta[3].value        
             };
             this.divCargandoAlta.style.display = 'block';
@@ -281,13 +280,13 @@ export class VistaGestionMantenimiento extends Vista {
         }
         if(!this.esModificacion){
             const datos = {
-                'descripcion': this.inputsAlta[0].value,
-                ''
+                'descripcion': this.inputsAlta[0].value
                 
             };
             this.divCargandoAlta.style.display = 'block';
-            this.controlador.ingresarEquipos(datos);*/
+            this.controlador.ingresarMantenimientos(datos);
     }
+}
 
     escribir(texto){
         // this.busqueda

@@ -52,7 +52,8 @@ export class VistaGestionInventario extends Vista {
        this.selectLinea = this.div.querySelector("#selectLinea")
        this.selectOS = this.div.querySelector("#selectSistemaOperativo")
        this.selectTE = this.div.querySelector("#selectTipoEquipo")
-    this.controlador.dameEquipos("")
+        this.controlador.dameEquipos("")
+       
         this.mostrarOcultarCrud(true,false,false,false)
         
     }
@@ -75,27 +76,36 @@ export class VistaGestionInventario extends Vista {
     }
 
     rellenarSelects(resultados) {
-        this.llenarSelect(resultados["linea"], this.selectLinea,"Elija una linea");
-        this.llenarSelect(resultados["sistemaOperativo"], this.selectOS, "Elija un Sistema Operativo");
-        this.llenarSelect(resultados["tipoEquipo"], this.selectTE, "Elija un tipo de Equipo");
-    }
-    
-    llenarSelect(items, selectElement, titulo) {
 
-        selectElement.innerHTML=""
+        console.log(resultados)
+        for (const linea of resultados["linea"]) {
 
-        let tituloSelect = document.createElement('option');
-        tituloSelect.value = "-1"
-        tituloSelect.textContent = titulo
-        selectElement.appendChild(tituloSelect);
+           let opcionLinea = document.createElement('option');
+           opcionLinea.textContent = linea.nombre;
+           opcionLinea.value = linea.id;
+            
+            this.selectLinea.appendChild(opcionLinea);
+        }
+        for (const SO of resultados["sistemaOperativo"]) {
 
-        for (const item of items) {
-            let option = document.createElement('option');
-            option.value = item.id;
-            option.textContent = item.nombre;
-            selectElement.appendChild(option);
+            
+           let opcionSO = document.createElement('option');
+           opcionSO.textContent = SO.nombre;
+           opcionSO.value = SO.id;
+            
+            this.selectOS.appendChild(opcionSO);
+        }
+        for (const TE of resultados["tipoEquipo"]) {
+
+           let opcionTE = document.createElement('option');
+           opcionTE.textContent = TE.nombre;
+           opcionTE.value = TE.id;
+            
+            this.selectTE.appendChild(opcionTE);
         }
     }
+    
+    
 
      //metodo para ocultar el crud de la gestion de hijos
 
@@ -124,14 +134,12 @@ export class VistaGestionInventario extends Vista {
     }
     anadir() {
         this.mostrarOcultarCrud(false, true, false,false);
-        this.controlador.obtenerDesplegables("inventario")
        
     }
     //modificar arrelo a los campos de los equipos
     modificar(equipo){
 
         this.mostrarOcultarCrud(false,true,true,false)
-        this.controlador.obtenerDesplegables("inventario")
         this.idEquipo = equipo.id;
         this.inputsAlta[0].value = equipo.codigoEquipo;
         this.inputsAlta[1].value = equipo.proveedor;
