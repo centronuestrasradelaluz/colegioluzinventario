@@ -394,14 +394,9 @@
 
         public static function altaMantenimiento($datos){
 
-            if(!BD::iniciarTransaccion()){
-                throw new Exception('No es posible iniciar la transacción.');
-            }
 
-            $sql = 'INSERT INTO Mantenimiento';
-           
-            $sql .= '(idEquipo, idUsuario, fechaIncidencia,descripcion)';
-            $sql .= ' VALUES(:idEquipo, :idUsuario, CURDATE(), :descripcion)';
+            $sql = 'INSERT INTO Mantenimiento(idEquipo, idUsuario, fechaIncidencia,descripcion)';
+            $sql .= ' VALUES(:idEquipo,:idUsuario,CURDATE(),:descripcion)';
 
 
             $params = array(
@@ -410,9 +405,11 @@
                 'descripcion' =>$datos->descripcion
 
             );
-           
+                
             return BD::insertar($sql, $params);
         }
+        
+
     }
 
        

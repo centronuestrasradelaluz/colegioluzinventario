@@ -270,6 +270,7 @@ export class VistaGestionMantenimiento extends Vista {
                 'descripcion': this.inputsAlta[0].value
                 
             };
+           
             this.divCargandoAlta.style.display = 'block';
             this.controlador.ingresarMantenimientos(datos);
     }
@@ -292,9 +293,6 @@ export class VistaGestionMantenimiento extends Vista {
     modificar(){
 
     }
-
-
-
 
 
     mostrar(ver) {
