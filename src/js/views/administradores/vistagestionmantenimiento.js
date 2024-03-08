@@ -139,9 +139,11 @@ export class VistaGestionMantenimiento extends Vista {
         let trBusqueda = document.createElement('tr');
         let tdBusqueda = document.createElement('td');
         tdBusqueda.setAttribute('colspan', '2');
+        tdBusqueda.setAttribute('class', 'buscar')
 
         let inputBusqueda = document.createElement('input');
         inputBusqueda.setAttribute('type', 'text');
+        inputBusqueda.setAttribute('class', 'input-buscar')
         inputBusqueda.setAttribute('name', 'busqueda');
         inputBusqueda.setAttribute('placeholder', 'Busca por codigo de equipo')
         inputBusqueda.value = this.busqueda
@@ -157,6 +159,7 @@ export class VistaGestionMantenimiento extends Vista {
        
         let tdAnadir = document.createElement('td');
         tdAnadir.setAttribute('id', 'añadir');
+        tdAnadir.setAttribute('class', 'añadir');
       
         let botonAnadirTabla = document.createElement('button')
         botonAnadirTabla.setAttribute('class', 'add-users-btn')
@@ -170,6 +173,7 @@ export class VistaGestionMantenimiento extends Vista {
 
         let trHeadInfo = document.createElement('tr');
         trHeadInfo.setAttribute('id', 'trInfo');
+        trHeadInfo.setAttribute('class', 'titulos')
 
         let tdCodigoEquipo = document.createElement('td');
         tdCodigoEquipo.textContent = 'Codigo';
@@ -209,7 +213,7 @@ export class VistaGestionMantenimiento extends Vista {
                 let tdCodigoEquipo = document.createElement('td');
                 tr.appendChild(tdCodigoEquipo);
                 tdCodigoEquipo.textContent = mantenimiento.codigoEquipo
-                
+
                 let td1 = document.createElement('td');
                 tr.appendChild(td1);
                 td1.textContent = mantenimiento.fechaIncidencia;

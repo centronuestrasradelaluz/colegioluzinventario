@@ -221,8 +221,10 @@ export class VistaGestionUsuarios extends Vista {
         let trBusqueda = document.createElement('tr');
         let tdBusqueda = document.createElement('td');
         tdBusqueda.setAttribute('colspan', '3');
+        tdBusqueda.setAttribute('class', 'buscar')
 
         let inputBusqueda = document.createElement('input');
+        inputBusqueda.setAttribute('class', 'input-buscar')
         inputBusqueda.setAttribute('type', 'text');
         inputBusqueda.setAttribute('name', 'busqueda');
         inputBusqueda.setAttribute('placeholder', 'Busca por nombre')
@@ -239,6 +241,7 @@ export class VistaGestionUsuarios extends Vista {
 
         let tdAnadir = document.createElement('td');
         tdAnadir.setAttribute('id', 'añadir');
+        tdAnadir.setAttribute('class', 'añadir');
         tdAnadir.setAttribute('colspan', '2');
 
         let botonAnadirTabla = document.createElement('button')
@@ -252,6 +255,7 @@ export class VistaGestionUsuarios extends Vista {
 
         let trHeadInfo = document.createElement('tr');
         trHeadInfo.setAttribute('id', 'trInfo');
+        trHeadInfo.setAttribute('class', 'titulos')
 
         let tdNombre = document.createElement('td');
         tdNombre.textContent = 'Nombre';
