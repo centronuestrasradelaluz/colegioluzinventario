@@ -1,15 +1,10 @@
 /* ESTILOS COMUNES */
 
 /* ----- FUENTE ----- */
-@font-face {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: normal;
-    src: url("../font/opensans/OpenSans-VariableFont.ttf");
-}
 
 body {
-    font-family: 'Open Sans';
+    font-family:'Calibri';
+    background-color: #d9e2f3;
 }
 
 /* ----- FORMULARIOS ----- */
@@ -142,4 +137,84 @@ nav#menuSecretaria ul li {
         display: block;
         text-align: left;
     }
+}
+
+.imgLogin{
+	width:100%;
+	height: 100px;
+}
+.content-logo{
+	height: 100px;
+	display:inline-block;
+}
+.texto{
+	display:inline-block;
+	font-family: "Comic Sans MS";
+	margin-left: 2%;
+	font-size:	40px;
+	font-weight: bold;
+	color: #bf2501;
+}
+.content-img{
+	overflow:hidden;
+	height: 100px;
+	background-color: white;
+	border-bottom: 1px solid;
+	text-align: center;
+	box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+/*BOTON AÑADIR USUARIOS*/
+.add-users-btn {
+	grid-column: span 2;
+	background-color: #4CAF50;
+	color: white;
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+}
+/*TABLAs*/
+table {
+	width: 50%;
+	border-collapse: collapse;
+	margin:auto;
+}
+tr.titulos td {
+	background-color: #3D7AEF;
+	text-align: center;
+	color: white;
+	border: 1px black solid;
+	padding: 8px;
+}
+td {
+	border: 1px black solid;
+	padding: 8px;
+	text-align: left;
+	background-color: white;
+	width: 20%;
+}
+
+td.buscar,
+td.añadir {
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	text-align: center;
+	background-color: #d9e2f3;
+}
+.input-buscar{
+	width: 100%;
+}
+/*IMAGENES*/
+td img.iconos{
+	width: 22px;
+	height: 22px;
+    margin:3px;
+	cursor: pointer;
+}
+td.options{
+    text-align: center;
 }

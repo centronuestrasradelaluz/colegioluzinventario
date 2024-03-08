@@ -220,7 +220,7 @@ export class VistaGestionUsuarios extends Vista {
         
         let trBusqueda = document.createElement('tr');
         let tdBusqueda = document.createElement('td');
-        tdBusqueda.setAttribute('colspan', '5');
+        tdBusqueda.setAttribute('colspan', '3');
 
         let inputBusqueda = document.createElement('input');
         inputBusqueda.setAttribute('type', 'text');
@@ -236,31 +236,19 @@ export class VistaGestionUsuarios extends Vista {
 
         tdBusqueda.appendChild(inputBusqueda);
 
-        trBusqueda.appendChild(tdBusqueda)
-
-
-        let trTitulo = document.createElement('tr');
-        let tdTitulo = document.createElement('td');
-        tdTitulo.textContent = 'Usuarios';
-        tdTitulo.setAttribute('colspan', '3');
-        trTitulo.appendChild(tdTitulo);
 
         let tdAnadir = document.createElement('td');
         tdAnadir.setAttribute('id', 'añadir');
         tdAnadir.setAttribute('colspan', '2');
-        tdAnadir.textContent = "Añadir usuario";
-        trTitulo.appendChild(tdAnadir);
 
+        let botonAnadirTabla = document.createElement('button')
+        botonAnadirTabla.setAttribute('class', 'add-users-btn')
+        botonAnadirTabla.textContent='Añadir Usuario'
+
+        tdAnadir.appendChild(botonAnadirTabla)
         tdAnadir.addEventListener('click', this.anadir.bind(this));
 
-       /* let iconoInsertar = document.createElement('img');
-        iconoInsertar.setAttribute('id', 'btnAnadir');
-        iconoInsertar.setAttribute('src', './img/icons/add.svg');
-        iconoInsertar.setAttribute('title', 'Añadir nuevo hijo');
-        iconoInsertar.setAttribute('alt', 'Añadir nuevo hijo');*/
-        //iconoInsertar.addEventListener('click', this.anadir.bind(this));
-
-        //tdAnadir.appendChild(iconoInsertar);
+        trBusqueda.appendChild(tdBusqueda)
 
         let trHeadInfo = document.createElement('tr');
         trHeadInfo.setAttribute('id', 'trInfo');
@@ -285,11 +273,10 @@ export class VistaGestionUsuarios extends Vista {
 
         let tdOpciones = document.createElement('td');
         tdOpciones.textContent = 'Opciones';
-        tdOpciones.setAttribute('colspan', '2');
         trHeadInfo.appendChild(tdOpciones);
 
+        trBusqueda.appendChild(tdAnadir)
         this.thead.appendChild(trBusqueda)
-        this.thead.appendChild(trTitulo);
         this.thead.appendChild(trHeadInfo);
     }
 
@@ -333,19 +320,21 @@ export class VistaGestionUsuarios extends Vista {
                 tdEstado.textContent = "Inactivo"
 
                 let td2 = document.createElement('td');
-                td2.classList.add('tdOperaciones');
+                td2.classList.add('options');
                 td2.setAttribute('colspan', '2');
                 tr.appendChild(td2);
 
                 let iconoEditar = document.createElement('img');
-                iconoEditar.setAttribute('src','./img/icons/edit_children.svg');
+                iconoEditar.setAttribute('src','./img/icons/ico_editar.png');
+                iconoEditar.setAttribute('class', 'iconos')
                 iconoEditar.setAttribute('alt', 'Modificar usuario');
                 iconoEditar.setAttribute('title','Modificar usuario');
                 iconoEditar.addEventListener('click', this.modificar.bind(this, usuario));
                 td2.appendChild(iconoEditar);
 
                 let iconoEliminar = document.createElement('img');
-                iconoEliminar.setAttribute('src', './img/icons/person_remove.svg');
+                iconoEliminar.setAttribute('src', './img/icons/ico_eliminar.png');
+                iconoEliminar.setAttribute('class', 'iconos')
                 iconoEliminar.setAttribute('alt', 'Eliminar usuario');
                 iconoEliminar.setAttribute('title', 'Eliminar usuario');
                 iconoEliminar.addEventListener('click', this.eliminarUsuario.bind(this, usuario.id))
@@ -361,16 +350,6 @@ export class VistaGestionUsuarios extends Vista {
             this.controlador.eliminarUsuario(id)
         }
     }
-
-     /**
-     * Limpia los campos del formulario alta.
-     */
-    /* cancelarAlta() {
-        for (let input of this.inputsAlta)
-            input.value = '';
-
-        this.mostrarOcultarCrud(true, false, false);
-    }*/
 
     mostrar(ver) {
         super.mostrar(ver);

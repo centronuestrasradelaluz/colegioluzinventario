@@ -138,7 +138,7 @@ export class VistaGestionMantenimiento extends Vista {
         
         let trBusqueda = document.createElement('tr');
         let tdBusqueda = document.createElement('td');
-        tdBusqueda.setAttribute('colspan', '5');
+        tdBusqueda.setAttribute('colspan', '2');
 
         let inputBusqueda = document.createElement('input');
         inputBusqueda.setAttribute('type', 'text');
@@ -154,31 +154,20 @@ export class VistaGestionMantenimiento extends Vista {
 
         tdBusqueda.appendChild(inputBusqueda);
 
-        trBusqueda.appendChild(tdBusqueda)
-
-
-        let trTitulo = document.createElement('tr');
-        let tdTitulo = document.createElement('td');
-        tdTitulo.textContent = 'Mantenimientos';
-        tdTitulo.setAttribute('colspan', '3');
-        trTitulo.appendChild(tdTitulo);
-
+       
         let tdAnadir = document.createElement('td');
         tdAnadir.setAttribute('id', 'añadir');
-        tdAnadir.setAttribute('colspan', '2');
-        tdAnadir.textContent = "Añadir mantenimiento";
-        trTitulo.appendChild(tdAnadir);
+      
+        let botonAnadirTabla = document.createElement('button')
+        botonAnadirTabla.setAttribute('class', 'add-users-btn')
+        botonAnadirTabla.textContent='Añadir mantenimiento'
+
+        tdAnadir.appendChild(botonAnadirTabla)
+        trBusqueda.appendChild(tdBusqueda)
+        trBusqueda.appendChild(tdAnadir)
+
 
         tdAnadir.addEventListener('click', this.anadir.bind(this));
-
-       /* let iconoInsertar = document.createElement('img');
-        iconoInsertar.setAttribute('id', 'btnAnadir');
-        iconoInsertar.setAttribute('src', './img/icons/add.svg');
-        iconoInsertar.setAttribute('title', 'Añadir nuevo hijo');
-        iconoInsertar.setAttribute('alt', 'Añadir nuevo hijo');*/
-        //iconoInsertar.addEventListener('click', this.anadir.bind(this));
-
-        //tdAnadir.appendChild(iconoInsertar);
 
         let trHeadInfo = document.createElement('tr');
         trHeadInfo.setAttribute('id', 'trInfo');
@@ -193,11 +182,10 @@ export class VistaGestionMantenimiento extends Vista {
 
         let tdOpciones = document.createElement('td');
         tdOpciones.textContent = 'Opciones';
-        tdOpciones.setAttribute('colspan', '2');
         trHeadInfo.appendChild(tdOpciones);
 
         this.thead.appendChild(trBusqueda)
-        this.thead.appendChild(trTitulo);
+     
         this.thead.appendChild(trHeadInfo);
     }
 
@@ -225,32 +213,32 @@ export class VistaGestionMantenimiento extends Vista {
                 tr.appendChild(tdCodigoEquipo);
                 tdCodigoEquipo.textContent = mantenimiento.codigoEquipo
 
-               /* let tdRol = document.createElement('td');
-                tr.appendChild(tdRol);*/
-
 
                 let td2 = document.createElement('td');
-                td2.classList.add('tdOperaciones');
+                td2.classList.add('options');
                 td2.setAttribute('colspan', '2');
                 tr.appendChild(td2);
 
                
                 let iconoConsultar = document.createElement('img');
-                iconoConsultar.setAttribute('src','./img/icons/edit_children.svg');
+                iconoConsultar.setAttribute('src','./img/icons/ico_lupa.png');
+                iconoConsultar.setAttribute('class', 'iconos')
                 iconoConsultar.setAttribute('alt', 'Consultar usuario');
                 iconoConsultar.setAttribute('title','Consultar usuario');
                 //iconoConsultar.addEventListener('click', this.consultar.bind(this, mantenimiento));
                 td2.appendChild(iconoConsultar);
 
                 let iconoEditar = document.createElement('img');
-                iconoEditar.setAttribute('src','./img/icons/edit_children.svg');
+                iconoEditar.setAttribute('src','./img/icons/ico_editar.png');
+                iconoEditar.setAttribute('class', 'iconos')
                 iconoEditar.setAttribute('alt', 'Modificar usuario');
                 iconoEditar.setAttribute('title','Modificar usuario');
                 //iconoEditar.addEventListener('click', this.modificar.bind(this, mantenimiento));
                 td2.appendChild(iconoEditar);
 
                 let iconoEliminar = document.createElement('img');
-                iconoEliminar.setAttribute('src', './img/icons/person_remove.svg');
+                iconoEliminar.setAttribute('src', './img/icons/ico_eliminar.png');
+                iconoEliminar.setAttribute('class', 'iconos')
                 iconoEliminar.setAttribute('alt', 'Eliminar usuario');
                 iconoEliminar.setAttribute('title', 'Eliminar usuario');
                 iconoEliminar.addEventListener('click', this.eliminar.bind(this, mantenimiento.id))
