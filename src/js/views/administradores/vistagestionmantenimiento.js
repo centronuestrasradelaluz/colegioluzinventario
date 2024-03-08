@@ -166,7 +166,6 @@ export class VistaGestionMantenimiento extends Vista {
         trBusqueda.appendChild(tdBusqueda)
         trBusqueda.appendChild(tdAnadir)
 
-
         tdAnadir.addEventListener('click', this.anadir.bind(this));
 
         let trHeadInfo = document.createElement('tr');
