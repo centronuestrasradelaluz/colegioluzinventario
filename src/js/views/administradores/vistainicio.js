@@ -16,12 +16,6 @@ export class VistaInicio extends Vista {
         
     }
 
-    bienvenida(datos){
-        this.divBienvenida.innerHTML = "Bienvenido "+ datos.nombre
-    }
-
-
-
     mostrar(ver) {
         super.mostrar(ver);
     }

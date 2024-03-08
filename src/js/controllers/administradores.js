@@ -44,7 +44,7 @@ class ControladorAdministradores {
         //Vista pedreterminada al iniciar la app
         this.verVistaInicio();
         this.obtenerDesplegables()
-        this.vistaInicio.bienvenida(this.#usuario)
+        this.vistaMenu.bienvenida(this.#usuario)
         
     }
     /**

@@ -12,6 +12,9 @@ export class VistaMenu {
         this.liGestionInventario = this.nav.getElementsByTagName('li')[2];
         this.liGestionMantenimiento = this.nav.getElementsByTagName('li')[3];
         this.liCerrarSesion = this.nav.getElementsByTagName('li')[4];
+        this.divBienvenida = this.nav.getElementsByTagName('div')[0];
+
+
 
 
         this.liInicio.onclick = this.inicio.bind(this);
@@ -19,6 +22,11 @@ export class VistaMenu {
         this.liGestionUsuarios.onclick = this.gestionUsuarios.bind(this)
         this.liGestionInventario.onclick = this.gestionInventario.bind(this);
         this.liGestionMantenimiento.onclick = this.gestionMantenimiento.bind(this);
+    }
+
+    bienvenida(datos){
+        this.divBienvenida.textContent = "Bienvenido/a " + datos.nombre
+        
     }
 
 

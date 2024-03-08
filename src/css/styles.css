@@ -47,6 +47,8 @@ label {
     text-align: left;
 }
 
+
+
 div.formItem input[type="checkbox"] {
     min-width: 20px;
     width: auto;
@@ -87,6 +89,12 @@ nav#menuSecretaria ul li {
 .topnav {
     background-color: #333;
     overflow: hidden;
+}
+
+#bienvenida{
+    color:white;
+    float:left;
+    margin-left:20%;
 }
 
 /* Style the links inside the navigation bar */
