@@ -382,16 +382,31 @@
            return BD::actualizar($sql,$params);
         }
 
-        public static function obtenerMantenimientos(){
+        public static function obtenerMantenimientos($busqueda){
 
             if (!BD::iniciarTransaccion())
             throw new Exception('No es posible iniciar la transacción.');
+            
+            if ($busqueda == "null"){
+                $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario,fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
+                $sql .= ' FROM Mantenimiento';
+                $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
 
-            $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario,fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
-            $sql .= ' FROM Mantenimiento';
-            $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
+                return BD::seleccionar($sql, null);
+            }
+            else{
+                $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario,fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
+                $sql .= ' FROM Mantenimiento';
+                $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
+                $sql .= ' WHERE equipo.codigoEquipo';
+                $sql .= ' LIKE :busqueda';
+
+                $params = array('busqueda' => '%'. $busqueda . '%');
+                return BD::seleccionar($sql, $params);
+            }
            
-            return BD::seleccionar($sql, null);
+           
+           
         }
 
         public static function altaMantenimiento($datos){
