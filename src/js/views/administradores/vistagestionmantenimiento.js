@@ -204,13 +204,16 @@ export class VistaGestionMantenimiento extends Vista {
                 let tr = document.createElement('tr');
                 this.tbody.appendChild(tr);
                 
+
+                
+                let tdCodigoEquipo = document.createElement('td');
+                tr.appendChild(tdCodigoEquipo);
+                tdCodigoEquipo.textContent = mantenimiento.codigoEquipo
+                
                 let td1 = document.createElement('td');
                 tr.appendChild(td1);
                 td1.textContent = mantenimiento.fechaIncidencia;
 
-                let tdCodigoEquipo = document.createElement('td');
-                tr.appendChild(tdCodigoEquipo);
-                tdCodigoEquipo.textContent = mantenimiento.codigoEquipo
 
 
                 let td2 = document.createElement('td');

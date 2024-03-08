@@ -387,7 +387,9 @@
             if (!BD::iniciarTransaccion())
             throw new Exception('No es posible iniciar la transacción.');
 
-            $sql = 'SELECT * FROM Mantenimiento';
+            $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario,fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
+            $sql .= ' FROM Mantenimiento';
+            $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
            
             return BD::seleccionar($sql, null);
         }
