@@ -417,7 +417,7 @@
 
 
             $params = array(
-                'idEquipo' => 1000,
+                'idEquipo' => $datos->idEquipo,
                 'idUsuario'=>$datos->idUsuario,
                 'descripcion' =>$datos->descripcion
 

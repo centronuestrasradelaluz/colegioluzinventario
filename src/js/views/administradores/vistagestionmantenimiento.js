@@ -34,7 +34,11 @@ export class VistaGestionMantenimiento extends Vista {
 
        //Formulario de la vista e inputs
        this.formAlta = this.div.getElementsByTagName('form')[0];
+       this.divFormularios = this.div.getElementsByClassName("formItem")
+
+       
        this.inputsAlta = this.formAlta.getElementsByTagName('input');
+       this.selectsAlta = this.formAlta.getElementsByTagName('select');
 
        this.selectCodigoEquipo = this.div.querySelector("#selectCodigoEquipo")
 
@@ -43,11 +47,13 @@ export class VistaGestionMantenimiento extends Vista {
 
        
         //Parametros necesarios para cargar la vista
-        
+
+        this.idMantenimiento = 0
+      
         this.esModificacion = false
         this.controlador.dameMantenimientos("")
       
-        this.mostrarOcultarCrud(true,false,false,false)
+        this.mostrarOcultarCrud(true,false,false)
         
     }
 
@@ -93,7 +99,7 @@ export class VistaGestionMantenimiento extends Vista {
 
      //metodo para ocultar el crud de la gestion de hijos
 
-     mostrarOcultarCrud(listado, alta, modificacion,consulta){
+     mostrarOcultarCrud(listado, alta, modificacion){
 
     
         if (alta && !modificacion){
@@ -106,9 +112,7 @@ export class VistaGestionMantenimiento extends Vista {
         if (listado){
             this.esModificacion = false;
         }
-        if(consulta){
-            this.esModificacion = false
-        }
+      
 
         this.divAlta.style.display = alta ? 'block' : 'none';
         this.divListado.style.display = listado ? 'block' : 'none';
@@ -119,7 +123,7 @@ export class VistaGestionMantenimiento extends Vista {
 
     volver() {
 
-        this.mostrarOcultarCrud(true, false,false, false)
+        this.mostrarOcultarCrud(true, false,false)
 
         this.formAlta.reset()
 
@@ -226,20 +230,20 @@ export class VistaGestionMantenimiento extends Vista {
                 tr.appendChild(td2);
 
                
-                let iconoConsultar = document.createElement('img');
+               /* let iconoConsultar = document.createElement('img');
                 iconoConsultar.setAttribute('src','./img/icons/ico_lupa.png');
                 iconoConsultar.setAttribute('class', 'iconos')
                 iconoConsultar.setAttribute('alt', 'Consultar usuario');
                 iconoConsultar.setAttribute('title','Consultar usuario');
                 //iconoConsultar.addEventListener('click', this.consultar.bind(this, mantenimiento));
-                td2.appendChild(iconoConsultar);
+                td2.appendChild(iconoConsultar);*/
 
                 let iconoEditar = document.createElement('img');
                 iconoEditar.setAttribute('src','./img/icons/ico_editar.png');
                 iconoEditar.setAttribute('class', 'iconos')
                 iconoEditar.setAttribute('alt', 'Modificar usuario');
                 iconoEditar.setAttribute('title','Modificar usuario');
-                //iconoEditar.addEventListener('click', this.modificar.bind(this, mantenimiento));
+                iconoEditar.addEventListener('click', this.modificar.bind(this, mantenimiento));
                 td2.appendChild(iconoEditar);
 
                 let iconoEliminar = document.createElement('img');
@@ -255,7 +259,32 @@ export class VistaGestionMantenimiento extends Vista {
     }
 
     anadir() {
-        this.mostrarOcultarCrud(false, true, false,false);
+        this.mostrarOcultarCrud(false, true, false);
+
+
+
+        this.divFormularios[0].style.display = 'block'
+
+        this.divFormularios[1].style.display = 'none'
+
+
+        this.inputsAlta[1].readOnly = false
+
+        this.divFormularios[3].style.display = 'none'
+        
+        this.divFormularios[4].style.display = 'none'
+        
+
+        this.divFormularios[5].style.display = 'none'
+
+      /*
+        
+        this.divFormularios[3].style.display = 'none'
+        
+        this.divFormularios[4].style.display = 'none'
+     
+        this.divFormularios[5].style.display = 'none'*/
+      
        
     }
 
@@ -274,7 +303,8 @@ export class VistaGestionMantenimiento extends Vista {
         }
         if(!this.esModificacion){
             const datos = {
-                'descripcion': this.inputsAlta[0].value
+                'idEquipo': parseInt(this.selectsAlta[0].value),
+                'descripcion': this.inputsAlta[1].value
                 
             };
            
@@ -297,8 +327,46 @@ export class VistaGestionMantenimiento extends Vista {
         }
     }
 
-    modificar(){
+    modificar(mantenimiento){
+        this.mostrarOcultarCrud(false,true,true)
 
+        console.log(mantenimiento)
+
+        this.idMantenimiento = mantenimiento.id
+
+
+        this.divFormularios[0].style.display = 'none'
+        this.divFormularios[1].style.display = 'block'
+        this.divFormularios[3].style.display = 'block'
+        
+        this.divFormularios[4].style.display = 'block'
+        
+
+        this.divFormularios[5].style.display = 'block'
+
+
+        this.inputsAlta[0].value = mantenimiento.codigoEquipo
+        this.inputsAlta[0].readOnly = true
+
+        this.inputsAlta[1].value = mantenimiento.descripcion
+        this.inputsAlta[1].readOnly = true
+       
+
+        this.inputsAlta[2].value = mantenimiento.solucion
+
+        this.inputsAlta[3].value = mantenimiento.fechaSolucion
+
+        this.inputsAlta[4].value = mantenimiento.nombreArregla
+
+
+       /* this.divFormularios[0].style.display = 'block'
+
+        
+
+        console.log(this.inputsAlta[0])
+        
+       
+        */
     }
 
 
