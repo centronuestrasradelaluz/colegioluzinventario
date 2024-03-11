@@ -436,6 +436,21 @@
             BD::borrar($sql, $params);
         }
 
+        public static function modificarMantenimiento($datos) {
+            $sql = 'UPDATE Mantenimiento SET fechaArreglo=:fechaArreglo, nombreArregla=:nombreArregla, solucion=:solucion';
+            $sql .= ' WHERE id=:id';
+
+         
+            $params = array(
+                'id'=> $datos->id,
+                'fechaArreglo'=> $datos->fechaSolucion,
+                'nombreArregla'=> $datos->quienSoluciona,
+                'solucion'=> $datos->solucion
+            );
+
+           return BD::actualizar($sql,$params);
+        }
+
 
         
 

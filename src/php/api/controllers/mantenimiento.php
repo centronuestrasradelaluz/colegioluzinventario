@@ -68,7 +68,7 @@
                 die();
             }
 
-            DAOUsuario::modificarEquipo($datos);
+            DAOUsuario::modificarMantenimiento($datos);
             header('HTTP/1.1 200 OK');
         
             die();

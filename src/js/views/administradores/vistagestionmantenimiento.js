@@ -294,9 +294,9 @@ export class VistaGestionMantenimiento extends Vista {
        if(this.esModificacion){
             const datos = {
                 'id': this.idMantenimiento,
-                'solucion': this.inputsAlta[1].value,
-                'fechaSolucion':  this.inputsAlta[2].value,
-                'quienSoluciona': this.inputsAlta[3].value        
+                'solucion': this.inputsAlta[2].value,
+                'fechaSolucion':  this.inputsAlta[3].value,
+                'quienSoluciona': this.inputsAlta[4].value        
             };
             this.divCargandoAlta.style.display = 'block';
             this.controlador.modificarMantenimiento(datos);
@@ -353,8 +353,8 @@ export class VistaGestionMantenimiento extends Vista {
        
 
         this.inputsAlta[2].value = mantenimiento.solucion
-
-        this.inputsAlta[3].value = mantenimiento.fechaSolucion
+       
+        this.inputsAlta[3].value = mantenimiento.fechaArreglo
 
         this.inputsAlta[4].value = mantenimiento.nombreArregla
 
