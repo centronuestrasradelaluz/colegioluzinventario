@@ -425,6 +425,18 @@
                 
             return BD::insertar($sql, $params);
         }
+
+        
+        public static function eliminarMantenimiento($id) {
+            $sql = 'DELETE FROM Mantenimiento';
+            $sql .= ' WHERE id=:id';
+
+            $params = array('id'=> $id);
+
+            BD::borrar($sql, $params);
+        }
+
+
         
 
     }

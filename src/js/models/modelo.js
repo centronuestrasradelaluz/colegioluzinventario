@@ -67,6 +67,11 @@ export class Modelo {
         return Rest.post('mantenimiento',[], datos, false);
     }
 
+    eliminarMantenimiento(id) {
+        
+        return Rest.delete('mantenimiento', [id]);
+    }
+
 
 
 

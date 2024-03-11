@@ -53,7 +53,7 @@
                
             }
           //Poner un header si no se realiza la eliminacion IMPORTANTE!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                DAOUsuario::eliminarEquipo($pathParams[0]);
+                DAOUsuario::eliminarMantenimiento($pathParams[0]);
                 header('HTTP/1.1 200 OK');
             
         
