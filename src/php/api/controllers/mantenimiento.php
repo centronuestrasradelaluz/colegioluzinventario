@@ -18,9 +18,16 @@
                 header('HTTP/1.1 401 Unauthorized');
                 die();
             }
-               
+               if (isset($queryParams['id'])){
+                $mantenimientos = DAOUsuario::obtenerMantenimientosUsuario($queryParams['id']);
+                sleep(1);
+               }
+               else
+               {
                 $mantenimientos = DAOUsuario::obtenerMantenimientos($pathParams[0]);
                 sleep(1);
+               }
+           
           
             if (!$mantenimientos) {
                 header('HTTP/1.1 404 Not Found');

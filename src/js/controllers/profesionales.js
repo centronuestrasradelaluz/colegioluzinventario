@@ -77,7 +77,8 @@ class ControladorProfesionales {
     }
 
      dameMantenimientos(){
-        this.modelo.dameMantenimientos()
+        const id = this.#usuario.id
+        this.modelo.dameMantenimientosUsuario(id)
         .then(mantenimientos => {
             this.vistaInicio.cargarListado(mantenimientos);
         })

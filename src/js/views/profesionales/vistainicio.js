@@ -41,7 +41,8 @@ export class VistaInicioProfesionales extends Vista {
         this.idMantenimiento = 0
       
         this.esModificacion = false
-        //this.controlador.dameMantenimientos("")
+        this.divFormularios[1].style.display = 'none'
+        this.controlador.dameMantenimientos("")
 
     }
 
@@ -155,6 +156,8 @@ export class VistaInicioProfesionales extends Vista {
                  'descripcion': this.inputsAlta[1].value
                  
              };
+             
+        
             
              //this.divCargandoAlta.style.display = 'block';
              console.log("ingresando como profesional")

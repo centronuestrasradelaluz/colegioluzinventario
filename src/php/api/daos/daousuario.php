@@ -388,7 +388,7 @@
             throw new Exception('No es posible iniciar la transacción.');
             
             if ($busqueda == "null"){
-                $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario,fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
+                $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
                 $sql .= ' FROM Mantenimiento';
                 $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
 
@@ -405,8 +405,21 @@
                 return BD::seleccionar($sql, $params);
             }
            
-           
-           
+        }
+
+        public static function obtenerMantenimientosUsuario($id){
+            if (!BD::iniciarTransaccion())
+            throw new Exception('No es posible iniciar la transacción.');
+
+            $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
+            $sql .= ' FROM Mantenimiento';
+            $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
+            $sql .= ' WHERE idUsuario = :id';
+
+            $params = array('id' => $id);
+
+            return BD::seleccionar($sql, $params);
+
         }
 
         public static function altaMantenimiento($datos){

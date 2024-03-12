@@ -58,7 +58,15 @@ export class Modelo {
     }
 
     dameMantenimientos(texto){
+
         return Rest.get('mantenimiento', [texto], []);
+    }
+
+    dameMantenimientosUsuario(id){
+
+        const queryParams = new Map();
+        queryParams.set('id', id)
+        return Rest.get('mantenimiento', [], queryParams);
     }
 
     ingresarMantenimiento(datos){
