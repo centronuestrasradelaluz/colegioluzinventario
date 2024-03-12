@@ -566,7 +566,57 @@ export class VistaGestionInventario extends Vista {
                 console.log("fin de un mantenimiento");
             });*/
         }
-        
+      /*
+        crearFila(label, valor) {
+        const tr = document.createElement('tr');
+        const tdLabel = document.createElement('td');
+        const tdValor = document.createElement('td');
+        tdLabel.textContent = label;
+        tdValor.textContent = valor;
+        tr.appendChild(tdLabel);
+        tr.appendChild(tdValor);
+        return tr;
+    }
+    
+     consultar(equipoConMantenimiento) {
+        const equipo = equipoConMantenimiento.equipo;
+        const mantenimiento = equipoConMantenimiento.mantenimientos;
+        this.mostrarOcultarCrud(false, false, false, true);
+    
+        // Limpiar contenedores
+        this.theadConsulta.innerHTML = '';
+        this.tbodyConsulta.innerHTML = '';
+    
+        // Crear título
+        const trTitulo = document.createElement('tr');
+        const tdTitulo = document.createElement('td');
+        tdTitulo.textContent = `Equipo Código ${equipo.codigoEquipo}`;
+        tdTitulo.setAttribute('colspan', '2');
+        trTitulo.appendChild(tdTitulo);
+        this.theadConsulta.appendChild(trTitulo);
+    
+        // Crear filas de detalles del equipo
+        const detallesEquipo = {
+            "Proveedor": equipo.proveedor,
+            "Marca": equipo.marca,
+            "Monitor": equipo.monitor,
+            "RAM": equipo.ram,
+            "Disco Duro": equipo.discoDuro,
+            "Procesador": equipo.procesador,
+            "Ubicación": equipo.ubicacion,
+            "Gráfica": equipo.grafica,
+            "Fecha de Compra": equipo.fechaCompra,
+            "Observaciones": equipo.observaciones,
+            "Valor del Equipo": equipo.valorEquipo
+        };
+    
+        Object.entries(detallesEquipo).forEach(([label, valor]) => {
+            const fila = this.crearFila(label, valor);
+            this.tbodyConsulta.appendChild(fila);
+        });
+    }
+    
+       */  
         
 
     eliminarEquipo(id) {
