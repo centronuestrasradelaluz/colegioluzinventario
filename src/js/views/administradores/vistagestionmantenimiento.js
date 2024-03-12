@@ -29,7 +29,7 @@ export class VistaGestionMantenimiento extends Vista {
        this.botonVolver = this.div.querySelector('#botonVolverMantenimientos');
        this.botonVolver.addEventListener('click', this.volver.bind(this));
 
-       this.botonAnadir = this.div.querySelector('#aceptar')
+       this.botonAnadir = this.div.querySelector('#aceptarMantenimientos')
        this.botonAnadir.addEventListener('click', this.ingresarMantenimientos.bind(this));
 
        //Formulario de la vista e inputs

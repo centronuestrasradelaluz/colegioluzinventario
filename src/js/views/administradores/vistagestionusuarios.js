@@ -28,7 +28,7 @@ export class VistaGestionUsuarios extends Vista {
        this.botonVolverAltaUsuarios = this.div.querySelector('#botonVolverAltaUsuarios');
        this.botonVolverAltaUsuarios.addEventListener('click', this.volver.bind(this));
 
-       this.botonAnadir = this.div.querySelector('#aceptar')
+       this.botonAnadir = this.div.querySelector('#aceptarUsuarios')
        this.botonAnadir.addEventListener('click', this.ingresarUsuario.bind(this));
 
        //Formulario de la vista e inputs

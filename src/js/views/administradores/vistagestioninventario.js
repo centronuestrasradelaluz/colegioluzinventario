@@ -34,7 +34,7 @@ export class VistaGestionInventario extends Vista {
        this.botonVolverConsultaEquipos = this.div.querySelector('#botonVolverConsultaEquipos');
        this.botonVolverConsultaEquipos.addEventListener('click', this.volver.bind(this));
        
-       this.botonAnadir = this.div.querySelector('#aceptar')
+       this.botonAnadir = this.div.querySelector('#aceptarEquipos')
        this.botonAnadir.addEventListener('click', this.ingresarEquipo.bind(this));
 
        //Formulario de la vista e inputs
