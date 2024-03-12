@@ -229,6 +229,21 @@ const input = document.getElementById('searchInput');
 input.addEventListener('input', debounce(search, 300)); // Llama a la función de búsqueda después de 300ms de inactividad del usuario
 
      */
+
+    // Definir función de debounce
+    /*Esta función se utiliza para limitar la frecuencia de ejecución de una función en respuesta a eventos como entrada de usuario. */
+    debounce(func, delay) {
+        let timer;
+        return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(context, args);
+        }, delay);
+        };
+    }
+
     escribir(texto){
        // this.busqueda
        console.log(texto)
@@ -254,11 +269,12 @@ input.addEventListener('input', debounce(search, 300)); // Llama a la función d
         inputBusqueda.setAttribute('placeholder', 'Busca por nombre')
         inputBusqueda.value = this.busqueda
         
-        inputBusqueda.addEventListener('input', (event) => {
+
+        inputBusqueda.addEventListener('input', this.debounce((event) => {
             
             const textoInput = event.target.value;
             this.escribir(textoInput); // Llama al método escribir con el valor del input
-        });
+        },1000));
 
         tdBusqueda.appendChild(inputBusqueda);
 
