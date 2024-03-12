@@ -207,8 +207,8 @@ class ControladorAdministradores {
 
     //MANTENIMIENTOOOOOOOOOOOOOOOOOo
 
-    dameMantenimientos(){
-        this.modelo.dameMantenimientos()
+    dameMantenimientos(texto){
+        this.modelo.dameMantenimientos(texto)
         .then(mantenimientos => {
             this.vistaGestionMantenimiento.cargarListado(mantenimientos);
         })
