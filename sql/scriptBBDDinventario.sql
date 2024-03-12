@@ -79,7 +79,7 @@ CREATE TABLE Mantenimiento(
 	solucion varchar (255) NULL,
 	
 	
-	/*ON DELETE CASCADE DUDAS*/
+	/*ON DELETE CASCADE DUDASs*/
 	CONSTRAINT PK_idMantenimiento PRIMARY KEY (id),
 	CONSTRAINT FK_Equipo_id FOREIGN KEY (idEquipo) REFERENCES Equipo(id),
 	CONSTRAINT FK_Usuario_id FOREIGN KEY (idUsuario) REFERENCES Usuario(id)
