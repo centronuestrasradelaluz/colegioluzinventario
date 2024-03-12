@@ -261,20 +261,16 @@ export class VistaGestionMantenimiento extends Vista {
     anadir() {
         this.mostrarOcultarCrud(false, true, false);
 
-
-
         this.divFormularios[0].style.display = 'block'
 
         this.divFormularios[1].style.display = 'none'
-
 
         this.inputsAlta[1].readOnly = false
 
         this.divFormularios[3].style.display = 'none'
         
         this.divFormularios[4].style.display = 'none'
-        
-
+    
         this.divFormularios[5].style.display = 'none'
 
       /*

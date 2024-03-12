@@ -35,6 +35,8 @@ class ControladorProfesionales {
         this.vistaMenu = new VistaMenuProfesionales(this, document.getElementById('menuPadres'));
         
         this.verVistaInicio();
+        this.obtenerDesplegables()
+        this.vistaMenu.bienvenida(this.#usuario)
     }
 
 
@@ -45,6 +47,45 @@ class ControladorProfesionales {
         this.vistaInicio.mostrar(true);
         
     }
+
+    ingresarMantenimientos(datos) {
+        datos.idUsuario = this.#usuario.id
+         this.modelo.ingresarMantenimiento(datos)
+          .then(() => {
+             // this.vistaInicio.bloquearBotonesAlta(false);
+              //this.vistaInicio.exitoAlta(true);
+              this.dameMantenimientos(); // Actualizar lista de usuarios
+          })
+          .catch(e => {
+              //this.vistaGestionHijos.bloquearBotonesAlta(false);
+              console.error(e);
+          })
+     }
+
+      /**
+     * Devuelve array de Lineas a vista de gestión de hijos.
+     */
+      obtenerDesplegables() {
+        this.modelo.obtenerDesplegables()
+        .then(resultados => {
+            this.vistaInicio.rellenarSelects(resultados);
+
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    }
+
+     dameMantenimientos(){
+        this.modelo.dameMantenimientos()
+        .then(mantenimientos => {
+            this.vistaInicio.cargarListado(mantenimientos);
+        })
+        .catch(e => {
+            console.error(e)
+        })
+    }
+ 
 
     /**
      * Cierra la sesión del usuario.

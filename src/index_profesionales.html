@@ -13,6 +13,14 @@
         <title>Pagina de Inicio</title>
     </head>
     <body>
+        <header class="content-img">
+			<div class="content-logo">
+				<img class="imgLogin" src="./img/foto.jpg"/>
+			</div>
+			<div class="texto">
+				<p>Centro Ntra. Sra. de la LUZ</p>
+			</div>
+		</header>
         <nav id="menuPadres" class="topnav">
             <ul>
                 <li>
@@ -20,10 +28,50 @@
                     &nbsp;Cerrar sesión
                 </li>
             </ul>
+            <div id="bienvenida"></div>
         </nav>
 
         <div id="inicioPadres">
-           Bienvenido Profesional
+            <div id="divAltaMantenimientos">
+                <form method="post" class="needs-validation" autocomplete="off" novalidate>
+                    <div class="formItem">
+                        <label for="codigoEquipo">
+                            Codigo Equipo<select id="selectCodigoEquipo" class="form-control" name="selectCodigoEquipo"><option value="-1" selected>Seleccione Codigo de Equipo</option></select>
+                            <div class="invalid-feedback">Por favor, seleccione un tipo Equipo.</div>
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="codigoEquipoText">
+                           Codigo Equipo<input type="text" class="form-control" name="codigoEquipoText" />
+                        </label>
+                    </div>
+                    <div class="formItem">
+                        <label for="descripcion">
+                           Descripcion de la incidencia<input type="textarea" class="form-control" name="descripcion" />
+                        </label>
+                    </div>
+                    
+                    <div class="formItem" id="loadingImg">
+                        <img src="./img/loading.gif"/>
+                    </div>
+                    <div class="formItem">
+                        <button type="button" class="btn btn-danger">Cancelar</button>
+                        <button id="aceptar" type="button" class="btn btn-success">Registrarse</button>
+                    </div>
+                </form>
+                <div id="divExito" class="w-75 p-1 container alert alert-success text-center rounded my-2">
+                    <p>Te has registrado exitosamente. Redirigiendo.</p>
+                </div>
+                <div id="divError" class="w-75 p-1 container alert alert-danger text-center rounded my-2"></div>
+            </div>    
+            
+            
+            <div id="divListadoMantenimientos">
+                <table id="tablaMantenimientos">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
 
         <script type="module" src="./js/controllers/profesionales.js"></script>

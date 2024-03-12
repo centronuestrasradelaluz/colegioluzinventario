@@ -8,6 +8,7 @@ export class VistaMenuProfesionales {
         
         this.liCerrarSesion = this.nav.getElementsByTagName('li')[0];
         this.liCerrarSesion.onclick = this.cerrarSesion.bind(this);
+        this.divBienvenida = this.nav.getElementsByTagName('div')[0];
     }
 
     /**
@@ -15,6 +16,11 @@ export class VistaMenuProfesionales {
      */
     inicio() {
         this.controlador.verVistaInicio();
+    }
+
+    bienvenida(datos){
+        this.divBienvenida.textContent = "Bienvenido/a " + datos.nombre
+        
     }
 
     /**
