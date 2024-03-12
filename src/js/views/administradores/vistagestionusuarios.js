@@ -205,30 +205,6 @@ export class VistaGestionUsuarios extends Vista {
             }
         }
     }
-    /*
-    // Función de búsqueda que se ejecutará después de que el usuario deje de escribir durante 300 milisegundos
-function debounce(func, delay) {
-  let timer;
-  return function() {
-    const context = this;
-    const args = arguments;
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      func.apply(context, args);
-    }, delay);
-  };
-}
-
-// Función para realizar la solicitud de búsqueda
-function search() {
-  // Realizar aquí la solicitud al servidor
-  console.log("Realizando búsqueda...");
-}
-
-const input = document.getElementById('searchInput');
-input.addEventListener('input', debounce(search, 300)); // Llama a la función de búsqueda después de 300ms de inactividad del usuario
-
-     */
 
     // Definir función de debounce
     /*Esta función se utiliza para limitar la frecuencia de ejecución de una función en respuesta a eventos como entrada de usuario. */
