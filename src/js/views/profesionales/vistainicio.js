@@ -147,31 +147,35 @@ export class VistaInicioProfesionales extends Vista {
 
     //ingresar arrelo a los campos de los equipos
     ingresarMantenimientos() {
-    
-        if(this.esModificacion){
-             const datos = {
-                 'id': this.idMantenimiento,
-                 'idEquipo': parseInt(this.selectsAlta[0].value),
-                 'descripcion': this.inputsAlta[1].value
-                        
-             };
-             this.divCargandoAlta.style.display = 'block';
-             this.controlador.modificarMantenimiento(datos);
-         }
-         if(!this.esModificacion){
-             const datos = {
-                 'idEquipo': parseInt(this.selectsAlta[0].value),
-                 'descripcion': this.inputsAlta[1].value
-                 
-             };
-             
         
-            
-             //this.divCargandoAlta.style.display = 'block';
-             console.log("ingresando como profesional")
-             this.controlador.ingresarMantenimientos(datos);
-     }
+        
+        if(confirm("Pulse aceptar para mandar la solicitud")){
+
+            if(this.esModificacion){
+                const datos = {
+                    'id': this.idMantenimiento,
+                    'idEquipo': parseInt(this.selectsAlta[0].value),
+                    'descripcion': this.inputsAlta[1].value
+                        
+                };
+                this.divCargandoAlta.style.display = 'block';
+                this.controlador.modificarMantenimiento(datos);
+            }
+            if(!this.esModificacion){
+                
+                const datos = {
+                    'idEquipo': parseInt(this.selectsAlta[0].value),
+                    'descripcion': this.inputsAlta[1].value
+                    
+                };
+        
+                //this.divCargandoAlta.style.display = 'block';
+                console.log("ingresando como profesional")
+                this.controlador.ingresarMantenimientos(datos);
+            }
+        }
     }
+
 
      modificar(mantenimiento){
         this.mostrarOcultarCrud(false,true,true)
