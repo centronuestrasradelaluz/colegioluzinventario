@@ -77,6 +77,7 @@ CREATE TABLE Mantenimiento(
 	fechaArreglo DATE NULL,
 	nombreArregla varchar (100) NULL,
 	solucion varchar (255) NULL,
+	asunto varchar (255) NULL,
 	
 	
 	/*ON DELETE CASCADE DUDASs*/
