@@ -36,7 +36,7 @@ class ControladorAdministradores {
 
         this.modelo = new Modelo();
         this.vistaInicio = new VistaInicio(this, document.getElementById('inicioAdministradores'));
-        this.vistaMenu = new VistaMenu(this, document.getElementById('menuAdministradores'));
+        this.vistaMenu = new VistaMenu(this, document.getElementById('menu'));
         this.vistaGestionUsuarios = new VistaGestionUsuarios(this, document.getElementById('gestionUsuarios'))
         this.vistaGestionInventario = new VistaGestionInventario(this, document.getElementById('gestionInventario'))
         this.vistaGestionMantenimiento = new VistaGestionMantenimiento(this, document.getElementById('gestionMantenimiento'))

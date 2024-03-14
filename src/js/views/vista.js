@@ -24,4 +24,13 @@ export class Vista {
             this.div.style.display = 'none';
         }
     }
+
+    mostrarFlex(ver) {
+        if(ver) {
+            this.div.style.display = 'flex';
+        }
+        else {
+            this.div.style.display = 'none';
+        }
+    }
 }

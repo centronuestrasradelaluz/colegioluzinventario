@@ -31,8 +31,8 @@ class ControladorProfesionales {
         Rest.setAutorizacion(this.#usuario.autorizacion);
 
         this.modelo = new Modelo();
-        this.vistaInicio = new VistaInicioProfesionales(this, document.getElementById('inicioPadres'));
-        this.vistaMenu = new VistaMenuProfesionales(this, document.getElementById('menuPadres'));
+        this.vistaInicio = new VistaInicioProfesionales(this, document.getElementById('inicioProfesionales'));
+        this.vistaMenu = new VistaMenuProfesionales(this, document.getElementById('menu'));
         
         this.verVistaInicio();
         this.obtenerDesplegables()
@@ -44,7 +44,7 @@ class ControladorProfesionales {
      * Cambia a la vista de inicio.
      */
     verVistaInicio() {
-        this.vistaInicio.mostrar(true);
+        this.vistaInicio.mostrarFlex(true);
         
     }
 

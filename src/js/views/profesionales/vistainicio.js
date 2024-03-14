@@ -12,8 +12,8 @@ export class VistaInicioProfesionales extends Vista {
     constructor(controlador, div) {
         super(controlador, div);
 
-        this.divListado = this.div.querySelector('#divListadoMantenimientos');
-       this.divAlta = this.div.querySelector('#divAltaMantenimientos');
+        this.divListado = this.div.querySelector('#divListadoMantenimientosPro');
+       this.divAlta = this.div.querySelector('#divAltaMantenimientosPro');
 
 
        this.thead = this.div.getElementsByTagName('thead')[0];
