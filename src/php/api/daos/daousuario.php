@@ -388,16 +388,18 @@
             throw new Exception('No es posible iniciar la transacción.');
             
             if ($busqueda == "null"){
-                $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
+                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo ,usuario.nombre'; 
                 $sql .= ' FROM Mantenimiento';
                 $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
+                $sql .= ' INNER JOIN Usuario on usuario.id = mantenimiento.idusuario';
 
                 return BD::seleccionar($sql, null);
             }
             else{
-                $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario,fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
+                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo, usuario.nombre'; 
                 $sql .= ' FROM Mantenimiento';
                 $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
+                $sql .= ' INNER JOIN Usuario on usuario.id = mantenimiento.idusuario';
                 $sql .= ' WHERE equipo.codigoEquipo';
                 $sql .= ' LIKE :busqueda';
 

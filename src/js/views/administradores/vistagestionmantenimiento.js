@@ -156,7 +156,7 @@ export class VistaGestionMantenimiento extends Vista {
         
         let trBusqueda = document.createElement('tr');
         let tdBusqueda = document.createElement('td');
-        tdBusqueda.setAttribute('colspan', '2');
+        tdBusqueda.setAttribute('colspan', '3');
         tdBusqueda.setAttribute('class', 'buscar')
 
         let inputBusqueda = document.createElement('input');
@@ -179,6 +179,8 @@ export class VistaGestionMantenimiento extends Vista {
         let tdAnadir = document.createElement('td');
         tdAnadir.setAttribute('id', 'añadir');
         tdAnadir.setAttribute('class', 'añadir');
+        tdAnadir.setAttribute('colspan', '2');
+
       
         let botonAnadirTabla = document.createElement('button')
         botonAnadirTabla.setAttribute('class', 'add-users-btn')
@@ -201,6 +203,14 @@ export class VistaGestionMantenimiento extends Vista {
         let tdFecha = document.createElement('td');
         tdFecha.textContent = 'Fecha Incidencia';
         trHeadInfo.appendChild(tdFecha);
+
+        let tdUsuario = document.createElement('td');
+        tdUsuario.textContent = 'Usuario';
+        trHeadInfo.appendChild(tdUsuario);
+
+        let tdAsunto = document.createElement('td');
+        tdAsunto.textContent = 'Asunto';
+        trHeadInfo.appendChild(tdAsunto);
 
         let tdOpciones = document.createElement('td');
         tdOpciones.textContent = 'Opciones';
@@ -237,7 +247,13 @@ export class VistaGestionMantenimiento extends Vista {
                 tr.appendChild(td1);
                 td1.textContent = mantenimiento.fechaIncidencia;
 
+                let tdUsuario = document.createElement('td');
+                tr.appendChild(tdUsuario);
+                tdUsuario.textContent = mantenimiento.nombre;
 
+                let tdAsunto = document.createElement('td');
+                tr.appendChild(tdAsunto);
+                tdAsunto.textContent = mantenimiento.asunto;
 
                 let td2 = document.createElement('td');
                 td2.classList.add('options');
