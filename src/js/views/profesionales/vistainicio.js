@@ -122,6 +122,8 @@ export class VistaInicioProfesionales extends Vista {
         this.tbody.innerHTML = '';  // Limpiar tabla para sustituirla con nuevos datos.
 
         if (mantenimientos != null) {
+
+
             for (const mantenimiento of mantenimientos) {
 
                
@@ -143,6 +145,41 @@ export class VistaInicioProfesionales extends Vista {
             }
 
         } 
+
+        /*let paginaActual = 0;
+let totalPaginas = Math.ceil(mantenimientos.length / 5); // Suponiendo que quieres mostrar 5 filas por página
+
+function mostrarPagina(pagina) {
+    // Calcular el rango de filas para esta página
+    let inicio = pagina * 5;
+    let fin = Math.min((pagina + 1) * 5, mantenimientos.length);
+
+    // Procesar y mostrar las filas para esta página
+    console.log(`Página ${pagina + 1}:`);
+    for (let i = inicio; i < fin; i++) {
+        const mantenimiento = mantenimientos[i];
+        // Aquí va tu lógica para mostrar cada objeto 'mantenimiento'
+        console.log(mantenimiento);
+    }
+}
+
+function mostrarPaginaSiguiente() {
+    if (paginaActual < totalPaginas - 1) {
+        paginaActual++;
+        mostrarPagina(paginaActual);
+    }
+}
+
+function mostrarPaginaAnterior() {
+    if (paginaActual > 0) {
+        paginaActual--;
+        mostrarPagina(paginaActual);
+    }
+}
+
+// Mostrar la primera página al inicio
+mostrarPagina(paginaActual);
+*/
     }
 
     //ingresar arrelo a los campos de los equipos
