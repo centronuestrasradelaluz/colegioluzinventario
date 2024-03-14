@@ -349,13 +349,13 @@ export class VistaGestionInventario extends Vista {
                 iconoEditar.addEventListener('click', this.modificar.bind(this, equipo));
                 td2.appendChild(iconoEditar);
 
-                let iconoEliminar = document.createElement('img');
+               /* let iconoEliminar = document.createElement('img');
                 iconoEliminar.setAttribute('src', './img/icons/ico_eliminar.png');
                 iconoEliminar.setAttribute('class', 'iconos')
                 iconoEliminar.setAttribute('alt', 'Eliminar usuario');
                 iconoEliminar.setAttribute('title', 'Eliminar usuario');
                 iconoEliminar.addEventListener('click', this.eliminarEquipo.bind(this, equipo.id))
-                td2.appendChild(iconoEliminar);
+                td2.appendChild(iconoEliminar);*/
             }
 
         } 
@@ -619,12 +619,12 @@ export class VistaGestionInventario extends Vista {
        */  
         
 
-    eliminarEquipo(id) {
+    /*eliminarEquipo(id) {
         if(confirm("¿Estas seguro de eliminar el equipo? Este proceso será irreversible"))
         {
             this.controlador.eliminarEquipo(id)
         }
-    }
+    }*/
 
      /**
      * Limpia los campos del formulario alta.

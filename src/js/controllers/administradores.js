@@ -169,7 +169,7 @@ class ControladorAdministradores {
         })
     }
 
-    eliminarEquipo(id) {
+    /*eliminarEquipo(id) {
         this.modelo.eliminarEquipo(id)
         .then(() =>{
             this.dameEquipos();
@@ -177,7 +177,7 @@ class ControladorAdministradores {
         .catch(e => {
             console.error(e)
         })
-    }
+    }*/
 
     ingresarEquipos(datos) {
         this.modelo.ingresarEquipos(datos)

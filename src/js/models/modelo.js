@@ -42,10 +42,10 @@ export class Modelo {
         return Rest.post('inventario', [], datos, false);
     }
 
-    eliminarEquipo(id) {
+    /*eliminarEquipo(id) {
         
         return Rest.delete('inventario', [id]);
-    }
+    }*/
 
     modificarEquipos(datos) {
 

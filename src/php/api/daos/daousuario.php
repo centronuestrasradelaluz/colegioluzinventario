@@ -343,14 +343,14 @@
             return BD::insertar($sql, $params);
         }
 
-        public static function eliminarEquipo($id) {
+       /*public static function eliminarEquipo($id) {
             $sql = 'DELETE FROM Equipo';
             $sql .= ' WHERE id=:id';
 
             $params = array('id'=> $id);
 
             BD::borrar($sql, $params);
-        }
+        }*/
 
         public static function modificarEquipo($datos) {
             $sql = 'UPDATE Equipo SET codigoEquipo=:codigoEquipo, proveedor=:proveedor, marca=:marca,';

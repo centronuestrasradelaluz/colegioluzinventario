@@ -45,7 +45,7 @@
             die();
         }
 
-        function delete($pathParams, $queryParams, $usuario) {
+       /* function delete($pathParams, $queryParams, $usuario) {
             // Si no existe $usuario, es porque la autorización ha fallado.
             if (!$usuario) {
                 header('HTTP/1.1 401 Unauthorized');
@@ -61,7 +61,7 @@
 
        
         
-        }
+        }*/
         function put($pathParams, $queryParams, $datos, $usuario){
             if (!$usuario) {
                 header('HTTP/1.1 401 Unauthorized');
