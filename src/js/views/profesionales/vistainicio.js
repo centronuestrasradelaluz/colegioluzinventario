@@ -138,7 +138,7 @@ export class VistaInicioProfesionales extends Vista {
                 
                 let tdAsunto = document.createElement('td');
                 tr.appendChild(tdAsunto);
-                td1.textContent = mantenimiento.asunto;
+                tdAsunto.textContent = mantenimiento.asunto;
  
             }
 
