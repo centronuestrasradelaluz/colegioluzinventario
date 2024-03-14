@@ -175,6 +175,16 @@ export class VistaGestionInventario extends Vista {
     ingresarEquipo() {
         console.log(this.selectsAlta)
 
+
+        /*
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+
+        const formData = new FormData();
+        formData.append('image', file);
+
+        */
+       
         if(this.esModificacion){
             const datos = {
                 'id': this.idEquipo,
