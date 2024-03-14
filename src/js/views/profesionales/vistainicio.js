@@ -90,7 +90,7 @@ export class VistaInicioProfesionales extends Vista {
      * Cargar thead tabla hijos.
      */
       cargarEncabezado() {
-        //this.thead.innerHTML = '';
+       // this.thead.innerHTML = '';
         
 
         let trHeadInfo = document.createElement('tr');
@@ -104,6 +104,10 @@ export class VistaInicioProfesionales extends Vista {
         let tdFecha = document.createElement('td');
         tdFecha.textContent = 'Fecha Incidencia';
         trHeadInfo.appendChild(tdFecha);
+
+        let tdAsunto = document.createElement('td');
+        tdAsunto.textContent = 'Asunto';
+        trHeadInfo.appendChild(tdAsunto);
      
         this.thead.appendChild(trHeadInfo);
     }
@@ -131,6 +135,10 @@ export class VistaInicioProfesionales extends Vista {
                 let td1 = document.createElement('td');
                 tr.appendChild(td1);
                 td1.textContent = mantenimiento.fechaIncidencia;
+                
+                let tdAsunto = document.createElement('td');
+                tr.appendChild(tdAsunto);
+                td1.textContent = mantenimiento.asunto;
  
             }
 
@@ -209,5 +217,9 @@ export class VistaInicioProfesionales extends Vista {
 
     mostrar(ver) {
         super.mostrar(ver);
+    }
+
+    mostrarFlex(ver) {
+        super.mostrarFlex(ver);
     }
  }
