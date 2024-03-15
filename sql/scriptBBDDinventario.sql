@@ -9,6 +9,7 @@ CREATE TABLE Usuario(
     contrasenia varchar(255) NOT NULL,
 	estado BOOLEAN NOT NULL DEFAULT 1,
 	rol char(3) NOT NULL,
+	observaciones (varchar 255) NULL,
 
     CONSTRAINT PK_idUsuario PRIMARY KEY (id),
 	CONSTRAINT UQ_Usuario_correo UNIQUE (correo)
@@ -62,6 +63,7 @@ CREATE TABLE Equipo(
 	CONSTRAINT FK_Linea_id FOREIGN KEY (idLinea) REFERENCES Linea(id),
 	CONSTRAINT FK_TipoEquipo_id FOREIGN KEY (idTipoEquipo) REFERENCES TipoEquipo(id),
 	CONSTRAINT FK_SistemaOperativo_id FOREIGN KEY (idSistemaOperativo) REFERENCES SistemaOperativo(id),
+	CONSTRAINT FK_Asundto_id FOREIGN KEY (idAsunto) REFERENCES Asunto(id),
 	CONSTRAINT UQ_Equipo_codigoEquipo UNIQUE (codigoEquipo)
 
 	/*PONER LOS CHECKS DE QUE NO SE PUEDAN INTRODUCIR SISTEMAS OPERATIVOS EN FOTOCOPIADORAS*/
@@ -72,18 +74,25 @@ CREATE TABLE Mantenimiento(
 	id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	idEquipo SMALLINT UNSIGNED NOT NULL,
 	idUsuario SMALLINT UNSIGNED NOT NULL,
+	idAsunto SMALLINT UNSIGNED NOT NULL,
 	fechaIncidencia DATE NOT NULL,
 	descripcion varchar(500) NULL,
 	fechaArreglo DATE NULL,
 	nombreArregla varchar (100) NULL,
-	solucion varchar (255) NULL,
-	asunto varchar (255) NULL,
-	
+	solucion varchar (255) NULL,	
 	
 	/*ON DELETE CASCADE DUDASs*/
 	CONSTRAINT PK_idMantenimiento PRIMARY KEY (id),
 	CONSTRAINT FK_Equipo_id FOREIGN KEY (idEquipo) REFERENCES Equipo(id),
 	CONSTRAINT FK_Usuario_id FOREIGN KEY (idUsuario) REFERENCES Usuario(id)
+	
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+CREATE TABLE Asunto(
+	id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	frase varchar (200) NOT NULL,
+	
+	CONSTRAINT PK_idTipoEquipo PRIMARY KEY (id)
 	
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -110,4 +119,34 @@ VALUES ('Torre'),
 		('Portátil'),
 		('Impresora'),
 		('Tablet');
+INSERT INTO Asunto (frase) 
+VALUES ('El ordenador no enciende.'),
+		('Sin señal de internet.'),
+		('La pantalla no funciona.'),
+		('El ratón no funciona.'),
+		('El teclado no funciona.'),
+		('La tablet no funciona correctamente.'),
+		('Problema con la impresora.'),
+		('El equipo va muy lento.'),
+		('Alerta de virus'),
+		('El ordenador suena de manera extraña.'),
+		('No funciona el sonido.');
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
 

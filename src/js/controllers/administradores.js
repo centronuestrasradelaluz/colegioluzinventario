@@ -16,7 +16,6 @@ class ControladorAdministradores {
         window.onload = this.iniciar.bind(this);
         window.onerror = (error) => console.error('Error capturado. ' + error);
     }
-
     /**
      * Inicia la aplicación.
      */
@@ -34,7 +33,10 @@ class ControladorAdministradores {
         // Se genera la autorizacion para usar el servicio rest
         Rest.setAutorizacion(this.#usuario.autorizacion);
 
+        // Se crea el objeto del Modelo
         this.modelo = new Modelo();
+        
+        // Se administraran las vistas de los administradores
         this.vistaInicio = new VistaInicio(this, document.getElementById('inicioAdministradores'));
         this.vistaMenu = new VistaMenu(this, document.getElementById('menu'));
         this.vistaGestionUsuarios = new VistaGestionUsuarios(this, document.getElementById('gestionUsuarios'))
@@ -43,7 +45,12 @@ class ControladorAdministradores {
        
         //Vista pedreterminada al iniciar la app
         this.verVistaInicio();
+        
+        //Lleno desplegables
+
         this.obtenerDesplegables()
+
+        //Cargamos el divBienvenida con el nombre del usuario logueado
         this.vistaMenu.bienvenida(this.#usuario)
         
     }
@@ -57,7 +64,6 @@ class ControladorAdministradores {
         this.vistaGestionInventario.mostrar(false);
         
     }
-
     /**
      * Cambia a la vista de usuarios.
      */
@@ -67,7 +73,6 @@ class ControladorAdministradores {
         this.vistaGestionMantenimiento.mostrar(false);
         this.vistaGestionInventario.mostrar(false);
        
-        
     }
     /**
      * Cambia a la vista de inventario
@@ -79,7 +84,6 @@ class ControladorAdministradores {
         this.vistaGestionInventario.mostrar(true);
         
     }
-
     /**
      * Cambia a la vista de mantenimiento
      */
@@ -90,11 +94,10 @@ class ControladorAdministradores {
         this.vistaGestionInventario.mostrar(false);
        
     }
-
-      /**
-     * Devuelve array de Lineas a vista de gestión de hijos.
+    /**
+     * Devuelve Objeto cargado con Arrays de los diferentes desplegables.
      */
-      obtenerDesplegables() {
+    obtenerDesplegables() {
         this.modelo.obtenerDesplegables()
         .then(resultados => {
             this.vistaGestionInventario.rellenarSelects(resultados);
@@ -105,23 +108,21 @@ class ControladorAdministradores {
             console.error(error);
         });
     }
-
      /**
      * Devuelve los usuarios registrados a la gestión de usuarios.
-     *  
      */
-     
-     dameUsuarios(texto) {
-        console.log(texto)
+    dameUsuarios(texto) {
         this.modelo.dameUsuarios(texto)
-         .then(usuarios => {
-             this.vistaGestionUsuarios.cargarListado(usuarios);
-         })
-         .catch(e => {
-             console.error(e)
-         })
+            .then(usuarios => {
+                this.vistaGestionUsuarios.cargarListado(usuarios);
+            })
+            .catch(e => {
+                console.error(e)
+            })
     }
-
+     /**
+     * Elimina un usuario .
+     */
     eliminarUsuario(id) {
         this.modelo.eliminarUsuario(id)
         .then(() =>{
@@ -131,7 +132,9 @@ class ControladorAdministradores {
             console.error(e)
         })
     }
-
+     /**
+     * Ingresa usuarios a la base de datos.
+     */
     ingresarUsuarios(datos) {
         this.modelo.ingresarUsuarios(datos)
          .then(() => {
@@ -144,7 +147,9 @@ class ControladorAdministradores {
              console.error(e);
          })
     }
-
+     /**
+     * Modifica los registros de usuarios.
+     */
     modificarUsuarios(datos) {
         this.modelo.modificarUsuarios(datos)
         .then(() => {
@@ -159,6 +164,9 @@ class ControladorAdministradores {
     }
     
                                         ////////////INVENTARIO///////////////
+     /**
+     * Devuelve los equipos de la consulta
+     */
     dameEquipos(texto){
         this.modelo.dameEquipos(texto)
         .then(equipos => {
@@ -169,6 +177,8 @@ class ControladorAdministradores {
         })
     }
 
+    //COMENTADO POR EL MOMENTO
+    
     /*eliminarEquipo(id) {
         this.modelo.eliminarEquipo(id)
         .then(() =>{
