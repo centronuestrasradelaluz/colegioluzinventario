@@ -36,11 +36,17 @@ export class VistaGestionMantenimiento extends Vista {
        this.formAlta = this.div.getElementsByTagName('form')[0];
        this.divFormularios = this.div.getElementsByClassName("formItem")
 
+
        
        this.inputsAlta = this.formAlta.getElementsByTagName('input');
        this.selectsAlta = this.formAlta.getElementsByTagName('select');
 
+       /*console.log(this.inputsAlta)
+       console.log(this.selectsAlta)
+       console.log(this.divFormularios)*/
+
        this.selectCodigoEquipo = this.div.querySelector("#selectCodigoEquipo")
+       this.selectAsunto = this.div.querySelector("#selectAsunto")
 
        this.divExitoAlta = this.div.querySelector('#divExito');
        this.divCargandoAlta = this.div.querySelector('#loadingImg');
@@ -59,6 +65,8 @@ export class VistaGestionMantenimiento extends Vista {
 
     rellenarSelects(resultados) {
         this.llenarSelect(resultados["codigoEquipo"], this.selectCodigoEquipo, "Elija Codigo de Equipo");
+        this.llenarSelect(resultados["asunto"], this.selectAsunto, "Elija una incidencia");
+       
     }
     
     llenarSelect(items, selectElement,titulo) {
@@ -69,13 +77,19 @@ export class VistaGestionMantenimiento extends Vista {
         tituloSelect.value = "-1"
         tituloSelect.textContent = titulo
         selectElement.appendChild(tituloSelect);
-
+      
         for (const item of items) {
             let option = document.createElement('option');
+        
             option.value = item.id;
+            
+            if(!item.frase)
             option.textContent = item.codigoEquipo;
+            else
+            option.textContent = item.frase
           
             selectElement.appendChild(option);
+
         }
     }
 
@@ -253,7 +267,7 @@ export class VistaGestionMantenimiento extends Vista {
 
                 let tdAsunto = document.createElement('td');
                 tr.appendChild(tdAsunto);
-                tdAsunto.textContent = mantenimiento.asunto;
+                tdAsunto.textContent = mantenimiento.frase;
 
                 let td2 = document.createElement('td');
                 td2.classList.add('options');
@@ -298,11 +312,11 @@ export class VistaGestionMantenimiento extends Vista {
 
         this.inputsAlta[1].readOnly = false
 
-        this.divFormularios[3].style.display = 'none'
-        
         this.divFormularios[4].style.display = 'none'
-    
+        
         this.divFormularios[5].style.display = 'none'
+    
+        this.divFormularios[6].style.display = 'none'
 
       /*
         
@@ -321,9 +335,9 @@ export class VistaGestionMantenimiento extends Vista {
        if(this.esModificacion){
             const datos = {
                 'id': this.idMantenimiento,
-                'solucion': this.inputsAlta[2].value,
-                'fechaSolucion':  this.inputsAlta[3].value,
-                'quienSoluciona': this.inputsAlta[4].value        
+                'solucion': this.inputsAlta[3].value,
+                'fechaSolucion':  this.inputsAlta[4].value,
+                'quienSoluciona': this.inputsAlta[5].value        
             };
             this.divCargandoAlta.style.display = 'block';
             this.controlador.modificarMantenimiento(datos);
@@ -331,7 +345,8 @@ export class VistaGestionMantenimiento extends Vista {
         if(!this.esModificacion){
             const datos = {
                 'idEquipo': parseInt(this.selectsAlta[0].value),
-                'descripcion': this.inputsAlta[1].value
+                'idAsunto': parseInt(this.selectsAlta[1].value),
+                'descripcion': this.inputsAlta[2].value
                 
             };
            
@@ -364,12 +379,12 @@ export class VistaGestionMantenimiento extends Vista {
 
         this.divFormularios[0].style.display = 'none'
         this.divFormularios[1].style.display = 'block'
-        this.divFormularios[3].style.display = 'block'
-        
         this.divFormularios[4].style.display = 'block'
         
-
         this.divFormularios[5].style.display = 'block'
+        
+
+        this.divFormularios[6].style.display = 'block'
 
 
         this.inputsAlta[0].value = mantenimiento.codigoEquipo

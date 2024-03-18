@@ -55,6 +55,7 @@ class ControladorProfesionales {
              // this.vistaInicio.bloquearBotonesAlta(false);
               //this.vistaInicio.exitoAlta(true);
               this.dameMantenimientos(); // Actualizar lista de usuarios
+              this.vistaInicio.limpiarCampos()
           })
           .catch(e => {
               //this.vistaGestionHijos.bloquearBotonesAlta(false);

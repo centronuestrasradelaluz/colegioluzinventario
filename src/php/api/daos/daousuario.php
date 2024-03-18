@@ -177,12 +177,17 @@
 
                     $equipo = BD::seleccionar($sql, null);
 
+                    $sql = 'SELECT id, frase FROM Asunto';
+
+                    $asunto = BD::seleccionar($sql, null);
+
        
                     $seleccionados = array(
                        'linea' => $linea,
                        'sistemaOperativo' => $sistemaOperativo,
                        'tipoEquipo' => $tipoEquipo,
-                       'codigoEquipo' => $equipo
+                       'codigoEquipo' => $equipo,
+                       'asunto' => $asunto
                    );
                    
                 return $seleccionados;
@@ -388,18 +393,20 @@
             throw new Exception('No es posible iniciar la transacción.');
             
             if ($busqueda == "null"){
-                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo ,usuario.nombre'; 
+                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo ,usuario.nombre, asunto.frase'; 
                 $sql .= ' FROM Mantenimiento';
                 $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
                 $sql .= ' INNER JOIN Usuario on usuario.id = mantenimiento.idusuario';
+                $sql .= ' INNER JOIN Asunto on asunto.id = mantenimiento.idAsunto';
 
                 return BD::seleccionar($sql, null);
             }
             else{
-                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo, usuario.nombre'; 
+                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo, usuario.nombre, asunto.frase'; 
                 $sql .= ' FROM Mantenimiento';
                 $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
                 $sql .= ' INNER JOIN Usuario on usuario.id = mantenimiento.idusuario';
+                $sql .= ' INNER JOIN Asunto on asunto.id = mantenimiento.idAsunto';
                 $sql .= ' WHERE equipo.codigoEquipo';
                 $sql .= ' LIKE :busqueda';
 
@@ -413,9 +420,10 @@
             if (!BD::iniciarTransaccion())
             throw new Exception('No es posible iniciar la transacción.');
 
-            $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo'; 
+            $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo, asunto.frase'; 
             $sql .= ' FROM Mantenimiento';
             $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
+            $sql .= ' INNER JOIN Asunto on asunto.id = mantenimiento.idAsunto';
             $sql .= ' WHERE idUsuario = :id';
 
             $params = array('id' => $id);
@@ -427,13 +435,14 @@
         public static function altaMantenimiento($datos){
 
 
-            $sql = 'INSERT INTO Mantenimiento(idEquipo, idUsuario, fechaIncidencia,descripcion)';
-            $sql .= ' VALUES(:idEquipo,:idUsuario,CURDATE(),:descripcion)';
+            $sql = 'INSERT INTO Mantenimiento(idEquipo, idUsuario, idAsunto, fechaIncidencia, descripcion)';
+            $sql .= ' VALUES(:idEquipo,:idUsuario,:idAsunto,CURDATE(),:descripcion)';
 
 
             $params = array(
                 'idEquipo' => $datos->idEquipo,
                 'idUsuario'=>$datos->idUsuario,
+                'idAsunto'=>$datos->idAsunto,
                 'descripcion' =>$datos->descripcion
 
             );

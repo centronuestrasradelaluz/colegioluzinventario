@@ -13,5 +13,5 @@ INSERT INTO `Equipo` (`id`, `codigoEquipo`, `proveedor`, `marca`, `monitor`, `ra
 VALUES(1000, 'N7-09', 'nosesabe', 'nosesabe', 'nosesabe','nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'fecha','observaciones', 200, 1, 1, 1);
 
 
-INSERT INTO `Mantenimiento` (idEquipo, idUsuario, fechaIncidencia) VALUES (1000, 2, '2024-03-05');
-INSERT INTO `Mantenimiento` (idEquipo, idUsuario, fechaIncidencia) VALUES (1000, 2, '2024-02-05');
+INSERT INTO `Mantenimiento` (idEquipo, idUsuario, idAsunto, fechaIncidencia) VALUES (1000, 2, 1, '2024-03-05');
+INSERT INTO `Mantenimiento` (idEquipo, idUsuario, idAsunto, fechaIncidencia) VALUES (1000, 2, 1, '2024-02-05');

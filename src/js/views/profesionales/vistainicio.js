@@ -28,6 +28,7 @@ export class VistaInicioProfesionales extends Vista {
        this.selectsAlta = this.formAlta.getElementsByTagName('select');
 
        this.selectCodigoEquipo = this.div.querySelector("#selectCodigoEquipo")
+       this.selectAsunto = this.div.querySelector("#selectAsunto")
 
        this.divExitoAlta = this.div.querySelector('#divExito');
        this.divCargandoAlta = this.div.querySelector('#loadingImg');
@@ -48,9 +49,10 @@ export class VistaInicioProfesionales extends Vista {
 
     rellenarSelects(resultados) {
         this.llenarSelect(resultados["codigoEquipo"], this.selectCodigoEquipo, "Elija Codigo de Equipo");
+        this.llenarSelect(resultados["asunto"], this.selectAsunto, "Elija una incidencia");
     }
     
-    llenarSelect(items, selectElement,titulo) {
+    llenarSelect(items, selectElement, titulo) {
 
         selectElement.innerHTML=""
 
@@ -62,7 +64,11 @@ export class VistaInicioProfesionales extends Vista {
         for (const item of items) {
             let option = document.createElement('option');
             option.value = item.id;
+            
+            if(!item.frase)
             option.textContent = item.codigoEquipo;
+            else
+            option.textContent = item.frase
           
             selectElement.appendChild(option);
         }
@@ -140,7 +146,8 @@ export class VistaInicioProfesionales extends Vista {
                 
                 let tdAsunto = document.createElement('td');
                 tr.appendChild(tdAsunto);
-                tdAsunto.textContent = mantenimiento.asunto;
+                tdAsunto.textContent = mantenimiento.frase;
+              
  
             }
 
@@ -202,8 +209,8 @@ mostrarPagina(paginaActual);
                 
                 const datos = {
                     'idEquipo': parseInt(this.selectsAlta[0].value),
+                    'idAsunto': parseInt(this.selectsAlta[1].value),
                     'descripcion': this.inputsAlta[1].value
-                    
                 };
         
                 //this.divCargandoAlta.style.display = 'block';
@@ -211,6 +218,12 @@ mostrarPagina(paginaActual);
                 this.controlador.ingresarMantenimientos(datos);
             }
         }
+    }
+
+    limpiarCampos(){
+        this.selectsAlta[0].value = "-1"
+        this.selectsAlta[1].value = "-1"
+        this.inputsAlta[1].value = ""
     }
 
 
