@@ -40,6 +40,8 @@ export class VistaInicioProfesionales extends Vista {
         //Parametros necesarios para cargar la vista
 
         this.idMantenimiento = 0
+        this.paginaActual = 0;
+      this.mantenimientos = []
       
         this.esModificacion = false
         this.divFormularios[1].style.display = 'none'
@@ -123,16 +125,21 @@ export class VistaInicioProfesionales extends Vista {
      * @param {Array} usuarios Listado de hijos.
      */
      cargarListado(mantenimientos) {
+        this.tbody.textContent = ""
+        this.mantenimientos = mantenimientos
         console.log(mantenimientos)
+        let totalPaginas = Math.ceil(mantenimientos.length / 5); // Suponiendo que quieres mostrar 5 filas por página
 
-        this.tbody.innerHTML = '';  // Limpiar tabla para sustituirla con nuevos datos.
+       // Calcular el rango de filas para esta página
+    let inicio = this.paginaActual * 5;
+    let fin = Math.min((this.paginaActual + 1) * 5, mantenimientos.length);
 
-        if (mantenimientos != null) {
-
-
-            for (const mantenimiento of mantenimientos) {
-
-               
+    // Procesar y mostrar las filas para esta página
+    console.log(`Página ${this.paginaActual + 1}:`);
+    for (let i = inicio; i < fin; i++) {
+        const mantenimiento = mantenimientos[i];
+        // Aquí va tu lógica para mostrar cada objeto 'mantenimiento'
+		
                 let tr = document.createElement('tr');
                 this.tbody.appendChild(tr);
                    
@@ -147,47 +154,69 @@ export class VistaInicioProfesionales extends Vista {
                 let tdAsunto = document.createElement('td');
                 tr.appendChild(tdAsunto);
                 tdAsunto.textContent = mantenimiento.frase;
-              
- 
-            }
-
-        } 
-
-        /*let paginaActual = 0;
-let totalPaginas = Math.ceil(mantenimientos.length / 5); // Suponiendo que quieres mostrar 5 filas por página
-
-function mostrarPagina(pagina) {
-    // Calcular el rango de filas para esta página
-    let inicio = pagina * 5;
-    let fin = Math.min((pagina + 1) * 5, mantenimientos.length);
-
-    // Procesar y mostrar las filas para esta página
-    console.log(`Página ${pagina + 1}:`);
-    for (let i = inicio; i < fin; i++) {
-        const mantenimiento = mantenimientos[i];
-        // Aquí va tu lógica para mostrar cada objeto 'mantenimiento'
         console.log(mantenimiento);
     }
+    //CREANDO LA FILA DE BOTONES
+    let trBotones = document.createElement('tr')
+    this.tbody.appendChild(trBotones);
+
+    let tdAnterior = document.createElement('td');
+    trBotones.appendChild(tdAnterior);
+
+    let tdEspacio = document.createElement('td');
+    trBotones.appendChild(tdEspacio)
+    tdEspacio.textContent = this.paginaActual + "/ "+ parseInt(totalPaginas-1)
+
+    let tdSiguiente = document.createElement('td');
+    trBotones.appendChild(tdSiguiente);
+
+    let botonAnterior = document.createElement('button')
+    botonAnterior.setAttribute('class', 'add-users-btn')
+    botonAnterior.textContent='Anterior'
+
+    let botonSiguiente = document.createElement('button')
+    botonSiguiente.setAttribute('class', 'add-users-btn')
+    botonSiguiente.textContent='Siguiente'
+
+    tdAnterior.appendChild(botonAnterior)
+    tdSiguiente.appendChild(botonSiguiente)
+
+   
+    botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
+    botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
+
+  
+
+    
+}
+ mostrarPaginaSiguiente(totalPaginas) {
+	
+   // this.tbody.textContent = ""
+
+
+        if (this.paginaActual < totalPaginas - 1) {
+        this.paginaActual++;
+       this.cargarListado(this.mantenimientos)
+}
+else{
+    this.cargarListado(this.mantenimientos)
 }
 
-function mostrarPaginaSiguiente() {
-    if (paginaActual < totalPaginas - 1) {
-        paginaActual++;
-        mostrarPagina(paginaActual);
-    }
+
 }
 
-function mostrarPaginaAnterior() {
-    if (paginaActual > 0) {
-        paginaActual--;
-        mostrarPagina(paginaActual);
-    }
+ mostrarPaginaAnterior() {
+//this.tbody.textContent = ""
+if (this.paginaActual > 0) {
+    this.paginaActual--;
+    this.cargarListado(this.mantenimientos)
+   
 }
+else{
+    this.cargarListado(this.mantenimientos)
+}
+ }
 
-// Mostrar la primera página al inicio
-mostrarPagina(paginaActual);
-*/
-    }
 
     //ingresar arrelo a los campos de los equipos
     ingresarMantenimientos() {
