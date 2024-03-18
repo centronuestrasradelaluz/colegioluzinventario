@@ -120,8 +120,10 @@ export class VistaGestionUsuarios extends Vista {
             this.inputsAlta[5].checked = false
         }
 
-        this.inputsAlta[6].value = usuario.contrasenia;
+        this.inputsAlta[6].value = usuario.observaciones
+
         this.inputsAlta[7].value = usuario.contrasenia;
+        this.inputsAlta[8].value = usuario.contrasenia;
 
         
        
@@ -158,7 +160,7 @@ export class VistaGestionUsuarios extends Vista {
         this.formAlta.classList.add('was-validated');
         if (cont == total) {
             // Check de contraseñas
-            if (this.inputsAlta[6].value === this.inputsAlta[7].value) {
+            if (this.inputsAlta[7].value === this.inputsAlta[8].value) {
                 
                 if(this.inputsAlta[2].checked){
                      radioButton = "pro"
@@ -182,7 +184,8 @@ export class VistaGestionUsuarios extends Vista {
                         'correo': this.inputsAlta[1].value,
                         'rol': radioButton,
                         'estado': radioButton1,
-                        'contrasenia': this.inputsAlta[6].value
+                        'observaciones': this.inputsAlta[6].value,
+                        'contrasenia': this.inputsAlta[7].value
                     };
                     this.divCargandoAlta.style.display = 'block';
                     this.controlador.modificarUsuarios(datos);
@@ -193,7 +196,8 @@ export class VistaGestionUsuarios extends Vista {
                         'nombre': this.inputsAlta[0].value,
                         'correo': this.inputsAlta[1].value,
                         'rol': radioButton,
-                        'contrasenia': this.inputsAlta[6].value
+                        'observaciones': this.inputsAlta[6].value,
+                        'contrasenia': this.inputsAlta[7].value
                     };
                     this.divCargandoAlta.style.display = 'block';
                     this.controlador.ingresarUsuarios(datos);
@@ -235,7 +239,7 @@ export class VistaGestionUsuarios extends Vista {
         
         let trBusqueda = document.createElement('tr');
         let tdBusqueda = document.createElement('td');
-        tdBusqueda.setAttribute('colspan', '3');
+        tdBusqueda.setAttribute('colspan', '4');
         tdBusqueda.setAttribute('class', 'buscar')
 
         let inputBusqueda = document.createElement('input');
@@ -291,6 +295,10 @@ export class VistaGestionUsuarios extends Vista {
         tdEstado.textContent = 'Estado';
         trHeadInfo.appendChild(tdEstado);
 
+        let tdObservaciones = document.createElement('td');
+        tdObservaciones.textContent = "Observaciones"
+        trHeadInfo.appendChild(tdObservaciones);
+
         let tdOpciones = document.createElement('td');
         tdOpciones.textContent = 'Opciones';
         trHeadInfo.appendChild(tdOpciones);
@@ -338,6 +346,14 @@ export class VistaGestionUsuarios extends Vista {
                 tdEstado.textContent = "Activo"
                 else if (usuario.estado == 0)
                 tdEstado.textContent = "Inactivo"
+
+                let tdObservaciones = document.createElement('td');
+                tr.appendChild(tdObservaciones);
+                if(usuario.observaciones)
+                tdObservaciones.textContent = usuario.observaciones
+                if(!usuario.observaciones)
+                tdObservaciones.textContent = "No tiene observaciones"
+                
 
                 let td2 = document.createElement('td');
                 td2.classList.add('options');

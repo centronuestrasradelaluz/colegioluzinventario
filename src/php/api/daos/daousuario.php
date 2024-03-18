@@ -83,13 +83,13 @@
                 throw new Exception('No es posible iniciar la transacción.');
            
             if($busqueda == "null"){
-                $sql = 'SELECT id, nombre, correo, contrasenia, estado, rol FROM Usuario';
+                $sql = 'SELECT id, nombre, correo, contrasenia, estado, rol, observaciones FROM Usuario';
            
                 $usuarios = BD::seleccionar($sql, null);
 
             }else{
                
-                $sql = 'SELECT id, nombre, correo, contrasenia, estado, rol FROM Usuario';
+                $sql = 'SELECT id, nombre, correo, contrasenia, estado, rol, observaciones FROM Usuario';
                 $sql .= ' WHERE nombre';
                 $sql .= ' LIKE :busqueda';
                 
@@ -108,8 +108,8 @@
          * @return int ID de la fila insertada.
          */
         public static function altaUsuario($datos) {
-            $sql = 'INSERT INTO Usuario(nombre, correo, contrasenia, rol)';
-            $sql .= ' VALUES(:nombre, :correo, :contrasenia, :rol)';
+            $sql = 'INSERT INTO Usuario(nombre, correo, contrasenia, rol, observaciones)';
+            $sql .= ' VALUES(:nombre, :correo, :contrasenia, :rol, :observaciones)';
 
           /*  if ($datos->contrasenia != null) {
                // $contrasenia = password_hash($datos->contrasenia, PASSWORD_DEFAULT, ['cost' => 15]);
@@ -122,7 +122,8 @@
                 'nombre' => $datos->nombre,
                 'correo' => $datos->correo,
                 'contrasenia' => $datos->contrasenia,
-                'rol' => $datos->rol
+                'rol' => $datos->rol,
+                'observaciones' => $datos->observaciones
             );
 
             return BD::insertar($sql, $params);
@@ -139,7 +140,7 @@
 
         public static function modificarUsuario($datos) {
             $sql = 'UPDATE Usuario SET nombre=:nombre, correo=:correo, contrasenia=:contrasenia,';
-            $sql .= ' estado=:estado, rol=:rol';
+            $sql .= ' estado=:estado, rol=:rol, observaciones=:observaciones';
             $sql .= ' WHERE id=:id';
 
             $params = array(
@@ -148,7 +149,8 @@
                 'correo'=> $datos->correo,
                 'contrasenia'=> $datos->contrasenia,
                 'estado'=> $datos->estado,
-                'rol'=> $datos->rol
+                'rol'=> $datos->rol,
+                'observaciones' => $datos->observaciones
             );
 
            return BD::actualizar($sql,$params);
