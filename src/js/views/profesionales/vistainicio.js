@@ -152,38 +152,38 @@ export class VistaInicioProfesionales extends Vista {
                     tdAsunto.textContent = mantenimiento.frase;
           
         }
-        //CREANDO LA FILA DE BOTONES
-        let trBotones = document.createElement('tr')
-        this.tbody.appendChild(trBotones);
-
-        let tdAnterior = document.createElement('td');
-        trBotones.appendChild(tdAnterior);
-
-        let tdEspacio = document.createElement('td');
-        trBotones.appendChild(tdEspacio)
-        tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
-
-        let tdSiguiente = document.createElement('td');
-        trBotones.appendChild(tdSiguiente);
-
-        let botonAnterior = document.createElement('button')
-        botonAnterior.setAttribute('class', 'add-users-btn')
-        botonAnterior.textContent='Anterior'
-
-        let botonSiguiente = document.createElement('button')
-        botonSiguiente.setAttribute('class', 'add-users-btn')
-        botonSiguiente.textContent='Siguiente'
-
-        tdAnterior.appendChild(botonAnterior)
-        tdSiguiente.appendChild(botonSiguiente)
-
-   
-        botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
-        botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
-
-  
-
-    
+            //CREANDO LA FILA DE BOTONES
+            console.log(mantenimientos.lengthuoh)
+            if (!mantenimientos.length<= 5){
+                let trBotones = document.createElement('tr')
+                this.tbody.appendChild(trBotones);
+        
+                let tdAnterior = document.createElement('td');
+                trBotones.appendChild(tdAnterior);
+        
+                let tdEspacio = document.createElement('td');
+                trBotones.appendChild(tdEspacio)
+                tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
+        
+                let tdSiguiente = document.createElement('td');
+                trBotones.appendChild(tdSiguiente);
+        
+                let botonAnterior = document.createElement('button')
+                botonAnterior.setAttribute('class', 'add-users-btn')
+                botonAnterior.textContent='Anterior'
+        
+                let botonSiguiente = document.createElement('button')
+                botonSiguiente.setAttribute('class', 'add-users-btn')
+                botonSiguiente.textContent='Siguiente'
+        
+                tdAnterior.appendChild(botonAnterior)
+                tdSiguiente.appendChild(botonSiguiente)
+        
+        
+                botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
+                botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
+            }
+       
         }
         mostrarPaginaSiguiente(totalPaginas) {
             
