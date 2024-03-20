@@ -18,7 +18,6 @@ export class VistaInicioProfesionales extends Vista {
 
        this.thead = this.div.getElementsByTagName('thead')[0];
        this.tbody = this.div.getElementsByTagName('tbody')[0];
-       this.cargarEncabezado();
 
        //Formulario de la vista e inputs
        this.formAlta = this.div.getElementsByTagName('form')[0];
@@ -96,7 +95,7 @@ export class VistaInicioProfesionales extends Vista {
      * Cargar thead tabla hijos.
      */
       cargarEncabezado() {
-        
+       this.thead.textContent =""
         let trHeadInfo = document.createElement('tr');
         trHeadInfo.setAttribute('id', 'trInfo');
         trHeadInfo.setAttribute('class', 'titulos')
@@ -121,6 +120,7 @@ export class VistaInicioProfesionales extends Vista {
      * @param {Array} usuarios Listado de hijos.
      */
      cargarListado(mantenimientos) {
+        this.cargarEncabezado()
         this.tbody.textContent = ""
         this.mantenimientos = mantenimientos
        
@@ -153,38 +153,45 @@ export class VistaInicioProfesionales extends Vista {
           
         }
             //CREANDO LA FILA DE BOTONES
-            console.log(mantenimientos.lengthuoh)
-            if (!mantenimientos.length<= 5){
-                let trBotones = document.createElement('tr')
-                this.tbody.appendChild(trBotones);
-        
-                let tdAnterior = document.createElement('td');
-                trBotones.appendChild(tdAnterior);
-        
-                let tdEspacio = document.createElement('td');
-                trBotones.appendChild(tdEspacio)
-                tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
-        
-                let tdSiguiente = document.createElement('td');
-                trBotones.appendChild(tdSiguiente);
-        
-                let botonAnterior = document.createElement('button')
-                botonAnterior.setAttribute('class', 'add-users-btn')
-                botonAnterior.textContent='Anterior'
-        
-                let botonSiguiente = document.createElement('button')
-                botonSiguiente.setAttribute('class', 'add-users-btn')
-                botonSiguiente.textContent='Siguiente'
-        
-                tdAnterior.appendChild(botonAnterior)
-                tdSiguiente.appendChild(botonSiguiente)
-        
-        
-                botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
-                botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
-            }
+           
+            if (mantenimientos.length>5)
+            this.crearFilaBotones(totalPaginas)
+
        
         }
+
+        crearFilaBotones(totalPaginas) {
+            
+            let trBotones = document.createElement('tr')
+            this.tbody.appendChild(trBotones);
+    
+            let tdAnterior = document.createElement('td');
+            trBotones.appendChild(tdAnterior);
+    
+            let tdEspacio = document.createElement('td');
+            trBotones.appendChild(tdEspacio)
+            tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
+    
+            let tdSiguiente = document.createElement('td');
+            trBotones.appendChild(tdSiguiente);
+    
+            let botonAnterior = document.createElement('button')
+            botonAnterior.setAttribute('class', 'add-users-btn')
+            botonAnterior.textContent='Anterior'
+    
+            let botonSiguiente = document.createElement('button')
+            botonSiguiente.setAttribute('class', 'add-users-btn')
+            botonSiguiente.textContent='Siguiente'
+    
+            tdAnterior.appendChild(botonAnterior)
+            tdSiguiente.appendChild(botonSiguiente)
+    
+    
+            botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
+            botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
+        }
+
+
         mostrarPaginaSiguiente(totalPaginas) {
             
             // this.tbody.textContent = ""
