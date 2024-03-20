@@ -269,7 +269,7 @@ export class VistaGestionUsuarios extends Vista {
         botonAnadirTabla.textContent='Añadir Usuario'
 
         tdAnadir.appendChild(botonAnadirTabla)
-        tdAnadir.addEventListener('click', this.anadir.bind(this));
+        botonAnadirTabla.addEventListener('click', this.anadir.bind(this));
 
         trBusqueda.appendChild(tdBusqueda)
 

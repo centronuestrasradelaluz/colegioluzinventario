@@ -279,7 +279,7 @@ export class VistaGestionInventario extends Vista {
 
         tdAnadir.appendChild(botonAnadirTabla)
 
-        tdAnadir.addEventListener('click', this.anadir.bind(this));
+        botonAnadirTabla.addEventListener('click', this.anadir.bind(this));
 
         trBusqueda.appendChild(tdBusqueda)
         trBusqueda.appendChild(tdAnadir)
