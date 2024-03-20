@@ -92,15 +92,11 @@ export class VistaInicioProfesionales extends Vista {
         this.divExitoAlta.style.display = activar ? 'block' : 'none';
 
     }
-
-    
       /**
      * Cargar thead tabla hijos.
      */
       cargarEncabezado() {
-       // this.thead.innerHTML = '';
         
-
         let trHeadInfo = document.createElement('tr');
         trHeadInfo.setAttribute('id', 'trInfo');
         trHeadInfo.setAttribute('class', 'titulos')
@@ -127,95 +123,95 @@ export class VistaInicioProfesionales extends Vista {
      cargarListado(mantenimientos) {
         this.tbody.textContent = ""
         this.mantenimientos = mantenimientos
-        console.log(mantenimientos)
+       
         let totalPaginas = Math.ceil(mantenimientos.length / 5); // Suponiendo que quieres mostrar 5 filas por página
 
-       // Calcular el rango de filas para esta página
-    let inicio = this.paginaActual * 5;
-    let fin = Math.min((this.paginaActual + 1) * 5, mantenimientos.length);
+        // Calcular el rango de filas para esta página
+        let inicio = this.paginaActual * 5;
+        let fin = Math.min((this.paginaActual + 1) * 5, mantenimientos.length);
 
-    // Procesar y mostrar las filas para esta página
-    console.log(`Página ${this.paginaActual + 1}:`);
-    for (let i = inicio; i < fin; i++) {
-        const mantenimiento = mantenimientos[i];
-        // Aquí va tu lógica para mostrar cada objeto 'mantenimiento'
-		
-                let tr = document.createElement('tr');
-                this.tbody.appendChild(tr);
-                   
-                let tdCodigoEquipo = document.createElement('td');
-                tr.appendChild(tdCodigoEquipo);
-                tdCodigoEquipo.textContent = mantenimiento.codigoEquipo
+        // Procesar y mostrar las filas para esta página
+      
+        for (let i = inicio; i < fin; i++) {
+            const mantenimiento = mantenimientos[i];
+            // Aquí va tu lógica para mostrar cada objeto 'mantenimiento'
+            
+                    let tr = document.createElement('tr');
+                    this.tbody.appendChild(tr);
+                    
+                    let tdCodigoEquipo = document.createElement('td');
+                    tr.appendChild(tdCodigoEquipo);
+                    tdCodigoEquipo.textContent = mantenimiento.codigoEquipo
 
-                let td1 = document.createElement('td');
-                tr.appendChild(td1);
-                td1.textContent = mantenimiento.fechaIncidencia;
-                
-                let tdAsunto = document.createElement('td');
-                tr.appendChild(tdAsunto);
-                tdAsunto.textContent = mantenimiento.frase;
-        console.log(mantenimiento);
-    }
-    //CREANDO LA FILA DE BOTONES
-    let trBotones = document.createElement('tr')
-    this.tbody.appendChild(trBotones);
+                    let td1 = document.createElement('td');
+                    tr.appendChild(td1);
+                    td1.textContent = mantenimiento.fechaIncidencia;
+                    
+                    let tdAsunto = document.createElement('td');
+                    tr.appendChild(tdAsunto);
+                    tdAsunto.textContent = mantenimiento.frase;
+          
+        }
+        //CREANDO LA FILA DE BOTONES
+        let trBotones = document.createElement('tr')
+        this.tbody.appendChild(trBotones);
 
-    let tdAnterior = document.createElement('td');
-    trBotones.appendChild(tdAnterior);
+        let tdAnterior = document.createElement('td');
+        trBotones.appendChild(tdAnterior);
 
-    let tdEspacio = document.createElement('td');
-    trBotones.appendChild(tdEspacio)
-    tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
+        let tdEspacio = document.createElement('td');
+        trBotones.appendChild(tdEspacio)
+        tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
 
-    let tdSiguiente = document.createElement('td');
-    trBotones.appendChild(tdSiguiente);
+        let tdSiguiente = document.createElement('td');
+        trBotones.appendChild(tdSiguiente);
 
-    let botonAnterior = document.createElement('button')
-    botonAnterior.setAttribute('class', 'add-users-btn')
-    botonAnterior.textContent='Anterior'
+        let botonAnterior = document.createElement('button')
+        botonAnterior.setAttribute('class', 'add-users-btn')
+        botonAnterior.textContent='Anterior'
 
-    let botonSiguiente = document.createElement('button')
-    botonSiguiente.setAttribute('class', 'add-users-btn')
-    botonSiguiente.textContent='Siguiente'
+        let botonSiguiente = document.createElement('button')
+        botonSiguiente.setAttribute('class', 'add-users-btn')
+        botonSiguiente.textContent='Siguiente'
 
-    tdAnterior.appendChild(botonAnterior)
-    tdSiguiente.appendChild(botonSiguiente)
+        tdAnterior.appendChild(botonAnterior)
+        tdSiguiente.appendChild(botonSiguiente)
 
    
-    botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
-    botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
+        botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
+        botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
 
   
 
     
-}
- mostrarPaginaSiguiente(totalPaginas) {
-	
-   // this.tbody.textContent = ""
+        }
+        mostrarPaginaSiguiente(totalPaginas) {
+            
+            // this.tbody.textContent = ""
 
 
-        if (this.paginaActual < totalPaginas - 1) {
-        this.paginaActual++;
-       this.cargarListado(this.mantenimientos)
-}
-else{
-    this.cargarListado(this.mantenimientos)
-}
+            if (this.paginaActual < totalPaginas - 1) {
+            this.paginaActual++;
+                this.cargarListado(this.mantenimientos)
+            }
+            else{
+                this.cargarListado(this.mantenimientos)
+            }
 
 
-}
+        }
 
- mostrarPaginaAnterior() {
-//this.tbody.textContent = ""
-if (this.paginaActual > 0) {
-    this.paginaActual--;
-    this.cargarListado(this.mantenimientos)
-   
-}
-else{
-    this.cargarListado(this.mantenimientos)
-}
- }
+        mostrarPaginaAnterior() {
+            //this.tbody.textContent = ""
+            if (this.paginaActual > 0) {
+                this.paginaActual--;
+                this.cargarListado(this.mantenimientos)
+            }
+            else
+            {
+                this.cargarListado(this.mantenimientos)
+            }
+        }
 
 
     //ingresar arrelo a los campos de los equipos
@@ -259,7 +255,6 @@ else{
      modificar(mantenimiento){
         this.mostrarOcultarCrud(false,true,true)
 
-        console.log(mantenimiento)
 
         this.idMantenimiento = mantenimiento.id
 
@@ -287,15 +282,6 @@ else{
 
         this.inputsAlta[4].value = mantenimiento.nombreArregla
 
-
-       /* this.divFormularios[0].style.display = 'block'
-
-        
-
-        console.log(this.inputsAlta[0])
-        
-       
-        */
     }
 
     mostrar(ver) {
