@@ -295,10 +295,6 @@ export class VistaGestionUsuarios extends Vista {
         tdEstado.textContent = 'Estado';
         trHeadInfo.appendChild(tdEstado);
 
-        let tdObservaciones = document.createElement('td');
-        tdObservaciones.textContent = "Observaciones"
-        trHeadInfo.appendChild(tdObservaciones);
-
         let tdOpciones = document.createElement('td');
         tdOpciones.textContent = 'Opciones';
         trHeadInfo.appendChild(tdOpciones);
@@ -346,15 +342,7 @@ export class VistaGestionUsuarios extends Vista {
                 tdEstado.textContent = "Activo"
                 else if (usuario.estado == 0)
                 tdEstado.textContent = "Inactivo"
-
-                let tdObservaciones = document.createElement('td');
-                tr.appendChild(tdObservaciones);
-                if(usuario.observaciones)
-                tdObservaciones.textContent = usuario.observaciones
-                if(!usuario.observaciones)
-                tdObservaciones.textContent = "No tiene observaciones"
                 
-
                 let td2 = document.createElement('td');
                 td2.classList.add('options');
                 td2.setAttribute('colspan', '2');
