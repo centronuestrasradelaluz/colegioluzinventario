@@ -165,7 +165,7 @@ export class VistaInicioProfesionales extends Vista {
 
     let tdEspacio = document.createElement('td');
     trBotones.appendChild(tdEspacio)
-    tdEspacio.textContent = this.paginaActual + "/ "+ parseInt(totalPaginas-1)
+    tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
 
     let tdSiguiente = document.createElement('td');
     trBotones.appendChild(tdSiguiente);
