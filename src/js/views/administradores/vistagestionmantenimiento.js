@@ -317,14 +317,6 @@ export class VistaGestionMantenimiento extends Vista {
         this.divFormularios[5].style.display = 'none'
     
         this.divFormularios[6].style.display = 'none'
-
-      /*
-        
-        this.divFormularios[3].style.display = 'none'
-        
-        this.divFormularios[4].style.display = 'none'
-     
-        this.divFormularios[5].style.display = 'none'*/
       
        
     }
