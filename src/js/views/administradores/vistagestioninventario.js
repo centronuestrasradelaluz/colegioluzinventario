@@ -20,7 +20,7 @@ export class VistaGestionInventario extends Vista {
        this.thead = this.div.getElementsByTagName('thead')[0];
        this.tbody = this.div.getElementsByTagName('tbody')[0];
        this.busqueda = ""
-       this.cargarEncabezado();
+       //this.cargarEncabezado();
 
        //Elmentos consulta equipo
 
@@ -47,7 +47,9 @@ export class VistaGestionInventario extends Vista {
 
        this.esModificacion = false
       
-       
+       this.paginaActual = 0;
+       this.equipos = []
+
 
        this.selectLinea = this.div.querySelector("#selectLinea")
        this.selectOS = this.div.querySelector("#selectSistemaOperativo")
@@ -55,6 +57,7 @@ export class VistaGestionInventario extends Vista {
         this.controlador.dameEquipos("")
        
         this.mostrarOcultarCrud(true,false,false,false)
+
         
     }
     
@@ -241,7 +244,7 @@ export class VistaGestionInventario extends Vista {
      * Cargar thead tabla hijos.
      */
        cargarEncabezado() {
-        //this.thead.innerHTML = '';
+        this.thead.innerHTML = '';
         
         let trBusqueda = document.createElement('tr');
         let tdBusqueda = document.createElement('td');
@@ -313,16 +316,21 @@ export class VistaGestionInventario extends Vista {
      */
      cargarListado(equiposConMantenimiento) {
         console.log(equiposConMantenimiento)
-
+        this.cargarEncabezado()
+        this.equipos = equiposConMantenimiento
         this.tbody.innerHTML = '';  // Limpiar tabla para sustituirla con nuevos datos.
 
-        if (equiposConMantenimiento != null) {
-            for (const equipoConMantenimiento of equiposConMantenimiento) {
+        let totalPaginas = Math.ceil(equiposConMantenimiento.length / 5);
 
-                const equipo = equipoConMantenimiento.equipo
-              
+        let inicio = this.paginaActual * 5;
+        let fin = Math.min((this.paginaActual + 1) * 5, equiposConMantenimiento.length);
+        
+        for (let i = inicio; i < fin; i++) {
+            const equipoConMantenimiento = equiposConMantenimiento[i];
 
-                let tr = document.createElement('tr');
+            const equipo = equipoConMantenimiento.equipo
+
+            let tr = document.createElement('tr');
                 this.tbody.appendChild(tr);
                 
                 let td1 = document.createElement('td');
@@ -336,13 +344,11 @@ export class VistaGestionInventario extends Vista {
                /* let tdRol = document.createElement('td');
                 tr.appendChild(tdRol);*/
 
-
                 let td2 = document.createElement('td');
                 td2.classList.add('options');
                 td2.setAttribute('colspan', '2');
                 tr.appendChild(td2);
 
-               
                 let iconoConsultar = document.createElement('img');
                 iconoConsultar.setAttribute('src','./img/icons/ico_lupa.png');
                 iconoConsultar.setAttribute('class', 'iconos')
@@ -366,10 +372,73 @@ export class VistaGestionInventario extends Vista {
                 iconoEliminar.setAttribute('title', 'Eliminar usuario');
                 iconoEliminar.addEventListener('click', this.eliminarEquipo.bind(this, equipo.id))
                 td2.appendChild(iconoEliminar);*/
-            }
-
-        } 
+        }
+                //CREANDO LA FILA DE BOTONES
+                if (equiposConMantenimiento.length>5)
+                this.crearFilaBotones(totalPaginas)
+        
     }
+
+    crearFilaBotones(totalPaginas) {
+            
+        let trBotones = document.createElement('tr')
+        this.tbody.appendChild(trBotones);
+
+        let tdAnterior = document.createElement('td');
+        trBotones.appendChild(tdAnterior);
+
+        let tdEspacio = document.createElement('td');
+        trBotones.appendChild(tdEspacio)
+        tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
+
+        let tdSiguiente = document.createElement('td');
+        trBotones.appendChild(tdSiguiente);
+
+        let botonAnterior = document.createElement('button')
+        botonAnterior.setAttribute('class', 'add-users-btn')
+        botonAnterior.textContent='Anterior'
+
+        let botonSiguiente = document.createElement('button')
+        botonSiguiente.setAttribute('class', 'add-users-btn')
+        botonSiguiente.textContent='Siguiente'
+
+        tdAnterior.appendChild(botonAnterior)
+        tdSiguiente.appendChild(botonSiguiente)
+
+
+        botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
+        botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
+    }
+
+
+    mostrarPaginaSiguiente(totalPaginas) {
+        
+        // this.tbody.textContent = ""
+
+
+        if (this.paginaActual < totalPaginas - 1) {
+        this.paginaActual++;
+            this.cargarListado(this.equipos)
+        }
+        else{
+            this.cargarListado(this.equipos)
+        }
+
+
+    }
+
+    mostrarPaginaAnterior() {
+        //this.tbody.textContent = ""
+        if (this.paginaActual > 0) {
+            this.paginaActual--;
+            this.cargarListado(this.equipos)
+        }
+        else
+        {
+            this.cargarListado(this.equipos)
+        }
+    }
+
 
      // Definir función de debounce
     /*Esta función se utiliza para limitar la frecuencia de ejecución de una función en respuesta a eventos como entrada de usuario. */
