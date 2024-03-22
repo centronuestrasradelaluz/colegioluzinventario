@@ -15,3 +15,5 @@ VALUES(1000, 'N7-09', 'nosesabe', 'nosesabe', 'nosesabe','nosesabe', 'nosesabe',
 
 INSERT INTO `Mantenimiento` (idEquipo, idUsuario, idAsunto, fechaIncidencia) VALUES (1000, 2, 1, '2024-03-05');
 INSERT INTO `Mantenimiento` (idEquipo, idUsuario, idAsunto, fechaIncidencia) VALUES (1000, 2, 1, '2024-02-05');
+
+--https://www.youtube.com/watch?v=n0bLPcR0JAc
