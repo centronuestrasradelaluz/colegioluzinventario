@@ -24,9 +24,9 @@ export class VistaGestionInventario extends Vista {
 
        //Elmentos consulta equipo
 
-       this.theadConsulta = this.div.getElementsByTagName('thead')[1];
-       this.tbodyConsulta = this.div.getElementsByTagName('tbody')[1];
-
+       this.fichaTecnica = this.div.querySelector('#divFichaTecnica');
+       this.tablaMantenimiento = this.div.querySelector('#divTablaMantenimiento')
+  
        //Botones de la vista
        this.botonVolverAltaEquipos = this.div.querySelector('#botonVolverAltaEquipos');
        this.botonVolverAltaEquipos.addEventListener('click', this.volver.bind(this));
@@ -169,7 +169,7 @@ export class VistaGestionInventario extends Vista {
         this.formAlta.reset()
 
         if(this.divExitoAlta.style.display == 'block'){}
-
+        
         this.divExitoAlta.style.display = "none"
         this.formAlta.classList.remove('was-validated');
            
@@ -455,264 +455,107 @@ export class VistaGestionInventario extends Vista {
     }
 
     consultar(equipoConMantenimiento){
-
+        this.fichaTecnica.textContent=""
+        this.tablaMantenimiento.textContent=""
+      
         const equipo = equipoConMantenimiento.equipo
-     
-        const mantenimiento = equipoConMantenimiento.mantenimientos
-       
+
+        const propiedadesAMostrar = ['codigoEquipo', 'discoDuro', 'fechaCompra',
+         'grafica', 'marca', 'monitor', 'observaciones', 'procesador', 'proveedor', 'ram', 'ubicacion', 'valorEquipo'];
+        
+         const mantenimiento = equipoConMantenimiento.mantenimientos
+        console.log(mantenimiento)
         this.mostrarOcultarCrud(false,false,false,true)
 
-        this.theadConsulta.innerHTML = '';
+        // Crear título de la ficha técnica
+        let titulo = document.createElement('h2');
+        titulo.textContent = "Ficha Técnica";
 
-        let trTitulo = document.createElement('tr');
-        let tdTitulo = document.createElement('td');
-        tdTitulo.textContent = 'Equipo Codigo ' + equipo.codigoEquipo;
-        tdTitulo.setAttribute('colspan', '2');
-        trTitulo.appendChild(tdTitulo);
+        // Añadir título al contenedor principal
+        this.fichaTecnica.appendChild(titulo);
 
-        let trInformacion = document.createElement('tr');
-        let tdInformacion = document.createElement('td');
-        tdInformacion.textContent = 'Campo'
+      // Iterar sobre las propiedades que deseas mostrar
+     propiedadesAMostrar.forEach(propiedad => {
+        // Verificar si la propiedad existe en el objeto equipo
+            if (equipo.hasOwnProperty(propiedad)) {
+                // Crear un párrafo para cada propiedad y su valor
+                let parrafo = document.createElement('p');
+                parrafo.textContent = `${propiedad}: ${equipo[propiedad]}`;
 
-        let tdDato = document.createElement('td');
-
-        trInformacion.appendChild(tdInformacion);
-        trInformacion.appendChild(tdDato);
-
-        this.theadConsulta.appendChild(trTitulo);
-        this.theadConsulta.appendChild(trInformacion);
-
-
-        this.tbodyConsulta.innerHTML = '';
-
-        let trProveedor = document.createElement('tr')
-        let tdProveedor = document.createElement('td')
-        tdProveedor.textContent = "Proveedor"
-        let tdDatoProveedor = document.createElement('td')
-        tdDatoProveedor.textContent = equipo.proveedor
-        this.tbodyConsulta.appendChild(trProveedor)
-
-        trProveedor.appendChild(tdProveedor)
-        trProveedor.appendChild(tdDatoProveedor)
-
-        let trMarca = document.createElement('tr')
-        let tdMarca = document.createElement('td')
-        tdMarca.textContent = "Marca"
-        let tdDatoMarca = document.createElement('td')
-        tdDatoMarca.textContent = equipo.marca
-        this.tbodyConsulta.appendChild(trMarca)
-
-        trMarca.appendChild(tdMarca)
-        trMarca.appendChild(tdDatoMarca)
-
-        let trMonitor = document.createElement('tr')
-        let tdMonitor = document.createElement('td')
-        tdMonitor.textContent = "Monitor"
-        let tdDatoMonitor = document.createElement('td')
-        tdDatoMonitor.textContent = equipo.monitor
-        this.tbodyConsulta.appendChild(trMonitor)
-
-        trMonitor.appendChild(tdMonitor)
-        trMonitor.appendChild(tdDatoMonitor)
-
-        let trRam = document.createElement('tr')
-        let tdRam = document.createElement('td')
-        tdRam.textContent = "Ram"
-        let tdDatoRam = document.createElement('td')
-        tdDatoRam.textContent = equipo.ram
-        this.tbodyConsulta.appendChild(trRam)
-
-        trRam.appendChild(tdRam)
-        trRam.appendChild(tdDatoRam)
-
-        let trDiscoDuro = document.createElement('tr')
-        let tdDiscoDuro = document.createElement('td')
-        tdDiscoDuro.textContent = "DiscoDuro"
-        let tdDatoDiscoDuro = document.createElement('td')
-        tdDatoDiscoDuro.textContent = equipo.discoDuro
-        this.tbodyConsulta.appendChild(trDiscoDuro)
-
-        trDiscoDuro.appendChild(tdDiscoDuro)
-        trDiscoDuro.appendChild(tdDatoDiscoDuro)
-
-        let trProcesador = document.createElement('tr')
-        let tdProcesador = document.createElement('td')
-        tdProcesador.textContent = "Procesador"
-        let tdDatoProcesador = document.createElement('td')
-        tdDatoProcesador.textContent = equipo.procesador
-        this.tbodyConsulta.appendChild(trProcesador)
-
-        trProcesador.appendChild(tdProcesador)
-        trProcesador.appendChild(tdDatoProcesador)
-
-         let trUbicacion = document.createElement('tr')
-        let tdUbicacion = document.createElement('td')
-        tdUbicacion.textContent = "Ubicacion"
-        let tdDatoUbicacion = document.createElement('td')
-        tdDatoUbicacion.textContent = equipo.ubicacion
-        this.tbodyConsulta.appendChild(trUbicacion)
-
-        trUbicacion.appendChild(tdUbicacion)
-        trUbicacion.appendChild(tdDatoUbicacion)
-
-        let trGrafica = document.createElement('tr')
-        let tdGrafica = document.createElement('td')
-        tdGrafica.textContent = "Grafica"
-        let tdDatoGrafica = document.createElement('td')
-        tdDatoGrafica.textContent = equipo.grafica
-        this.tbodyConsulta.appendChild(trGrafica)
-
-        trGrafica.appendChild(tdGrafica)
-        trGrafica.appendChild(tdDatoGrafica)
-
-        let trFechaCompra = document.createElement('tr')
-        let tdFechaCompra = document.createElement('td')
-        tdFechaCompra.textContent = "FechaCompra"
-        let tdDatoFechaCompra = document.createElement('td')
-        tdDatoFechaCompra.textContent = equipo.fechaCompra
-        this.tbodyConsulta.appendChild(trFechaCompra)
-
-        trFechaCompra.appendChild(tdFechaCompra)
-        trFechaCompra.appendChild(tdDatoFechaCompra)
- 
-
-        let trObservaciones = document.createElement('tr')
-        let tdObservaciones = document.createElement('td')
-        tdObservaciones.textContent = "Observaciones"
-        let tdDatoObservaciones = document.createElement('td')
-        tdDatoObservaciones.textContent = equipo.observaciones
-        this.tbodyConsulta.appendChild(trObservaciones)
-
-        trObservaciones.appendChild(tdObservaciones)
-        trObservaciones.appendChild(tdDatoObservaciones)
-    
-        let trValorEconomico = document.createElement('tr')
-        let tdValorEconomico = document.createElement('td')
-        tdValorEconomico.textContent = "ValorEconomico"
-        let tdDatoValorEconomico = document.createElement('td')
-        tdDatoValorEconomico.textContent = equipo.valorEquipo
-        this.tbodyConsulta.appendChild(trValorEconomico)
-
-        trValorEconomico.appendChild(tdValorEconomico)
-        trValorEconomico.appendChild(tdDatoValorEconomico)
-
-        for(const mant of mantenimiento){
+                // Añadir el párrafo al contenedor principal
+                this.fichaTecnica.appendChild(parrafo);
+        }
+    });
+        // Añadir la ficha técnica al elemento deseado del DOM
        
-            console.log(mant)
-            console.log("fin de un mantenimiento")
-        }
+    this.divConsultaEquipos.appendChild(this.fichaTecnica);
+        // Crear encabezado de la tabla
+        let encabezado = document.createElement('tr');
 
-        /*consultar(equipoConMantenimiento) {
-            const equipo = equipoConMantenimiento.equipo;
-            const mantenimiento = equipoConMantenimiento.mantenimientos;
-        
-            this.mostrarOcultarCrud(false, false, false, true);
-            this.theadConsulta.innerHTML = '';
-            this.tbodyConsulta.innerHTML = '';
-        
-            // Función para agregar una fila a la tabla de consulta
-            const agregarFila = (nombreCampo, valorCampo) => {
-                const tr = document.createElement('tr');
-                const tdNombre = document.createElement('td');
-                const tdValor = document.createElement('td');
-        
-                tdNombre.textContent = nombreCampo;
-                tdValor.textContent = valorCampo;
-        
-                tr.appendChild(tdNombre);
-                tr.appendChild(tdValor);
-        
-                this.tbodyConsulta.appendChild(tr);
-            };
-        
-            // Agregar filas para cada atributo del equipo
-            agregarFila('Equipo Codigo', equipo.codigoEquipo);
-            agregarFila('Proveedor', equipo.proveedor);
-            agregarFila('Marca', equipo.marca);
-            agregarFila('Monitor', equipo.monitor);
-            agregarFila('RAM', equipo.ram);
-            agregarFila('Disco Duro', equipo.discoDuro);
-            agregarFila('Procesador', equipo.procesador);
-            agregarFila('Ubicación', equipo.ubicacion);
-            agregarFila('Gráfica', equipo.grafica);
-            agregarFila('Fecha de Compra', equipo.fechaCompra);
-            agregarFila('Observaciones', equipo.observaciones);
-            agregarFila('Valor Económico', equipo.valorEquipo);
-        
-            // Iterar sobre los mantenimientos y hacer algo con ellos (aquí puedes agregar lógica para mostrarlos en la tabla)
-            mantenimiento.forEach(mant => {
-                console.log(mant);
-                console.log("fin de un mantenimiento");
-            });*/
+        let thFecha = document.createElement('th');
+        thFecha.textContent = 'Fecha de la Incidencia';
+        encabezado.appendChild(thFecha);
+
+        let thDescripcion = document.createElement('th');
+        thDescripcion.textContent = 'Descripción';
+        encabezado.appendChild(thDescripcion);
+
+        let thOpciones = document.createElement('th');
+        thOpciones.textContent = 'Opciones';
+        encabezado.appendChild(thOpciones);
+
+        this.tablaMantenimiento.appendChild(encabezado);
+
+        // Iterar sobre los datos de mantenimiento y crear filas de la tabla
+
+        if(mantenimiento.length === 0){
+            let fila = document.createElement('tr');
+            let tdSinRegistro = document.createElement('td');
+            tdSinRegistro.textContent="No existen mantenimientos para el equipo"
+            tdSinRegistro.setAttribute("colspan", "3")
+            fila.appendChild(tdSinRegistro)
+           this.tablaMantenimiento.appendChild(fila);
+            
         }
-      /*
-        crearFila(label, valor) {
-        const tr = document.createElement('tr');
-        const tdLabel = document.createElement('td');
-        const tdValor = document.createElement('td');
-        tdLabel.textContent = label;
-        tdValor.textContent = valor;
-        tr.appendChild(tdLabel);
-        tr.appendChild(tdValor);
-        return tr;
-    }
-    
-     consultar(equipoConMantenimiento) {
-        const equipo = equipoConMantenimiento.equipo;
-        const mantenimiento = equipoConMantenimiento.mantenimientos;
-        this.mostrarOcultarCrud(false, false, false, true);
-    
-        // Limpiar contenedores
-        this.theadConsulta.innerHTML = '';
-        this.tbodyConsulta.innerHTML = '';
-    
-        // Crear título
-        const trTitulo = document.createElement('tr');
-        const tdTitulo = document.createElement('td');
-        tdTitulo.textContent = `Equipo Código ${equipo.codigoEquipo}`;
-        tdTitulo.setAttribute('colspan', '2');
-        trTitulo.appendChild(tdTitulo);
-        this.theadConsulta.appendChild(trTitulo);
-    
-        // Crear filas de detalles del equipo
-        const detallesEquipo = {
-            "Proveedor": equipo.proveedor,
-            "Marca": equipo.marca,
-            "Monitor": equipo.monitor,
-            "RAM": equipo.ram,
-            "Disco Duro": equipo.discoDuro,
-            "Procesador": equipo.procesador,
-            "Ubicación": equipo.ubicacion,
-            "Gráfica": equipo.grafica,
-            "Fecha de Compra": equipo.fechaCompra,
-            "Observaciones": equipo.observaciones,
-            "Valor del Equipo": equipo.valorEquipo
-        };
-    
-        Object.entries(detallesEquipo).forEach(([label, valor]) => {
-            const fila = this.crearFila(label, valor);
-            this.tbodyConsulta.appendChild(fila);
+        else{
+            mantenimiento.forEach(item => {
+            let fila = document.createElement('tr');
+
+            // Columna para la fecha de la incidencia
+            let tdFecha = document.createElement('td');
+            tdFecha.textContent = item.fechaIncidencia;
+            fila.appendChild(tdFecha);
+
+            // Columna para la descripción
+            let tdDescripcion = document.createElement('td');
+            tdDescripcion.textContent = item.descripcion;
+            fila.appendChild(tdDescripcion);
+
+            // Columna para las opciones (aquí puedes añadir botones u otros elementos según necesites)
+            let tdOpciones = document.createElement('td');
+            // Por ejemplo, añadir un botón de eliminar
+            let botonVisualizar = document.createElement('button');
+
+            tdOpciones.appendChild(botonVisualizar);
+            fila.appendChild(tdOpciones);
+
+            this.tablaMantenimiento.appendChild(fila);
         });
-    }
-    
-       */  
-        
+          
+        }
+        // Añadir la tabla de mantenimiento al documento
+
+        this.divConsultaEquipos.appendChild(this.tablaMantenimiento);
+
+       
+        }
+     
 
     /*eliminarEquipo(id) {
         if(confirm("¿Estas seguro de eliminar el equipo? Este proceso será irreversible"))
         {
             this.controlador.eliminarEquipo(id)
         }
-    }*/
-
-     /**
-     * Limpia los campos del formulario alta.
-     */
-    /* cancelarAlta() {
-        for (let input of this.inputsAlta)
-            input.value = '';
-
-        this.mostrarOcultarCrud(true, false, false);
     }*/
 
 

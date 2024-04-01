@@ -243,3 +243,76 @@ td img.iconos{
 td.options{
     text-align: center;
 }
+/* Estilos para el contenedor principal de la ficha técnica */
+.ficha-tecnica {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 60%; /* Ajusta el ancho según tus necesidades */
+    margin: 20px auto; /* Centra la ficha técnica horizontalmente */
+  }
+  
+  /* Estilos para el título */
+  .ficha-tecnica h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  /* Estilos para cada propiedad */
+  .ficha-tecnica p {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 1em;
+    color: #666;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  /* Estilos para el último párrafo (sin borde inferior) */
+  .ficha-tecnica p:last-child {
+    border-bottom: none;
+  }
+
+  /* Estilos para la tabla */
+.table-mantenimiento {
+    width:60%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para las celdas de la tabla */
+  .table-mantenimiento th,
+  .table-mantenimiento td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Estilos para el encabezado de la tabla */
+  .table-mantenimiento th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilos para las filas impares de la tabla */
+  .table-mantenimiento tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Estilos para el botón de opciones */
+  .table-mantenimiento .opcion {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  /* Estilos para el botón de opciones al pasar el ratón sobre él */
+  .table-mantenimiento .opcion:hover {
+    background-color: #0056b3;
+  }
+  
+  
