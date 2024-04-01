@@ -480,7 +480,7 @@ export class VistaGestionInventario extends Vista {
             if (equipo.hasOwnProperty(propiedad)) {
                 // Crear un párrafo para cada propiedad y su valor
                 let parrafo = document.createElement('p');
-                parrafo.textContent = `${propiedad}: ${equipo[propiedad]}`;
+                parrafo.innerHTML = `<span class="negrita">${propiedad}</span>: ${equipo[propiedad]}`;
 
                 // Añadir el párrafo al contenedor principal
                 this.fichaTecnica.appendChild(parrafo);

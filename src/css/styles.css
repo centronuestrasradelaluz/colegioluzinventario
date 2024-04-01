@@ -251,6 +251,8 @@ td.options{
     border-radius: 5px;
     width: 60%; /* Ajusta el ancho según tus necesidades */
     margin: 20px auto; /* Centra la ficha técnica horizontalmente */
+    display: flex;
+    flex-wrap: wrap;
   }
   
   /* Estilos para el título */
@@ -258,6 +260,7 @@ td.options{
     margin-top: 0;
     font-size: 1.5em;
     color: #333;
+    flex-basis: 100%;
   }
   
   /* Estilos para cada propiedad */
@@ -267,12 +270,14 @@ td.options{
     font-size: 1em;
     color: #666;
     border-bottom: 1px solid #ccc;
+    flex-basis: 50%; /* Establece el ancho deseado para cada columna */
+    /* Otra opción sería usar width: 50%; */
+    /* Puedes ajustar el espacio entre columnas con gap o margin */
+    /* margin: 0 10px; */
+    /* O */
+    /* gap: 10px; */
   }
-  
-  /* Estilos para el último párrafo (sin borde inferior) */
-  .ficha-tecnica p:last-child {
-    border-bottom: none;
-  }
+
 
   /* Estilos para la tabla */
 .table-mantenimiento {
@@ -314,5 +319,8 @@ td.options{
   .table-mantenimiento .opcion:hover {
     background-color: #0056b3;
   }
+  .negrita{
+    font-weight: bold;
+}
   
   
