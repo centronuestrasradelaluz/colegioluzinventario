@@ -1,4 +1,5 @@
 import { Vista } from '../vista.js';
+import { Formulario } from '../formulario.js'; // Importa la clase del formulario dinámico
 
 /**
  * Contiene la vista del inicio
@@ -11,94 +12,58 @@ export class VistaInicioProfesionales extends Vista {
 	 */
     constructor(controlador, div) {
         super(controlador, div);
+        
+        // Crear instancia del formulario dinámico y generar el formulario
+        const idContenedor = 'divAltaMantenimientosPro'; // ID del div donde se agregará el formulario
+        this.formulario = new Formulario(this, idContenedor);
 
-        this.divListado = this.div.querySelector('#divListadoMantenimientosPro');
-       this.divAlta = this.div.querySelector('#divAltaMantenimientosPro');
+        // Crear el botón y agregarlo al formulario
+        const botonAnadir = this.formulario.crearBotonAnadir(); 
+        //this.formulario.contenedor.appendChild(botonAnadir);
 
+        // Asignar la función ingresarMantenimientos como manejador de eventos para el botón
+        botonAnadir.addEventListener('click', this.ingresarMantenimientos.bind(this));
 
-       this.thead = this.div.getElementsByTagName('thead')[0];
-       this.tbody = this.div.getElementsByTagName('tbody')[0];
-
-       //Formulario de la vista e inputs
-       this.formAlta = this.div.getElementsByTagName('form')[0];
-       this.divFormularios = this.div.getElementsByClassName("formItem")
-
-       this.inputsAlta = this.formAlta.getElementsByTagName('input');
-       this.selectsAlta = this.formAlta.getElementsByTagName('select');
-
-       this.selectCodigoEquipo = this.div.querySelector("#selectCodigoEquipo")
-       this.selectAsunto = this.div.querySelector("#selectAsunto")
-
-       this.divExitoAlta = this.div.querySelector('#divExito');
-       this.divCargandoAlta = this.div.querySelector('#loadingImg');
-
-       this.botonAnadir = this.div.querySelector('#aceptar')
-       this.botonAnadir.addEventListener('click', this.ingresarMantenimientos.bind(this));
-
+        // Definir los items del formulario
+        this.items = [
+            { label: 'Codigo Equipo', type: 'select', name: 'selectCodigoEquipo', id:'selectCodigoEquipo', options: [{ value: '-1', text: 'Elija Codigo de Equipo' }] },
+            { label: 'Codigo Equipo', type: 'text', name: 'codigoEquipoText' },
+            { label: 'Asunto', type: 'select', name: 'selectAsunto', id:'selectAsunto', options: [{ value: '-1', text: '' }] },
+            { label: 'Descripcion de la incidencia', type: 'textarea', name: 'descripcion' }
+        ];
+            // Generar el formulario dinámico después de la creación de la fila de botones
        
-        //Parametros necesarios para cargar la vista
+        // Obtener referencias a elementos HTML relevantes
+        this.divListado = this.div.querySelector('#divListadoMantenimientosPro');
+        this.divAlta = this.div.querySelector('#divAltaMantenimientosPro');
+        this.thead = this.div.getElementsByTagName('thead')[0];
+        this.tbody = this.div.getElementsByTagName('tbody')[0];
+        this.divExitoAlta = this.div.querySelector('#divExito');
+        this.divCargandoAlta = this.div.querySelector('#loadingImg');
 
-        this.idMantenimiento = 0
+        // Parametros necesarios para cargar la vista
+        this.idMantenimiento = 0;
         this.paginaActual = 0;
-      this.mantenimientos = []
-      
-        this.esModificacion = false
-        this.divFormularios[1].style.display = 'none'
-        this.controlador.dameMantenimientos("")
+        this.mantenimientos = [];
+        this.esModificacion = false;
 
+        // Obtener los mantenimientos
+        this.controlador.dameMantenimientos("");
     }
 
+    // Método para rellenar los selects del formulario dinámico
     rellenarSelects(resultados) {
-        this.llenarSelect(resultados["codigoEquipo"], this.selectCodigoEquipo, "Elija Codigo de Equipo");
-        this.llenarSelect(resultados["asunto"], this.selectAsunto, "Elija una incidencia");
+        this.formulario.generarFormulario(this.items);
+        this.formulario.llenarSelect(resultados["codigoEquipo"], "selectCodigoEquipo", "Elija Codigo de Equipo");
+        this.formulario.llenarSelect(resultados["asunto"], "selectAsunto", "Elija una incidencia");
     }
     
-    llenarSelect(items, selectElement, titulo) {
-
-        selectElement.innerHTML=""
-
-        let tituloSelect = document.createElement('option');
-        tituloSelect.value = "-1"
-        tituloSelect.textContent = titulo
-        selectElement.appendChild(tituloSelect);
-
-        for (const item of items) {
-            let option = document.createElement('option');
-            option.value = item.id;
-            
-            if(!item.frase)
-            option.textContent = item.codigoEquipo;
-            else
-            option.textContent = item.frase
-          
-            selectElement.appendChild(option);
-        }
-    }
-
-     /**
-     * Informar al usuario del alta exitosa.
-     * @param {Boolean} activar Activa o no mensaje éxito.
-     */
-     exitoAlta(activar) {
-        
-
-        /*if(!this.esModificacion){
-            this.formAlta.reset();
-            this.formAlta.classList.remove('was-validated');
-        }*/
-       
-        this.divCargandoAlta.style.display = 'none';
-        this.divExitoAlta.style.display = activar ? 'block' : 'none';
-
-    }
-      /**
-     * Cargar thead tabla hijos.
-     */
-      cargarEncabezado() {
-       this.thead.textContent =""
+    // Método para cargar el encabezado de la tabla
+    cargarEncabezado() {
+        this.thead.textContent = "";
         let trHeadInfo = document.createElement('tr');
         trHeadInfo.setAttribute('id', 'trInfo');
-        trHeadInfo.setAttribute('class', 'titulos')
+        trHeadInfo.setAttribute('class', 'titulos');
 
         let tdCodigoEquipo = document.createElement('td');
         tdCodigoEquipo.textContent = 'Codigo';
@@ -111,191 +76,144 @@ export class VistaInicioProfesionales extends Vista {
         let tdAsunto = document.createElement('td');
         tdAsunto.textContent = 'Asunto';
         trHeadInfo.appendChild(tdAsunto);
-     
+
         this.thead.appendChild(trHeadInfo);
     }
 
-     /**
-     * Carga tabla con los hijos.
-     * @param {Array} usuarios Listado de hijos.
-     */
-     cargarListado(mantenimientos) {
-        this.cargarEncabezado()
-        this.tbody.textContent = ""
-        this.mantenimientos = mantenimientos
-       
-        let totalPaginas = Math.ceil(mantenimientos.length / 5); // Suponiendo que quieres mostrar 5 filas por página
+    // Método para cargar el listado de mantenimientos en la tabla
+    cargarListado(mantenimientos) {
+        this.cargarEncabezado();
+        this.tbody.textContent = "";
+        this.mantenimientos = mantenimientos;
 
-        // Calcular el rango de filas para esta página
+        let totalPaginas = Math.ceil(mantenimientos.length / 5); // Suponiendo que quieres mostrar 5 filas por página
         let inicio = this.paginaActual * 5;
         let fin = Math.min((this.paginaActual + 1) * 5, mantenimientos.length);
 
-        // Procesar y mostrar las filas para esta página
-      
         for (let i = inicio; i < fin; i++) {
             const mantenimiento = mantenimientos[i];
-            // Aquí va tu lógica para mostrar cada objeto 'mantenimiento'
-            
-                    let tr = document.createElement('tr');
-                    this.tbody.appendChild(tr);
-                    
-                    let tdCodigoEquipo = document.createElement('td');
-                    tr.appendChild(tdCodigoEquipo);
-                    tdCodigoEquipo.textContent = mantenimiento.codigoEquipo
+            let tr = document.createElement('tr');
+            this.tbody.appendChild(tr);
 
-                    let td1 = document.createElement('td');
-                    tr.appendChild(td1);
-                    td1.textContent = mantenimiento.fechaIncidencia;
-                    
-                    let tdAsunto = document.createElement('td');
-                    tr.appendChild(tdAsunto);
-                    tdAsunto.textContent = mantenimiento.frase;
-          
-        }
-            //CREANDO LA FILA DE BOTONES
-           
-            if (mantenimientos.length>5)
-            this.crearFilaBotones(totalPaginas)
+            let tdCodigoEquipo = document.createElement('td');
+            tr.appendChild(tdCodigoEquipo);
+            tdCodigoEquipo.textContent = mantenimiento.codigoEquipo;
 
-       
+            let td1 = document.createElement('td');
+            tr.appendChild(td1);
+            td1.textContent = mantenimiento.fechaIncidencia;
+
+            let tdAsunto = document.createElement('td');
+            tr.appendChild(tdAsunto);
+            tdAsunto.textContent = mantenimiento.frase;
         }
 
-        crearFilaBotones(totalPaginas) {
-            
-            let trBotones = document.createElement('tr')
-            this.tbody.appendChild(trBotones);
-    
-            let tdAnterior = document.createElement('td');
-            trBotones.appendChild(tdAnterior);
-    
-            let tdEspacio = document.createElement('td');
-            trBotones.appendChild(tdEspacio)
-            tdEspacio.textContent = (this.paginaActual+1) + "/ "+ parseInt(totalPaginas)
-    
-            let tdSiguiente = document.createElement('td');
-            trBotones.appendChild(tdSiguiente);
-    
-            let botonAnterior = document.createElement('button')
-            botonAnterior.setAttribute('class', 'add-users-btn')
-            botonAnterior.textContent='Anterior'
-    
-            let botonSiguiente = document.createElement('button')
-            botonSiguiente.setAttribute('class', 'add-users-btn')
-            botonSiguiente.textContent='Siguiente'
-    
-            tdAnterior.appendChild(botonAnterior)
-            tdSiguiente.appendChild(botonSiguiente)
-    
-    
-            botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
-            botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
+        if (mantenimientos.length > 5) {
+            this.crearFilaBotones(totalPaginas);
         }
+    }
 
+    // Método para crear la fila de botones de paginación
+    crearFilaBotones(totalPaginas) {
+        let trBotones = document.createElement('tr');
+        this.tbody.appendChild(trBotones);
 
-        mostrarPaginaSiguiente(totalPaginas) {
-            
-            // this.tbody.textContent = ""
+        let tdAnterior = document.createElement('td');
+        trBotones.appendChild(tdAnterior);
 
+        let tdEspacio = document.createElement('td');
+        trBotones.appendChild(tdEspacio);
+        tdEspacio.textContent = (this.paginaActual + 1) + "/ " + parseInt(totalPaginas);
 
-            if (this.paginaActual < totalPaginas - 1) {
+        let tdSiguiente = document.createElement('td');
+        trBotones.appendChild(tdSiguiente);
+
+        let botonAnterior = document.createElement('button');
+        botonAnterior.setAttribute('class', 'add-users-btn');
+        botonAnterior.textContent = 'Anterior';
+
+        let botonSiguiente = document.createElement('button');
+        botonSiguiente.setAttribute('class', 'add-users-btn');
+        botonSiguiente.textContent = 'Siguiente';
+
+        tdAnterior.appendChild(botonAnterior);
+        tdSiguiente.appendChild(botonSiguiente);
+
+        botonAnterior.addEventListener('click', () => this.mostrarPaginaAnterior());
+        botonSiguiente.addEventListener('click', () => this.mostrarPaginaSiguiente(totalPaginas));
+
+        
+    }
+
+    // Método para mostrar la siguiente página de resultados
+    mostrarPaginaSiguiente(totalPaginas) {
+        if (this.paginaActual < totalPaginas - 1) {
             this.paginaActual++;
-                this.cargarListado(this.mantenimientos)
-            }
-            else{
-                this.cargarListado(this.mantenimientos)
-            }
-
-
+            this.cargarListado(this.mantenimientos);
+        } else {
+            this.cargarListado(this.mantenimientos);
         }
+    }
 
-        mostrarPaginaAnterior() {
-            //this.tbody.textContent = ""
-            if (this.paginaActual > 0) {
-                this.paginaActual--;
-                this.cargarListado(this.mantenimientos)
-            }
-            else
-            {
-                this.cargarListado(this.mantenimientos)
-            }
+    // Método para mostrar la página anterior de resultados
+    mostrarPaginaAnterior() {
+        if (this.paginaActual > 0) {
+            this.paginaActual--;
+            this.cargarListado(this.mantenimientos);
+        } else {
+            this.cargarListado(this.mantenimientos);
         }
+    }
 
-
-    //ingresar arrelo a los campos de los equipos
+    // Método para ingresar mantenimientos
     ingresarMantenimientos() {
-        
-        
-        if(confirm("Pulse aceptar para mandar la solicitud")){
-
-            if(this.esModificacion){
+        if (confirm("Pulse aceptar para mandar la solicitud")) {
+            if (this.esModificacion) {
                 const datos = {
                     'id': this.idMantenimiento,
-                    'idEquipo': parseInt(this.selectsAlta[0].value),
-                    'descripcion': this.inputsAlta[1].value
-                        
+                    'idEquipo': parseInt(this.formulario.getValue('selectCodigoEquipo')),
+                    'descripcion': this.formulario.getValue('descripcion')
                 };
                 this.divCargandoAlta.style.display = 'block';
                 this.controlador.modificarMantenimiento(datos);
             }
-            if(!this.esModificacion){
-                
+            if (!this.esModificacion) {
                 const datos = {
-                    'idEquipo': parseInt(this.selectsAlta[0].value),
-                    'idAsunto': parseInt(this.selectsAlta[1].value),
-                    'descripcion': this.inputsAlta[1].value
+                    'idEquipo': parseInt(this.formulario.getValue('selectCodigoEquipo')),
+                    'idAsunto': parseInt(this.formulario.getValue('selectAsunto')),
+                    'descripcion': this.formulario.getValue('descripcion')
                 };
-        
-                //this.divCargandoAlta.style.display = 'block';
-                console.log("ingresando como profesional")
                 this.controlador.ingresarMantenimientos(datos);
             }
         }
     }
 
-    limpiarCampos(){
-        this.selectsAlta[0].value = "-1"
-        this.selectsAlta[1].value = "-1"
-        this.inputsAlta[1].value = ""
+    // Método para limpiar los campos del formulario
+    limpiarCampos() {
+        this.formulario.setValue('selectCodigoEquipo', '-1');
+        this.formulario.setValue('selectAsunto', '-1');
+        this.formulario.setValue('descripcion', '');
     }
 
-
-     modificar(mantenimiento){
-        this.mostrarOcultarCrud(false,true,true)
-
-
-        this.idMantenimiento = mantenimiento.id
-
-
-        this.divFormularios[0].style.display = 'none'
-        this.divFormularios[1].style.display = 'block'
-        this.divFormularios[3].style.display = 'block'
-        
-        this.divFormularios[4].style.display = 'block'
-        
-
-        this.divFormularios[5].style.display = 'block'
-
-
-        this.inputsAlta[0].value = mantenimiento.codigoEquipo
-        this.inputsAlta[0].readOnly = true
-
-        this.inputsAlta[1].value = mantenimiento.descripcion
-        this.inputsAlta[1].readOnly = true
-       
-
-        this.inputsAlta[2].value = mantenimiento.solucion
-       
-        this.inputsAlta[3].value = mantenimiento.fechaArreglo
-
-        this.inputsAlta[4].value = mantenimiento.nombreArregla
-
+    // Método para mostrar la información de un mantenimiento a modificar
+    modificar(mantenimiento) {
+        this.mostrarOcultarCrud(false, true, true);
+        this.idMantenimiento = mantenimiento.id;
+        this.formulario.setValue('selectCodigoEquipo', mantenimiento.codigoEquipo);
+        this.formulario.setValue('descripcion', mantenimiento.descripcion);
+        this.formulario.setValue('solucion', mantenimiento.solucion);
+        this.formulario.setValue('fechaArreglo', mantenimiento.fechaArreglo);
+        this.formulario.setValue('nombreArregla', mantenimiento.nombreArregla);
+        this.formulario.setReadOnly(['selectCodigoEquipo', 'descripcion']);
     }
 
+    // Método para mostrar la vista
     mostrar(ver) {
         super.mostrar(ver);
     }
 
+    // Método para mostrar la vista con flexbox
     mostrarFlex(ver) {
         super.mostrarFlex(ver);
     }
- }
+}

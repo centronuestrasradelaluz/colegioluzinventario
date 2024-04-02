@@ -29,13 +29,15 @@ class ControladorProfesionales {
             window.location.href = 'login.html';
 
         Rest.setAutorizacion(this.#usuario.autorizacion);
+        
 
         this.modelo = new Modelo();
         this.vistaInicio = new VistaInicioProfesionales(this, document.getElementById('inicioProfesionales'));
+        this.obtenerDesplegables()
         this.vistaMenu = new VistaMenuProfesionales(this, document.getElementById('menu'));
         
         this.verVistaInicio();
-        this.obtenerDesplegables()
+       
         this.vistaMenu.bienvenida(this.#usuario)
     }
 
@@ -49,18 +51,20 @@ class ControladorProfesionales {
     }
 
     ingresarMantenimientos(datos) {
+    
+        //const datos = this.vistaInicio.formulario.obtenerDatos();
         datos.idUsuario = this.#usuario.id
-         this.modelo.ingresarMantenimiento(datos)
+          // Enviar los datos al método correspondiente en el modelo
+          console.log(datos)
+          this.modelo.ingresarMantenimiento(datos)
           .then(() => {
-             // this.vistaInicio.bloquearBotonesAlta(false);
-              //this.vistaInicio.exitoAlta(true);
-              this.dameMantenimientos(); // Actualizar lista de usuarios
-              this.vistaInicio.limpiarCampos()
+              // Actualizar la vista después de ingresar el mantenimiento
+              this.dameMantenimientos();
+              this.vistaInicio.limpiarCampos();
           })
-          .catch(e => {
-              //this.vistaGestionHijos.bloquearBotonesAlta(false);
-              console.error(e);
-          })
+          .catch(error => {
+              console.error(error);
+          });
      }
 
       /**
@@ -70,7 +74,6 @@ class ControladorProfesionales {
         this.modelo.obtenerDesplegables()
         .then(resultados => {
             this.vistaInicio.rellenarSelects(resultados);
-
         })
         .catch(error => {
             console.error(error);
