@@ -27,7 +27,7 @@ export class VistaInicioProfesionales extends Vista {
         // Definir los items del formulario
         this.items = [
             { label: 'Codigo Equipo', type: 'select', name: 'selectCodigoEquipo', id:'selectCodigoEquipo', options: [{ value: '-1', text: 'Elija Codigo de Equipo' }] },
-            { label: 'Codigo Equipo', type: 'text', name: 'codigoEquipoText' },
+           // { label: 'Codigo Equipo', type: 'text', name: 'codigoEquipoText' },
             { label: 'Asunto', type: 'select', name: 'selectAsunto', id:'selectAsunto', options: [{ value: '-1', text: '' }] },
             { label: 'Descripcion de la incidencia', type: 'textarea', name: 'descripcion' }
         ];
