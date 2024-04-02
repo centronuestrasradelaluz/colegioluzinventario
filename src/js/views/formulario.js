@@ -32,7 +32,13 @@ export class Formulario {
                 optionElement.textContent = option.text;
                 inputElement.appendChild(optionElement);
             });
-        } else {
+        } else if (inputType === 'textarea') {
+            inputElement = document.createElement('textarea');
+            inputElement.classList.add('form-control');
+            inputElement.name = inputName;
+            inputElement.rows = "5"
+        }
+        else {
             inputElement = document.createElement('input');
             inputElement.type = inputType;
             inputElement.classList.add('form-control');
@@ -74,9 +80,9 @@ export class Formulario {
     
     
     llenarSelect(options, selectId, defaultOptionText) {
-        console.log(selectId)
+       
         const selectElement = document.getElementById(selectId);
-        console.log(selectElement)
+       
         selectElement.innerHTML = "";
 
         let defaultOption = document.createElement('option');
