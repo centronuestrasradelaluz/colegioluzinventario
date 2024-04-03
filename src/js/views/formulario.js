@@ -140,5 +140,15 @@ export class Formulario {
             console.error(`No se pudo encontrar el campo con el nombre '${fieldName}' en el formulario.`);
         }
     }
+
+    ocultarFormItem(inputName) {
+        const input = this.contenedor.querySelector(`[name="${inputName}"]`);
+        if (input) {
+            input.closest('.formItem').style.display = 'none';
+        } else {
+            console.error(`No se pudo encontrar el campo con el nombre '${inputName}' en el formulario.`);
+        }
+    }
+    
     
 }
