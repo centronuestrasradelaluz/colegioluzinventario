@@ -23,7 +23,7 @@ form div.formItem {
     text-align: center;
 }
 
-div.formItem input, 
+/*div.formItem input, 
 div.formItem select, 
 div.formItem textarea {
     display: block;
@@ -34,7 +34,7 @@ div.formItem textarea {
     border: 1px solid gray;
     border-radius: 5px;
     background-color: white;
-}
+}*/
 
 div.formItem input[type="file"] {
     border: 0;
@@ -43,11 +43,12 @@ div.formItem input[type="file"] {
 }
 
 form {
-    width:25%;
+    margin: 1em auto !important;
+    width:50%;
     min-width: 398px;
     border: 1px solid gray;
     border-radius: 5px;
-    margin: 1em auto;
+  
     padding: 10px;
     color: #014179;
     background-color: aliceblue;
@@ -321,6 +322,10 @@ td.options{
   }
   .negrita{
     font-weight: bold;
+}
+.row{
+    margin-left:0;
+    margin-right:0;
 }
   
   

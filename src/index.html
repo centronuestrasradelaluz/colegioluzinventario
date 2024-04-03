@@ -139,81 +139,81 @@
 
             <div id="divAltaEquipos">
                 <button id="botonVolverAltaEquipos">VOLVER</button>
-                <form method="post" class="needs-validation" autocomplete="off" novalidate>
-                    <div class="formItem">
-                        <label for="codigoEquipo">
+                <form method="post" class="needs-validation row" autocomplete="off" novalidate>
+                    <div class="formItem col-10">
+                        <label  class="form-label col-6" for="codigoEquipo">
                             Código del equipo (*) <input type="text" class="form-control" name="codigoEquipo" maxlength="50" required/>
                         </label>
                     </div>
-                    <div class="formItem">
-                        <label for="proveedor">
+                    <div class="formItem col-3" >
+                        <label  class="form-label" for="proveedor">
                             Proveedor <input type="text" class="form-control" name="proveedor"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="marca">
                             Marca <input type="text" class="form-control" name="marca"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="monitor">
                             Monitor <input type="text" class="form-control" name="monitor"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="discoDuro">
                             Disco duro <input type="text" class="form-control" name="discoDuro"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="procesador">
                             Procesador <input type="text" class="form-control" name="procesador"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="ubicacion">
                             Ubicación <input type="text" class="form-control" name="ubicacion"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="grafica">
                             Gráfica <input type="text" class="form-control" name="grafica"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="ram">
                             Ram <input type="text" class="form-control" name="ram"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="fechaCompra">
                             Fecha de compra <input type="date" class="form-control" name="fechaCompra"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-7">
                         <label for="observaciones">
                             Observaciones <input type="text" class="form-control" name="observaciones"/>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="linea">
-                            linea <select id="selectLinea" class="form-control" name="linea"><option value="-1" selected>Elija linea</option></select>
+                            Linea <select id="selectLinea" class="form-control" name="linea"><option value="-1" selected>Elija linea</option></select>
                             <div class="invalid-feedback">Por favor, seleccione una Línea.</div>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="sistemaOperativo">
-                            linea <select id="selectSistemaOperativo" class="form-control" name="sistemaOperativo"><option value="-1" selected>Elija sistema</option></select>
+                            Sistema Operativo <select id="selectSistemaOperativo" class="form-control" name="sistemaOperativo"><option value="-1" selected>Elija sistema</option></select>
                             <div class="invalid-feedback">Por favor, seleccione un sistema.</div>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="tipoEquipo">
-                            linea <select id="selectTipoEquipo" class="form-control" name="tipoEquipo"><option value="-1" selected>Elija tipo Equipo</option></select>
+                            Tipo de Equipo <select id="selectTipoEquipo" class="form-control" name="tipoEquipo"><option value="-1" selected>Elija tipo Equipo</option></select>
                             <div class="invalid-feedback">Por favor, seleccione un tipo Equipo.</div>
                         </label>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-3">
                         <label for="valorEquipo">
                             Valor del Equipo <input type="number" class="form-control" name="valorEquipo" step="0.01" min="0" pattern="^[0-9]+"/>
                         </label>
@@ -221,7 +221,7 @@
                     <div class="formItem" id="loadingImg">
                         <img src="./img/loading.gif"/>
                     </div>
-                    <div class="formItem">
+                    <div class="formItem col-6">
                         <button id="aceptarEquipos" type="button" class="btn btn-success">Registrarse</button>
                     </div>
                 </form>
