@@ -18,11 +18,11 @@ export class VistaInicioProfesionales extends Vista {
         this.formulario = new Formulario(this, idContenedor);
 
         // Crear el botón y agregarlo al formulario
-        const botonAnadir = this.formulario.crearBotonAnadir(); 
+       this.formulario.crearBotonAnadir(); 
         //this.formulario.contenedor.appendChild(botonAnadir);
 
         // Asignar la función ingresarMantenimientos como manejador de eventos para el botón
-        botonAnadir.addEventListener('click', this.ingresarMantenimientos.bind(this));
+        //botonAnadir.addEventListener('click', this.ingresarMantenimientos.bind(this));
 
         // Definir los items del formulario
         this.items = [
@@ -166,7 +166,7 @@ export class VistaInicioProfesionales extends Vista {
     }
 
     // Método para ingresar mantenimientos
-    ingresarMantenimientos() {
+    ingresarDatos() {
         if (confirm("Pulse aceptar para mandar la solicitud")) {
             if (this.esModificacion) {
                 const datos = {

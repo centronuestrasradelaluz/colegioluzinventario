@@ -1,4 +1,5 @@
 import { Vista } from '../vista.js';
+import { Formulario } from '../formulario.js'; // Importa la clase del formulario dinámico
 
 /**
  * Contiene la vista de la Gestion de Usuarios
@@ -29,7 +30,7 @@ export class VistaGestionUsuarios extends Vista {
        this.botonVolverAltaUsuarios.addEventListener('click', this.volver.bind(this));
 
        this.botonAnadir = this.div.querySelector('#aceptarUsuarios')
-       this.botonAnadir.addEventListener('click', this.ingresarUsuario.bind(this));
+       this.botonAnadir.addEventListener('click', this.ingresarDatos.bind(this));
 
        //Formulario de la vista e inputs
        this.formAlta = this.div.getElementsByTagName('form')[0];
@@ -46,6 +47,27 @@ export class VistaGestionUsuarios extends Vista {
         this.esModificacion = false
         this.controlador.dameUsuarios("")
         this.mostrarOcultarCrud(true,false,false)
+
+ // Crear instancia del formulario dinámico y generar el formulario
+ const idContenedor = 'divAltaUsuarios'; // ID del div donde se agregará el formulario
+ this.formulario = new Formulario(this, idContenedor);
+
+ // Crear el botón y agregarlo al formulario
+ this.formulario.crearBotonAnadir(); 
+ //this.formulario.contenedor.appendChild(botonAnadir);
+
+ // Asignar la función ingresarMantenimientos como manejador de eventos para el botón
+ //botonAnadir.addEventListener('click', this.ingresarMantenimientos.bind(this));
+
+ // Definir los items del formulario
+ this.items = [
+     { label: 'Codigo Equipo', type: 'select', name: 'selectCodigoEquipo', id:'selectCodigoEquipo', options: [{ value: '-1', text: 'Elija Codigo de Equipo' }] },
+    // { label: 'Codigo Equipo', type: 'text', name: 'codigoEquipoText' },
+     { label: 'Asunto', type: 'select', name: 'selectAsunto', id:'selectAsunto', options: [{ value: '-1', text: '' }] },
+     { label: 'Descripcion de la incidencia', type: 'textarea', name: 'descripcion' }
+ ];
+     // Generar el formulario dinámico después de la creación de la fila de botones
+     this.formulario.generarFormulario(this.items);
   
     }
 
@@ -142,7 +164,7 @@ export class VistaGestionUsuarios extends Vista {
            
     }
 
-    ingresarUsuario() {
+    ingresarDatos() {
         let cont;
         let total = this.inputsAlta.length;
 

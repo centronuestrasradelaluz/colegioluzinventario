@@ -76,6 +76,7 @@ export class Formulario {
         formulario.appendChild(divFormItem);
     
         this.contenedor.appendChild(formulario);
+       
     }
     
     
@@ -119,7 +120,7 @@ export class Formulario {
         boton.textContent = 'Enviar';
         boton.type = 'button'
         boton.classList.add('btn', 'btn-success');
-        boton.addEventListener('click', this.vista.ingresarMantenimientos.bind(this.vista));
+        boton.addEventListener('click', this.vista.ingresarDatos.bind(this.vista));
         return boton;
     }
     getValue(fieldName) {
