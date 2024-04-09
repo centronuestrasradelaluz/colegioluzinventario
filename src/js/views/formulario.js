@@ -9,12 +9,17 @@ export class Formulario {
         this.contenedor = document.getElementById(idContenedor);
     }
 
-    rearFormItem(labelText, inputType, inputName, inputId, selectOptions = []) {
+    crearFormItem(labelText, inputType, inputName, inputId, selectOptions = []) {
         const divFormItem = document.createElement('div');
         divFormItem.classList.add('formItem');
     
-        const label = document.createElement('label');
-        label.textContent = labelText;
+        let label; // Definir label fuera del bloque if
+    
+        if (!Array.isArray(labelText)) {
+            console.log("no es array");
+            label = document.createElement('label');
+            label.textContent = labelText;
+        }
     
         let inputElement;
     
@@ -22,8 +27,7 @@ export class Formulario {
             inputElement = document.createElement('select');
             inputElement.classList.add('form-control');
             inputElement.name = inputName;
-            inputElement.id = inputId; // Asignar el id aquí
-            console.log(inputElement)
+            inputElement.id = inputId;
     
             // Agregar opciones al select
             selectOptions.forEach(option => {
@@ -36,20 +40,37 @@ export class Formulario {
             inputElement = document.createElement('textarea');
             inputElement.classList.add('form-control');
             inputElement.name = inputName;
-            inputElement.rows = "5"
-        }
-        else {
+            inputElement.rows = "5";
+        } else if (inputType === 'radio') {
+            labelText.forEach(texto => {
+                label = document.createElement('label');
+                label.textContent = texto;
+    
+                inputElement = document.createElement('input');
+                inputElement.type = inputType;
+                inputElement.name = inputName;
+                label.appendChild(inputElement);
+    
+                divFormItem.appendChild(label);
+            });
+        } else {
             inputElement = document.createElement('input');
             inputElement.type = inputType;
             inputElement.classList.add('form-control');
             inputElement.name = inputName;
         }
     
-        label.appendChild(inputElement); // Cambiar a divFormItem.appendChild(label);
-        divFormItem.appendChild(label);
+        // Agregar inputElement al label si label está definido
+        if (label) {
+            label.appendChild(inputElement);
+            divFormItem.appendChild(label);
+        } else {
+            divFormItem.appendChild(inputElement);
+        }
     
         return divFormItem;
     }
+    
     generarFormulario(items) {
           // Verificar si ya hay un formulario en el contenedor
     const formularioExistente = this.contenedor.querySelector('form');
@@ -65,7 +86,7 @@ export class Formulario {
         formulario.noValidate = true;
     
         items.forEach(item => {
-            formulario.appendChild(this.rearFormItem(item.label, item.type, item.name, item.id, item.options));
+            formulario.appendChild(this.crearFormItem(item.label, item.type, item.name, item.id, item.options));
         });
         const divFormItem = document.createElement('div');
         divFormItem.classList.add('formItem');

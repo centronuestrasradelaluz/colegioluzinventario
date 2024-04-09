@@ -29,20 +29,20 @@ export class VistaGestionUsuarios extends Vista {
        this.botonVolverAltaUsuarios = this.div.querySelector('#botonVolverAltaUsuarios');
        this.botonVolverAltaUsuarios.addEventListener('click', this.volver.bind(this));
 
-       this.botonAnadir = this.div.querySelector('#aceptarUsuarios')
-       this.botonAnadir.addEventListener('click', this.ingresarDatos.bind(this));
+      /* this.botonAnadir = this.div.querySelector('#aceptarUsuarios')
+       this.botonAnadir.addEventListener('click', this.ingresarDatos.bind(this));*/
 
        //Formulario de la vista e inputs
-       this.formAlta = this.div.getElementsByTagName('form')[0];
-       this.inputsAlta = this.formAlta.getElementsByTagName('input');
+      /* this.formAlta = this.div.getElementsByTagName('form')[0];
+       this.inputsAlta = this.formAlta.getElementsByTagName('input');*/
 
-       this.divExitoAlta = this.div.querySelector('#divExito');
-       this.divCargandoAlta = this.div.querySelector('#loadingImg');
+       /*this.divExitoAlta = this.div.querySelector('#divExito');
+       this.divCargandoAlta = this.div.querySelector('#loadingImg');*/
 
        
         //Parametros necesarios para cargar la vista
         this.idUsuario = 0
-        this.campoEstado = this.div.querySelector("#estado")
+        //this.campoEstado = this.div.querySelector("#estado")
         
         this.esModificacion = false
         this.controlador.dameUsuarios("")
@@ -61,10 +61,13 @@ export class VistaGestionUsuarios extends Vista {
 
  // Definir los items del formulario
  this.items = [
-     { label: 'Codigo Equipo', type: 'select', name: 'selectCodigoEquipo', id:'selectCodigoEquipo', options: [{ value: '-1', text: 'Elija Codigo de Equipo' }] },
-    // { label: 'Codigo Equipo', type: 'text', name: 'codigoEquipoText' },
-     { label: 'Asunto', type: 'select', name: 'selectAsunto', id:'selectAsunto', options: [{ value: '-1', text: '' }] },
-     { label: 'Descripcion de la incidencia', type: 'textarea', name: 'descripcion' }
+     { label: 'Nombre Usuario (*)', type: 'text', name: 'nombreUsuario', id:'nombreUsuario'},
+     { label: 'Dirección de email (*)', type: 'text', name: 'email', id:'email'},
+     { label: ['Profesional', 'Técnico'], type: 'radio', name: 'tipo', id:'tipo'},
+     { label: ['Activo', 'Inactivo'], type: 'radio', name: 'estado', id:'estado'},
+     { label: 'Observaciones', type: 'textarea', name: 'observaciones', id:'observaciones'},
+     { label: 'Contraseña', type: 'password', name: 'contraseña', id:'contraseña'},
+     { label: 'Repita la contraseña (*)', type: 'password', name: 'contraseña2', id:'contraseña2'}
  ];
      // Generar el formulario dinámico después de la creación de la fila de botones
      this.formulario.generarFormulario(this.items);
@@ -115,17 +118,19 @@ export class VistaGestionUsuarios extends Vista {
     }
     anadir() {
         this.mostrarOcultarCrud(false, true, false);
-        this.campoEstado.style.display = "none"
+        //this.campoEstado.style.display = "none"
     }
 
     modificar(usuario){
         this.mostrarOcultarCrud(false,true,true)
-        this.campoEstado.style.display = "block"
+        //this.campoEstado.style.display = "block"
         this.idUsuario = usuario.id;
-        this.inputsAlta[0].value = usuario.nombre;
+        
+        this.formulario.setValue('nombreUsuario', usuario.nombre)
         this.inputsAlta[1].value = usuario.correo;
+        this.formulario.setValue('email', usuario.correo)
 
-        if (usuario.rol == "adm"){
+       /* if (usuario.rol == "adm"){
             this.inputsAlta[2].checked = false
             this.inputsAlta[3].checked = true
         }
@@ -140,96 +145,70 @@ export class VistaGestionUsuarios extends Vista {
         if (usuario.estado == 0){
             this.inputsAlta[4].checked = true
             this.inputsAlta[5].checked = false
-        }
-
-        this.inputsAlta[6].value = usuario.observaciones
-
-        this.inputsAlta[7].value = usuario.contrasenia;
-        this.inputsAlta[8].value = usuario.contrasenia;
-
-        
-       
+        }*/
+        this.formulario.setValue('observaciones', usuario.observaciones)
+        this.formulario.setValue('contraseña', usuario.contraseña)
+        this.formulario.setValue('contraseña2', usuario.contraseña)
     }
 
     volver() {
 
         this.mostrarOcultarCrud(true, false,false)
 
-        this.formAlta.reset()
+        //this.formAlta.reset()
 
-        if(this.divExitoAlta.style.display == 'block'){}
+        //if(this.divExitoAlta.style.display == 'block'){}
 
-        this.divExitoAlta.style.display = "none"
-        this.formAlta.classList.remove('was-validated');
+        //this.divExitoAlta.style.display = "none"
+        //this.formAlta.classList.remove('was-validated');
            
     }
 
     ingresarDatos() {
-        let cont;
-        let total = this.inputsAlta.length;
+       /* let cont;
+        let total = this.inputsAlta.length;*/
 
-        console.log(this.inputsAlta)
-
-        let radioButton = ""
-
-        let radioButton1 = null
-
-        for (cont=0; cont<total; cont++) {
+      /*  for (cont=0; cont<total; cont++) {
             if (!this.inputsAlta[cont].checkValidity()) break;
-        }
-        console.log(this.inputsAlta[3])
-        this.inputsAlta[7].setCustomValidity('');
-        this.formAlta.classList.add('was-validated');
-        if (cont == total) {
+        }*/
+        
+        //this.inputsAlta[7].setCustomValidity('');
+        //this.formAlta.classList.add('was-validated');
+       // if (cont == total) {
             // Check de contraseñas
-            if (this.inputsAlta[7].value === this.inputsAlta[8].value) {
-                
-                if(this.inputsAlta[2].checked){
-                     radioButton = "pro"
-                }
-                else if (this.inputsAlta[3].checked)
-                {
-                     radioButton = "adm"
-                }
-
-                if(this.inputsAlta[4].checked){
-                    radioButton1 = 0
-                }else if (this.inputsAlta[5].checked){
-                    radioButton1 = 1
-                }
-                
-
+            if (this.formulario.getValue('contraseña') === this.formulario.getValue('contraseña2')) {
                 if(this.esModificacion){
                     const datos = {
                         'id': this.idUsuario,
-                        'nombre': this.inputsAlta[0].value,
-                        'correo': this.inputsAlta[1].value,
-                        'rol': radioButton,
-                        'estado': radioButton1,
-                        'observaciones': this.inputsAlta[6].value,
-                        'contrasenia': this.inputsAlta[7].value
+                        'nombre': this.formulario.getValue('nombreUsuario'),
+                        'correo': this.formulario.getValue('email'),
+                        'rol': true,
+                        'estado': false,
+                        'observaciones': this.formulario.getValue('observaciones'),
+                        'contrasenia': this.formulario.getValue('contraseña')
                     };
-                    this.divCargandoAlta.style.display = 'block';
+
+                    console.log(datos)
+                    //this.divCargandoAlta.style.display = 'block';
                     this.controlador.modificarUsuarios(datos);
                 }
                 if(!this.esModificacion){
                     const datos = {
-
-                        'nombre': this.inputsAlta[0].value,
-                        'correo': this.inputsAlta[1].value,
-                        'rol': radioButton,
-                        'observaciones': this.inputsAlta[6].value,
-                        'contrasenia': this.inputsAlta[7].value
+                        'nombre': this.formulario.getValue('nombreUsuario'),
+                        'correo': this.formulario.getValue('email'),
+                        'rol': 1,
+                        'observaciones': this.formulario.getValue('observaciones'),
+                        'contrasenia': this.formulario.getValue('contraseña')
                     };
-                    this.divCargandoAlta.style.display = 'block';
+                    //this.divCargandoAlta.style.display = 'block';
                     this.controlador.ingresarUsuarios(datos);
                 }
             }
             else {
-                this.inputsAlta[7].setCustomValidity('Las contraseñas no coindicen.');
-                this.inputsAlta[7].reportValidity();
+               /* this.inputsAlta[7].setCustomValidity('Las contraseñas no coindicen.');
+                this.inputsAlta[7].reportValidity();*/
             }
-        }
+        
     }
 
     // Definir función de debounce
@@ -400,7 +379,7 @@ export class VistaGestionUsuarios extends Vista {
     mostrar(ver) {
         super.mostrar(ver);
 
-        if (this.divExitoAlta.style.display == 'block')
-        this.exitoAlta(false);
+       /* if (this.divExitoAlta.style.display == 'block')
+        this.exitoAlta(false);*/
     }
 }
