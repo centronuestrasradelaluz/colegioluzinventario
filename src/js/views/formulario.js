@@ -153,6 +153,18 @@ export class Formulario {
             console.error(`No se pudo encontrar el campo con el nombre '${fieldName}' en el formulario.`);
             return null;
         }
+
+         // Verificar si es un campo de radio
+    const radioInputs = this.contenedor.querySelectorAll(`input[type="radio"][name="${fieldName}"]:checked`);
+    if (radioInputs.length > 0) {
+        // Si hay un radio button seleccionado, devolver su valor
+        console.log(radioInputs[0].value);
+        return radioInputs[0].value;
+    } else {
+        // Si no hay radio button seleccionado, mostrar un error
+        console.error(`No se pudo encontrar un radio button seleccionado con el nombre '${fieldName}' en el formulario.`);
+        return null;
+    }
     }
     setValue(fieldName, value) {
         const input = this.contenedor.querySelector(`[name="${fieldName}"]`);

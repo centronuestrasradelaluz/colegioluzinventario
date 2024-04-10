@@ -53,7 +53,7 @@ export class VistaGestionUsuarios extends Vista {
  this.formulario = new Formulario(this, idContenedor);
 
  // Crear el botón y agregarlo al formulario
- this.formulario.crearBotonAnadir(); 
+ //this.formulario.crearBotonAnadir(); 
  //this.formulario.contenedor.appendChild(botonAnadir);
 
  // Asignar la función ingresarMantenimientos como manejador de eventos para el botón
