@@ -196,9 +196,17 @@ export class Formulario {
     }
 
     setSelectedIndex(selectElement, value) {
-        for (let i = 0; i < selectElement.options.length; i++) {
-            if (selectElement.options[i].value === value) {
-                selectElement.selectedIndex = i;
+      
+         let valueString = ""
+
+         if (typeof value != "string")
+         valueString = String(value)
+
+        const select = document.getElementById(selectElement);
+
+        for (let i = 0; i < select.options.length; i++) {
+            if (select.options[i].value === valueString) {
+                select.selectedIndex = i;
                 break;
             }
         }

@@ -192,7 +192,7 @@ class ControladorAdministradores {
         this.modelo.ingresarEquipos(datos)
          .then(() => {
             // this.vistaGestionHijos.bloquearBotonesAlta(false);
-             this.vistaGestionInventario.exitoAlta(true);
+             //this.vistaGestionInventario.exitoAlta(true);
              this.dameEquipos(); // Actualizar lista de usuarios
          })
          .catch(e => {
@@ -205,7 +205,7 @@ class ControladorAdministradores {
         this.modelo.modificarEquipos(datos)
         .then(() => {
               // this.vistaGestionHijos.bloquearBotonesAlta(false);
-            this.vistaGestionInventario.exitoAlta(true);
+            //this.vistaGestionInventario.exitoAlta(true);
             this.dameEquipos();// Actualizar lista de usuarios
         })
         .catch(e => {
@@ -232,7 +232,7 @@ class ControladorAdministradores {
         this.modelo.ingresarMantenimiento(datos)
          .then(() => {
             // this.vistaGestionHijos.bloquearBotonesAlta(false);
-             this.vistaGestionMantenimiento.exitoAlta(true);
+             //this.vistaGestionMantenimiento.exitoAlta(true);
              this.dameMantenimientos(); // Actualizar lista de usuarios
          })
          .catch(e => {

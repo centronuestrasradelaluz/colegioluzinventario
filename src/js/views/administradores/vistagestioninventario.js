@@ -76,8 +76,8 @@ export class VistaGestionInventario extends Vista {
             { label: 'Observaciones', type: 'textarea', name: 'txtObservaciones', id:'txtObservaciones'},
             { label: 'Fecha de Compra', type: 'date', name: 'txtFechaCompra', id:'txtFechaCOmpra'},
             { label: 'Línea', type: 'select', name: 'selectLinea', id:'selectLinea', options:[{value:'-1', text:''}]},
-            { label: 'Sistema Operativo', type: 'select', name: 'selectSO', id:'selectSistemaOperativo', options:[{value:'-1', text:''}]},
-            { label: 'Tipo de Equipo', type: 'select', name: 'selectTE', id:'selectTipoEquipo', options:[{value:'-1', text:''}]},
+            { label: 'Sistema Operativo', type: 'select', name: 'selectSistemaOperativo', id:'selectSistemaOperativo', options:[{value:'-1', text:''}]},
+            { label: 'Tipo de Equipo', type: 'select', name: 'selectTipoEquipo', id:'selectTipoEquipo', options:[{value:'-1', text:''}]},
             { label: 'Valor del Equipo', type: 'number', name: 'txtValorEquipo', id:'txtValorEquipo'},
 
         ];
@@ -158,7 +158,7 @@ export class VistaGestionInventario extends Vista {
 
         this.mostrarOcultarCrud(true, false,false,false)
 
-       // this.formAlta.reset()
+        this.formulario.reset()
 
        /* if(this.divExitoAlta.style.display == 'block'){}
         
@@ -169,47 +169,49 @@ export class VistaGestionInventario extends Vista {
  //ingresar arrelo a los campos de los equipos
     ingresarDatos() {
        
-       /* if(this.esModificacion){
+        if(this.esModificacion){
             const datos = {
                 'id': this.idEquipo,
-                'codigoEquipo': this.inputsAlta[0].value,
-                'proveedor': this.inputsAlta[1].value,
-                'marca': this.inputsAlta[2].value,
-                'discoDuro': this.inputsAlta[3].value,
-                'procesador': this.inputsAlta[4].value,
-                'ubicacion': this.inputsAlta[5].value,
-                'ram': this.inputsAlta[6].value,
-                'grafica': this.inputsAlta[7].value,
-                'fechaCompra': this.inputsAlta[8].value,
-                'observaciones': this.inputsAlta[9].value,
-                'valorEquipo': parseFloat(this.inputsAlta[10].value),
-                'idLinea': parseInt(this.selectsAlta[0].value),
-                'idSistemaOperativo': parseInt(this.selectsAlta[1].value),
-                'idTipoEquipo': parseInt(this.selectsAlta[2].value)
+                'codigoEquipo': this.formulario.getValue(("txtCodigoEquipo")),
+                'proveedor': this.formulario.getValue(("txtProveedor")),
+                'marca': this.formulario.getValue(("txtMarca")),
+                'discoDuro': this.formulario.getValue(("txtDiscoDuro")),
+                'procesador': this.formulario.getValue(("txtProcesador")),
+                'ubicacion': this.formulario.getValue(("txtUbicacion")),
+                'ram': this.formulario.getValue(("txtRam")),
+                'grafica':this.formulario.getValue(("txtGrafica")),
+                'fechaCompra': this.formulario.getValue(("txtObservaciones")),
+                'observaciones': this.formulario.getValue(("txtFechaCompra")),
+                'valorEquipo': this.formulario.getValue(("txtValorEquipo")),
+
+                'idLinea': this.formulario.getValue(("selectLinea")),
+                'idSistemaOperativo': this.formulario.getValue(("selectSistemaOperativo")),
+                'idTipoEquipo': this.formulario.getValue(("selectTipoEquipo"))
             };
-            this.divCargandoAlta.style.display = 'block';
+           // this.divCargandoAlta.style.display = 'block';
             this.controlador.modificarEquipos(datos);
         }
         if(!this.esModificacion){
             const datos = {
-                'codigoEquipo': this.inputsAlta[0].value,
-                'proveedor': this.inputsAlta[1].value,
-                'marca': this.inputsAlta[2].value,
-                'discoDuro': this.inputsAlta[3].value,
-                'procesador': this.inputsAlta[4].value,
-                'ubicacion': this.inputsAlta[5].value,
-                'ram': this.inputsAlta[6].value,
-                'grafica': this.inputsAlta[7].value,
-                'fechaCompra': this.inputsAlta[8].value,
-                'observaciones': this.inputsAlta[9].value,
-                'valorEquipo': parseFloat(this.inputsAlta[10].value),
-                'idLinea': parseInt(this.selectsAlta[0].value),
-                'idSistemaOperativo': parseInt(this.selectsAlta[1].value),
-                'idTipoEquipo': parseInt(this.selectsAlta[2].value)
+                'codigoEquipo': this.formulario.getValue(("txtCodigoEquipo")),
+                'proveedor': this.formulario.getValue(("txtProveedor")),
+                'marca': this.formulario.getValue(("txtMarca")),
+                'discoDuro': this.formulario.getValue(("txtDiscoDuro")),
+                'procesador': this.formulario.getValue(("txtProcesador")),
+                'ubicacion': this.formulario.getValue(("txtUbicacion")),
+                'ram': this.formulario.getValue(("txtRam")),
+                'grafica':this.formulario.getValue(("txtGrafica")),
+                'fechaCompra': this.formulario.getValue(("txtObservaciones")),
+                'observaciones': this.formulario.getValue(("txtFechaCompra")),
+                'valorEquipo': this.formulario.getValue(("txtValorEquipo")),
+
+                'idLinea': this.formulario.getValue(("selectLinea")),
+                'idSistemaOperativo': this.formulario.getValue(("selectSistemaOperativo")),
+                'idTipoEquipo': this.formulario.getValue(("selectTipoEquipo"))
             };
-            this.divCargandoAlta.style.display = 'block';
+           // this.divCargandoAlta.style.display = 'block';
             this.controlador.ingresarEquipos(datos);
-        }*/
+        }
     }
 
     escribir(texto){
