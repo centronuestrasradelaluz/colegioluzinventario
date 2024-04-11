@@ -138,7 +138,7 @@ class ControladorAdministradores {
         this.modelo.ingresarUsuarios(datos)
          .then(() => {
             // this.vistaGestionHijos.bloquearBotonesAlta(false);
-             this.vistaGestionUsuarios.exitoAlta(true);
+             //this.vistaGestionUsuarios.exitoAlta(true);
              this.dameUsuarios(); // Actualizar lista de usuarios
          })
          .catch(e => {
