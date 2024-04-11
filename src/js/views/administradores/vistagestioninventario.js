@@ -1,4 +1,5 @@
 import { Vista } from '../vista.js';
+import { Formulario } from '../formulario.js'; // Importa la clase del formulario dinámico
 
 /**
  * Contiene la vista del inicio
@@ -12,17 +13,19 @@ export class VistaGestionInventario extends Vista {
     constructor(controlador, div) {
         super(controlador, div);
 
+        //Secciones de la vista 
+
         this.divListadoEquipos = this.div.querySelector('#divListadoEquipos');
         this.divAltaEquipos = this.div.querySelector('#divAltaEquipos');
         this.divConsultaEquipos = this.div.querySelector('#divConsultaEquipo');
+
        //Elementos vista Listado
 
        this.thead = this.div.getElementsByTagName('thead')[0];
        this.tbody = this.div.getElementsByTagName('tbody')[0];
        this.busqueda = ""
-       //this.cargarEncabezado();
 
-       //Elmentos consulta equipo
+       //Elementos consulta equipo
 
        this.fichaTecnica = this.div.querySelector('#divFichaTecnica');
        this.tablaMantenimiento = this.div.querySelector('#divTablaMantenimiento')
@@ -34,16 +37,16 @@ export class VistaGestionInventario extends Vista {
        this.botonVolverConsultaEquipos = this.div.querySelector('#botonVolverConsultaEquipos');
        this.botonVolverConsultaEquipos.addEventListener('click', this.volver.bind(this));
        
-       this.botonAnadir = this.div.querySelector('#aceptarEquipos')
-       this.botonAnadir.addEventListener('click', this.ingresarEquipo.bind(this));
+       /*this.botonAnadir = this.div.querySelector('#aceptarEquipos')
+       this.botonAnadir.addEventListener('click', this.ingresarEquipo.bind(this));*/
 
        //Formulario de la vista e inputs
-       this.formAlta = this.div.getElementsByTagName('form')[0];
+       /*this.formAlta = this.div.getElementsByTagName('form')[0];
        this.inputsAlta = this.formAlta.getElementsByTagName('input');
        this.selectsAlta = this.formAlta.getElementsByTagName('select');
 
        this.divExitoAlta = this.div.querySelector('#divExito');
-       this.divCargandoAlta = this.div.querySelector('#loadingImg');
+       this.divCargandoAlta = this.div.querySelector('#loadingImg');*/
 
        this.esModificacion = false
       
@@ -51,12 +54,35 @@ export class VistaGestionInventario extends Vista {
        this.equipos = []
 
 
-       this.selectLinea = this.div.querySelector("#selectLinea")
+      /* this.selectLinea = this.div.querySelector("#selectLinea")
        this.selectOS = this.div.querySelector("#selectSistemaOperativo")
-       this.selectTE = this.div.querySelector("#selectTipoEquipo")
+       this.selectTE = this.div.querySelector("#selectTipoEquipo")*/
         this.controlador.dameEquipos("")
        
         this.mostrarOcultarCrud(true,false,false,false)
+        const idContenedor = 'divAltaEquipos'
+        this.formulario = new Formulario(this, idContenedor)
+        
+        // Definir los items del formulario
+        this.items = [
+            { label: 'Código del equipo(*)', type: 'text', name: 'txtCodigoEquipo', id:'txtCodigoEquipo'},
+            { label: 'Proveedor', type: 'text', name: 'txtProveedor', id:'txtProveedor'},
+            { label: 'Marca', type: 'text', name: 'txtMarca', id:'txtMarca'},
+            { label: 'Disco duro', type: 'text', name: 'txtDiscoDuro', id:'txtDiscoDuro'},
+            { label: 'Procesador', type: 'text', name: 'txtProcesador', id:'txtProcesador'},
+            { label: 'Ubicación', type: 'text', name: 'txtUbicacion', id:'txtUbicacion'},
+            { label: 'Gráfica', type: 'text', name: 'txtGrafica', id:'txtGrafica'},
+            { label: 'Ram', type: 'text', name: 'txtRam', id:'txtRam'},
+            { label: 'Observaciones', type: 'textarea', name: 'txtObservaciones', id:'txtObservaciones'},
+            { label: 'Fecha de Compra', type: 'date', name: 'txtFechaCompra', id:'txtFechaCOmpra'},
+            { label: 'Línea', type: 'select', name: 'selectLinea', id:'selectLinea', options:[{value:'-1', text:''}]},
+            { label: 'Sistema Operativo', type: 'select', name: 'selectSO', id:'selectSistemaOperativo', options:[{value:'-1', text:''}]},
+            { label: 'Tipo de Equipo', type: 'select', name: 'selectTE', id:'selectTipoEquipo', options:[{value:'-1', text:''}]},
+            { label: 'Valor del Equipo', type: 'number', name: 'txtValorEquipo', id:'txtValorEquipo'},
+
+        ];
+        // Generar el formulario dinámico después de la creación de la fila de botones
+       // this.formulario.generarFormulario(this.items);
 
         
     }
@@ -68,44 +94,23 @@ export class VistaGestionInventario extends Vista {
      exitoAlta(activar) {
         
 
-        if(!this.esModificacion){
+    /*    if(!this.esModificacion){
             this.formAlta.reset();
             this.formAlta.classList.remove('was-validated');
         }
        
         this.divCargandoAlta.style.display = 'none';
-        this.divExitoAlta.style.display = activar ? 'block' : 'none';
+        this.divExitoAlta.style.display = activar ? 'block' : 'none';*/
 
     }
 
+   
+    // Método para rellenar los selects del formulario dinámico
     rellenarSelects(resultados) {
-
-        console.log(resultados)
-        for (const linea of resultados["linea"]) {
-
-           let opcionLinea = document.createElement('option');
-           opcionLinea.textContent = linea.nombre;
-           opcionLinea.value = linea.id;
-            
-            this.selectLinea.appendChild(opcionLinea);
-        }
-        for (const SO of resultados["sistemaOperativo"]) {
-
-            
-           let opcionSO = document.createElement('option');
-           opcionSO.textContent = SO.nombre;
-           opcionSO.value = SO.id;
-            
-            this.selectOS.appendChild(opcionSO);
-        }
-        for (const TE of resultados["tipoEquipo"]) {
-
-           let opcionTE = document.createElement('option');
-           opcionTE.textContent = TE.nombre;
-           opcionTE.value = TE.id;
-            
-            this.selectTE.appendChild(opcionTE);
-        }
+        this.formulario.generarFormulario(this.items);
+        this.formulario.llenarSelect(resultados["linea"], "selectLinea", "Elija una línea de red");
+        this.formulario.llenarSelect(resultados["sistemaOperativo"], "selectSistemaOperativo", "Elija un Sistema operativo");
+        this.formulario.llenarSelect(resultados["tipoEquipo"], "selectTipoEquipo", "Elija un Tipo de Equipo");
     }
     
     
@@ -114,26 +119,13 @@ export class VistaGestionInventario extends Vista {
 
      mostrarOcultarCrud(listado, alta, modificacion,consulta){
 
-    
-        if (alta && !modificacion){
-            this.esModificacion = false;
-        }
-        if (alta && modificacion){
-            
-            this.esModificacion = true;
-        }
-        if (listado){
-            this.esModificacion = false;
-        }
-        if(consulta){
-            this.esModificacion = false
-        }
-
         this.divAltaEquipos.style.display = alta ? 'block' : 'none';
         this.divListadoEquipos.style.display = listado ? 'block' : 'none';
         this.divConsultaEquipos.style.display = consulta ? 'block': 'none';
+        this.esModificacion = alta && modificacion;
        
-        console.log('modificacion global', this.esModificacion)
+
+        console.log('modificacion global', this.esModificacion);
     }
     anadir() {
         this.mostrarOcultarCrud(false, true, false,false);
@@ -144,50 +136,40 @@ export class VistaGestionInventario extends Vista {
 
         this.mostrarOcultarCrud(false,true,true,false)
         this.idEquipo = equipo.id;
-        this.inputsAlta[0].value = equipo.codigoEquipo;
-        this.inputsAlta[1].value = equipo.proveedor;
-        this.inputsAlta[2].value = equipo.marca;
-        this.inputsAlta[3].value = equipo.discoDuro;
-        this.inputsAlta[4].value = equipo.procesador;
-        this.inputsAlta[5].value = equipo.ubicacion;
-        this.inputsAlta[6].value = equipo.ram;
-        this.inputsAlta[7].value = equipo.grafica;
-        this.inputsAlta[8].value = equipo.fechaCompra;
-        this.inputsAlta[9].value = equipo.observaciones;
-        this.inputsAlta[10].value = equipo.valorEquipo;
+        this.formulario.setValue("txtCodigoEquipo", equipo.codigoEquipo)
+        this.formulario.setValue("txtProveedor", equipo.proveedor)
+        this.formulario.setValue("txtMarca", equipo.marca)
+        this.formulario.setValue("txtDiscoDuro", equipo.discoDuro)
+        this.formulario.setValue("txtProcesador", equipo.procesador)
+        this.formulario.setValue("txtUbicacion", equipo.ubicacion)
+        this.formulario.setValue("txtRam", equipo.ram)
+        this.formulario.setValue("txtGrafica", equipo.grafica)
+        this.formulario.setValue("txtObservaciones", equipo.observaciones)
+        this.formulario.setValue("txtFechaCompra", equipo.fechaCompra)
+        this.formulario.setValue("txtValorEquipo", equipo.valorEquipo)
 
-        this.selectsAlta[0].value = equipo.idLinea;
-        this.selectsAlta[1].value = equipo.idSistemaOperativo;
-        this.selectsAlta[2].value = equipo.idTipoEquipo;
+        this.formulario.setSelectedIndex("selectLinea", equipo.idLinea)
+        this.formulario.setSelectedIndex("selectSistemaOperativo", equipo.idSistemaOperativo)
+        this.formulario.setSelectedIndex("selectTipoEquipo", equipo.idTipoEquipo)
+
     }
 
     volver() {
 
         this.mostrarOcultarCrud(true, false,false,false)
 
-        this.formAlta.reset()
+       // this.formAlta.reset()
 
-        if(this.divExitoAlta.style.display == 'block'){}
+       /* if(this.divExitoAlta.style.display == 'block'){}
         
         this.divExitoAlta.style.display = "none"
-        this.formAlta.classList.remove('was-validated');
+        this.formAlta.classList.remove('was-validated');*/
            
     }
  //ingresar arrelo a los campos de los equipos
-    ingresarEquipo() {
-        console.log(this.selectsAlta)
-
-
-        /*
-        const fileInput = document.getElementById('fileInput');
-        const file = fileInput.files[0];
-
-        const formData = new FormData();
-        formData.append('image', file);
-
-        */
+    ingresarDatos() {
        
-        if(this.esModificacion){
+       /* if(this.esModificacion){
             const datos = {
                 'id': this.idEquipo,
                 'codigoEquipo': this.inputsAlta[0].value,
@@ -227,7 +209,7 @@ export class VistaGestionInventario extends Vista {
             };
             this.divCargandoAlta.style.display = 'block';
             this.controlador.ingresarEquipos(datos);
-        }
+        }*/
     }
 
     escribir(texto){
@@ -548,19 +530,11 @@ export class VistaGestionInventario extends Vista {
         }
      
 
-    /*eliminarEquipo(id) {
-        if(confirm("¿Estas seguro de eliminar el equipo? Este proceso será irreversible"))
-        {
-            this.controlador.eliminarEquipo(id)
-        }
-    }*/
-
-
     mostrar(ver) {
         super.mostrar(ver);
 
         
-        if (this.divExitoAlta.style.display == 'block')
-        this.exitoAlta(false);
+       /* if (this.divExitoAlta.style.display == 'block')
+        this.exitoAlta(false);*/
     }
 }

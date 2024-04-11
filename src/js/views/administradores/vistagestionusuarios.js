@@ -112,7 +112,7 @@ export class VistaGestionUsuarios extends Vista {
 
     ingresarDatos() {
 
-        //FALTA VALIDAD
+        //FALTA VALIDAR
      
             // Check de contraseñas
             if (this.formulario.getValue('contraseña') === this.formulario.getValue('contraseña2')) {

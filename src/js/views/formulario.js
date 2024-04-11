@@ -123,6 +123,8 @@ export class Formulario {
             optionElement.textContent = option.frase;
             if(option.codigoEquipo)
             optionElement.textContent = option.codigoEquipo;
+            if(option.nombre)
+            optionElement.textContent = option.nombre;
             selectElement.appendChild(optionElement);
         }
     }
@@ -191,6 +193,15 @@ export class Formulario {
                 button.checked = false;
             }
         });
+    }
+
+    setSelectedIndex(selectElement, value) {
+        for (let i = 0; i < selectElement.options.length; i++) {
+            if (selectElement.options[i].value === value) {
+                selectElement.selectedIndex = i;
+                break;
+            }
+        }
     }
     
     
