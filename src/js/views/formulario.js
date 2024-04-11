@@ -85,6 +85,7 @@ export class Formulario {
         formulario.classList.add('needs-validation');
         formulario.autocomplete = 'off';
         formulario.noValidate = true;
+        formulario.id = 'miFormulario'
     
         items.forEach(item => {
             formulario.appendChild(this.crearFormItem(item.label, item.type, item.name, item.id, item.options, item.value));
@@ -125,17 +126,7 @@ export class Formulario {
             selectElement.appendChild(optionElement);
         }
     }
-    // Método para obtener los datos del formulario
-    /*obtenerDatos() {
-        const inputs = this.contenedor.querySelectorAll('input, select, textarea');
-        const datos = {};
-
-        inputs.forEach(input => {
-            datos[input.name] = input.value;
-        });
-
-        return datos;
-    }*/
+ 
     crearBotonAnadir() {
         const boton = document.createElement('button');
         boton.id = 'aceptar';
@@ -145,22 +136,11 @@ export class Formulario {
         boton.addEventListener('click', this.vista.ingresarDatos.bind(this.vista));
         return boton;
     }
-   /* getValue(fieldName) {
-        const input = this.contenedor.querySelector(`[name="${fieldName}"]`);
-        if (input) {
-            console.log(input.value)
-            return input.value;
-        } else {
-            console.error(`No se pudo encontrar el campo con el nombre '${fieldName}' en el formulario.`);
-            return null;
-        }
-    }*/
     getValue(fieldName) {
         // Verificar si es un campo de radio
         const radioInputs = this.contenedor.querySelectorAll(`input[type="radio"][name="${fieldName}"]:checked`);
         if (radioInputs.length > 0) {
             // Si hay un radio button seleccionado, devolver su valor
-            console.log(radioInputs[0].value);
             return radioInputs[0].value;
         } else {
             // Si no es un campo de radio, intentar obtener el valor de otros tipos de input
@@ -186,13 +166,31 @@ export class Formulario {
         }
     }
 
-    ocultarFormItem(inputName) {
+    mostrarOcultarItem(inputName, modo) {
         const input = this.contenedor.querySelector(`[name="${inputName}"]`);
-        if (input) {
+        if (input && modo) {
             input.closest('.formItem').style.display = 'none';
-        } else {
+        } else if(input && !modo){
+            input.closest('.formItem').style.display = 'block';
+        }else{
             console.error(`No se pudo encontrar el campo con el nombre '${inputName}' en el formulario.`);
         }
+    }
+
+    reset() {
+        const form = document.getElementById('miFormulario'); // Suponiendo que el formulario tiene un ID 'miFormulario'
+        form.reset(); // Esto restablecerá todos los campos del formulario a sus valores predeterminados
+    }
+
+    setChecked(fieldName, value) {
+        const radioButtons = document.getElementsByName(fieldName);
+        radioButtons.forEach(button => {
+            if (button.value === value) {
+                button.checked = true;
+            } else {
+                button.checked = false;
+            }
+        });
     }
     
     

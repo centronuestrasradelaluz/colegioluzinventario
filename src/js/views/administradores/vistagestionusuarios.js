@@ -28,153 +28,92 @@ export class VistaGestionUsuarios extends Vista {
        //Botones de la vista
        this.botonVolverAltaUsuarios = this.div.querySelector('#botonVolverAltaUsuarios');
        this.botonVolverAltaUsuarios.addEventListener('click', this.volver.bind(this));
-
-      /* this.botonAnadir = this.div.querySelector('#aceptarUsuarios')
-       this.botonAnadir.addEventListener('click', this.ingresarDatos.bind(this));*/
-
-       //Formulario de la vista e inputs
-      /* this.formAlta = this.div.getElementsByTagName('form')[0];
-       this.inputsAlta = this.formAlta.getElementsByTagName('input');*/
-
-       /*this.divExitoAlta = this.div.querySelector('#divExito');
-       this.divCargandoAlta = this.div.querySelector('#loadingImg');*/
-
        
         //Parametros necesarios para cargar la vista
         this.idUsuario = 0
-        //this.campoEstado = this.div.querySelector("#estado")
         
         this.esModificacion = false
         this.controlador.dameUsuarios("")
         this.mostrarOcultarCrud(true,false,false)
 
- // Crear instancia del formulario dinámico y generar el formulario
- const idContenedor = 'divAltaUsuarios'; // ID del div donde se agregará el formulario
- this.formulario = new Formulario(this, idContenedor);
+        // Crear instancia del formulario dinámico y generar el formulario
+        const idContenedor = 'divAltaUsuarios'; // ID del div donde se agregará el formulario
+        this.formulario = new Formulario(this, idContenedor);
 
- // Crear el botón y agregarlo al formulario
- //this.formulario.crearBotonAnadir(); 
- //this.formulario.contenedor.appendChild(botonAnadir);
 
- // Asignar la función ingresarMantenimientos como manejador de eventos para el botón
- //botonAnadir.addEventListener('click', this.ingresarMantenimientos.bind(this));
-
- // Definir los items del formulario
- this.items = [
-     { label: 'Nombre Usuario (*)', type: 'text', name: 'nombreUsuario', id:'nombreUsuario'},
-     { label: 'Dirección de email (*)', type: 'text', name: 'email', id:'email'},
-     { label: ['Profesional', 'Técnico'], type: 'radio', name: 'tipo', id:'tipo', value1:'', value:['pro', 'adm']},
-     { label: ['Activo', 'Inactivo'], type: 'radio', name: 'estado', id:'estado', value1:'', value:['pro', 'adm']},
-     { label: 'Observaciones', type: 'textarea', name: 'observaciones', id:'observaciones'},
-     { label: 'Contraseña', type: 'password', name: 'contraseña', id:'contraseña'},
-     { label: 'Repita la contraseña (*)', type: 'password', name: 'contraseña2', id:'contraseña2'}
- ];
-     // Generar el formulario dinámico después de la creación de la fila de botones
-     this.formulario.generarFormulario(this.items);
-  
+        // Definir los items del formulario
+        this.items = [
+            { label: 'Nombre Usuario (*)', type: 'text', name: 'nombreUsuario', id:'nombreUsuario'},
+            { label: 'Dirección de email (*)', type: 'text', name: 'email', id:'email'},
+            { label: ['Profesional', 'Técnico'], type: 'radio', name: 'tipo', id:'tipo', value1:'', value:['pro', 'adm']},
+            { label: ['Inactivo', 'Activo'], type: 'radio', name: 'estado', id:'estado', value1:'', value:[0, 1]},
+            { label: 'Observaciones', type: 'textarea', name: 'observaciones', id:'observaciones'},
+            { label: 'Contraseña', type: 'password', name: 'contraseña', id:'contraseña'},
+            { label: 'Repita la contraseña (*)', type: 'password', name: 'contraseña2', id:'contraseña2'}
+        ];
+        // Generar el formulario dinámico después de la creación de la fila de botones
+        this.formulario.generarFormulario(this.items);
+    
     }
-
-    /**
-     * Informar al usuario del alta exitosa.
-     * @param {Boolean} activar Activa o no mensaje éxito.
-     */
-    exitoAlta(activar) {
-        
-
-        if(!this.esModificacion){
-            //this.formAlta.reset();
-           // this.formAlta.classList.remove('was-validated');
-        }
-       
-        //this.divCargandoAlta.style.display = 'none';
-        //this.divExitoAlta.style.display = activar ? 'block' : 'none';
-
-    }
-
 
 
     //metodo para ocultar el crud de la gestion de hijos
 
     mostrarOcultarCrud(listado, alta, modificacion){
+        this.esModificacion = alta && modificacion;
 
-    
-        if (alta && !modificacion){
-            this.esModificacion = false;
-        }
-        if (alta && modificacion){
-            
-            this.esModificacion = true;
-        }
-        if (listado){
-            this.esModificacion = false;
-        }
-
-        this.divAltaUsuarios.style.display = alta ? 'block' : 'none';
+        this.divAltaUsuarios.style.display = alta || modificacion ? 'block' : 'none';
         this.divListadoUsuarios.style.display = listado ? 'block' : 'none';
 
-       
-
-        console.log('modificacion global', this.esModificacion)
+        console.log('modificacion global', this.esModificacion);
     }
     anadir() {
         this.mostrarOcultarCrud(false, true, false);
-        //this.campoEstado.style.display = "none"
+        this.formulario.mostrarOcultarItem("estado", true)
+        this.formulario.setChecked('tipo', 'pro')
     }
 
     modificar(usuario){
+        console.log(usuario)
         this.mostrarOcultarCrud(false,true,true)
-        //this.campoEstado.style.display = "block"
+        this.formulario.mostrarOcultarItem("estado", false)
         this.idUsuario = usuario.id;
-        
         this.formulario.setValue('nombreUsuario', usuario.nombre)
-        this.inputsAlta[1].value = usuario.correo;
         this.formulario.setValue('email', usuario.correo)
-
-       /* if (usuario.rol == "adm"){
-            this.inputsAlta[2].checked = false
-            this.inputsAlta[3].checked = true
-        }
-        if (usuario.rol == "pro"){
-            this.inputsAlta[2].checked = true
-            this.inputsAlta[3].checked = false
-        }
-        if (usuario.estado == 1){
-            this.inputsAlta[4].checked = false
-            this.inputsAlta[5].checked = true
-        }
-        if (usuario.estado == 0){
-            this.inputsAlta[4].checked = true
-            this.inputsAlta[5].checked = false
-        }*/
         this.formulario.setValue('observaciones', usuario.observaciones)
         this.formulario.setValue('contraseña', usuario.contraseña)
         this.formulario.setValue('contraseña2', usuario.contraseña)
-    }
+      
+         // Marcar como seleccionado el botón de radio correspondiente a usuario.rol
+        if (usuario.rol === 'adm' || usuario.rol === 'pro') {
+           
+            if (usuario.rol === 'adm') {
+                this.formulario.setChecked('tipo', 'adm');
+            } else {
+                this.formulario.setChecked('tipo', 'pro');
+            }
+        }
+        if (usuario.estado == 1 || usuario.estado ===0) {
+           
+            if (usuario.estado == 1) {
+                this.formulario.setChecked('estado', '1');
+            } else {
+                this.formulario.setChecked('estado', '0');
+            }
+        }
 
+       
+    }
     volver() {
 
         this.mostrarOcultarCrud(true, false,false)
-
-        //this.formAlta.reset()
-
-        //if(this.divExitoAlta.style.display == 'block'){}
-
-        //this.divExitoAlta.style.display = "none"
-        //this.formAlta.classList.remove('was-validated');
-           
+        this.formulario.reset()
     }
 
     ingresarDatos() {
-       /* let cont;
-        let total = this.inputsAlta.length;*/
 
-      /*  for (cont=0; cont<total; cont++) {
-            if (!this.inputsAlta[cont].checkValidity()) break;
-        }*/
-        
-        //this.inputsAlta[7].setCustomValidity('');
-        //this.formAlta.classList.add('was-validated');
-       // if (cont == total) {
+        //FALTA VALIDAD
+     
             // Check de contraseñas
             if (this.formulario.getValue('contraseña') === this.formulario.getValue('contraseña2')) {
                 if(this.esModificacion){
@@ -182,8 +121,8 @@ export class VistaGestionUsuarios extends Vista {
                         'id': this.idUsuario,
                         'nombre': this.formulario.getValue('nombreUsuario'),
                         'correo': this.formulario.getValue('email'),
-                        'rol': true,
-                        'estado': false,
+                        'rol': this.formulario.getValue('tipo'),
+                        'estado': this.formulario.getValue('estado'),
                         'observaciones': this.formulario.getValue('observaciones'),
                         'contrasenia': this.formulario.getValue('contraseña')
                     };
@@ -205,8 +144,7 @@ export class VistaGestionUsuarios extends Vista {
                 }
             }
             else {
-               /* this.inputsAlta[7].setCustomValidity('Las contraseñas no coindicen.');
-                this.inputsAlta[7].reportValidity();*/
+                console.log("Las contraseñas no coinciden")
             }
         
     }
