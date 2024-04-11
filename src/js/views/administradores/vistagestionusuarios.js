@@ -63,8 +63,8 @@ export class VistaGestionUsuarios extends Vista {
  this.items = [
      { label: 'Nombre Usuario (*)', type: 'text', name: 'nombreUsuario', id:'nombreUsuario'},
      { label: 'Dirección de email (*)', type: 'text', name: 'email', id:'email'},
-     { label: ['Profesional', 'Técnico'], type: 'radio', name: 'tipo', id:'tipo'},
-     { label: ['Activo', 'Inactivo'], type: 'radio', name: 'estado', id:'estado'},
+     { label: ['Profesional', 'Técnico'], type: 'radio', name: 'tipo', id:'tipo', value1:'', value:['pro', 'adm']},
+     { label: ['Activo', 'Inactivo'], type: 'radio', name: 'estado', id:'estado', value1:'', value:['pro', 'adm']},
      { label: 'Observaciones', type: 'textarea', name: 'observaciones', id:'observaciones'},
      { label: 'Contraseña', type: 'password', name: 'contraseña', id:'contraseña'},
      { label: 'Repita la contraseña (*)', type: 'password', name: 'contraseña2', id:'contraseña2'}
@@ -82,12 +82,12 @@ export class VistaGestionUsuarios extends Vista {
         
 
         if(!this.esModificacion){
-            this.formAlta.reset();
-            this.formAlta.classList.remove('was-validated');
+            //this.formAlta.reset();
+           // this.formAlta.classList.remove('was-validated');
         }
        
-        this.divCargandoAlta.style.display = 'none';
-        this.divExitoAlta.style.display = activar ? 'block' : 'none';
+        //this.divCargandoAlta.style.display = 'none';
+        //this.divExitoAlta.style.display = activar ? 'block' : 'none';
 
     }
 
@@ -196,7 +196,7 @@ export class VistaGestionUsuarios extends Vista {
                     const datos = {
                         'nombre': this.formulario.getValue('nombreUsuario'),
                         'correo': this.formulario.getValue('email'),
-                        'rol': 1,
+                        'rol': this.formulario.getValue('tipo'),
                         'observaciones': this.formulario.getValue('observaciones'),
                         'contrasenia': this.formulario.getValue('contraseña')
                     };

@@ -9,7 +9,7 @@ export class Formulario {
         this.contenedor = document.getElementById(idContenedor);
     }
 
-    crearFormItem(labelText, inputType, inputName, inputId, selectOptions = []) {
+    crearFormItem(labelText, inputType, inputName, inputId, selectOptions = [], inputValue=[]) {
         const divFormItem = document.createElement('div');
         divFormItem.classList.add('formItem');
     
@@ -42,13 +42,14 @@ export class Formulario {
             inputElement.name = inputName;
             inputElement.rows = "5";
         } else if (inputType === 'radio') {
-            labelText.forEach(texto => {
+            labelText.forEach((texto, index) => {
                 label = document.createElement('label');
                 label.textContent = texto;
-    
+                console.log(inputValue[index])
                 inputElement = document.createElement('input');
                 inputElement.type = inputType;
                 inputElement.name = inputName;
+                inputElement.value = inputValue[index]
                 label.appendChild(inputElement);
     
                 divFormItem.appendChild(label);
@@ -86,7 +87,7 @@ export class Formulario {
         formulario.noValidate = true;
     
         items.forEach(item => {
-            formulario.appendChild(this.crearFormItem(item.label, item.type, item.name, item.id, item.options));
+            formulario.appendChild(this.crearFormItem(item.label, item.type, item.name, item.id, item.options, item.value));
         });
         const divFormItem = document.createElement('div');
         divFormItem.classList.add('formItem');
@@ -144,7 +145,7 @@ export class Formulario {
         boton.addEventListener('click', this.vista.ingresarDatos.bind(this.vista));
         return boton;
     }
-    getValue(fieldName) {
+   /* getValue(fieldName) {
         const input = this.contenedor.querySelector(`[name="${fieldName}"]`);
         if (input) {
             console.log(input.value)
@@ -153,19 +154,29 @@ export class Formulario {
             console.error(`No se pudo encontrar el campo con el nombre '${fieldName}' en el formulario.`);
             return null;
         }
-
-         // Verificar si es un campo de radio
-    const radioInputs = this.contenedor.querySelectorAll(`input[type="radio"][name="${fieldName}"]:checked`);
-    if (radioInputs.length > 0) {
-        // Si hay un radio button seleccionado, devolver su valor
-        console.log(radioInputs[0].value);
-        return radioInputs[0].value;
-    } else {
-        // Si no hay radio button seleccionado, mostrar un error
-        console.error(`No se pudo encontrar un radio button seleccionado con el nombre '${fieldName}' en el formulario.`);
-        return null;
+    }*/
+    getValue(fieldName) {
+        // Verificar si es un campo de radio
+        const radioInputs = this.contenedor.querySelectorAll(`input[type="radio"][name="${fieldName}"]:checked`);
+        if (radioInputs.length > 0) {
+            // Si hay un radio button seleccionado, devolver su valor
+            console.log(radioInputs[0].value);
+            return radioInputs[0].value;
+        } else {
+            // Si no es un campo de radio, intentar obtener el valor de otros tipos de input
+            const input = this.contenedor.querySelector(`[name="${fieldName}"]`);
+            if (input) {
+                // Si se encuentra un input con el nombre especificado, devolver su valor
+                console.log(input.value);
+                return input.value;
+            } else {
+                // Si no se encuentra ningún campo con el nombre especificado, mostrar un error
+                console.error(`No se pudo encontrar un campo con el nombre '${fieldName}' en el formulario.`);
+                return null;
+            }
+        }
     }
-    }
+    
     setValue(fieldName, value) {
         const input = this.contenedor.querySelector(`[name="${fieldName}"]`);
         if (input) {
