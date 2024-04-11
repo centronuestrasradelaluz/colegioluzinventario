@@ -53,7 +53,7 @@ class ControladorProfesionales {
     ingresarMantenimientos(datos) {
     
         //const datos = this.vistaInicio.formulario.obtenerDatos();
-        datos.idUsuario = this.#usuario.id
+        datos.nombreCreador = this.#usuario.nombre
           // Enviar los datos al método correspondiente en el modelo
           console.log(datos)
           this.modelo.ingresarMantenimiento(datos)
@@ -81,8 +81,8 @@ class ControladorProfesionales {
     }
 
      dameMantenimientos(){
-        const id = this.#usuario.id
-        this.modelo.dameMantenimientosUsuario(id)
+        const nombreCreador = this.#usuario.nombre
+        this.modelo.dameMantenimientosUsuario(nombreCreador)
         .then(mantenimientos => {
             this.vistaInicio.cargarListado(mantenimientos);
         })

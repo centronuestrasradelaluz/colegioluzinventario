@@ -41,12 +41,6 @@ export class Modelo {
        
         return Rest.post('inventario', [], datos, false);
     }
-
-    /*eliminarEquipo(id) {
-        
-        return Rest.delete('inventario', [id]);
-    }*/
-
     modificarEquipos(datos) {
 
         return Rest.put('inventario', [], datos, false);
@@ -62,10 +56,10 @@ export class Modelo {
         return Rest.get('mantenimiento', [texto], []);
     }
 
-    dameMantenimientosUsuario(id){
+    dameMantenimientosUsuario(nombreCreador){
 
         const queryParams = new Map();
-        queryParams.set('id', id)
+        queryParams.set('nombreCreador', nombreCreador)
         return Rest.get('mantenimiento', [], queryParams);
     }
 
@@ -84,12 +78,5 @@ export class Modelo {
 
         return Rest.put('mantenimiento',[], datos, false)
     }
-
-
-
-
-
-
-   
 
 }

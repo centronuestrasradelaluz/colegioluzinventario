@@ -21,7 +21,6 @@ class ControladorAdministradores {
      */
     iniciar() {
         this.#usuario = JSON.parse(sessionStorage.getItem('usuario'));
-
         // Comprobar login
         if (!this.#usuario)
             window.location.href = 'login.html';
@@ -228,7 +227,8 @@ class ControladorAdministradores {
     }
 
     ingresarMantenimientos(datos) {
-       datos.idUsuario = this.#usuario.id
+       datos.nombreCreador = this.#usuario.nombre
+       
         this.modelo.ingresarMantenimiento(datos)
          .then(() => {
             // this.vistaGestionHijos.bloquearBotonesAlta(false);

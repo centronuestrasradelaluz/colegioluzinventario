@@ -54,7 +54,6 @@ CREATE TABLE Equipo(
     codigoEquipo varchar(10) NULL,
     proveedor varchar(255) NULL,
     marca varchar(255) NULL,
-    monitor varchar(255) NULL,
 	ram varchar(255) NULL,
 	discoDuro varchar(255) NULL,
 	procesador varchar(255) NULL,
@@ -80,8 +79,8 @@ CREATE TABLE Equipo(
 CREATE TABLE Mantenimiento(
 	id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	idEquipo SMALLINT UNSIGNED NOT NULL,
-	idUsuario SMALLINT UNSIGNED NOT NULL,
 	idAsunto TINYINT UNSIGNED NOT NULL,
+	nombreCreador varchar(255) NOT NULL,
 	fechaIncidencia DATE NOT NULL,
 	descripcion varchar(500) NULL,
 	fechaArreglo DATE NULL,
@@ -91,9 +90,8 @@ CREATE TABLE Mantenimiento(
 	/*ON DELETE CASCADE DUDASs*/
 	CONSTRAINT PK_idMantenimiento PRIMARY KEY (id),
 	CONSTRAINT FK_Equipo_id FOREIGN KEY (idEquipo) REFERENCES Equipo(id),
-    CONSTRAINT FK_Asunto_id FOREIGN KEY (idAsunto) REFERENCES Asunto(id),
-	CONSTRAINT FK_Usuario_id FOREIGN KEY (idUsuario) REFERENCES Usuario(id)
-	
+    CONSTRAINT FK_Asunto_id FOREIGN KEY (idAsunto) REFERENCES Asunto(id)
+
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 INSERT INTO SistemaOperativo (nombre) 
@@ -118,7 +116,8 @@ VALUES ('Torre'),
 		('Switch'),
 		('Portátil'),
 		('Impresora'),
-		('Tablet');
+		('Tablet'),
+		('Monitor');
 INSERT INTO Asunto (frase) 
 VALUES ('El ordenador no enciende.'),
 		('Sin señal de internet.'),

@@ -261,7 +261,7 @@ export class VistaGestionMantenimiento extends Vista {
 
                 let tdUsuario = document.createElement('td');
                 tr.appendChild(tdUsuario);
-                tdUsuario.textContent = mantenimiento.nombre;
+                tdUsuario.textContent = mantenimiento.nombreCreador;
 
                 let tdAsunto = document.createElement('td');
                 tr.appendChild(tdAsunto);

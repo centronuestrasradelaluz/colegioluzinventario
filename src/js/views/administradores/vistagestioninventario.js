@@ -147,15 +147,14 @@ export class VistaGestionInventario extends Vista {
         this.inputsAlta[0].value = equipo.codigoEquipo;
         this.inputsAlta[1].value = equipo.proveedor;
         this.inputsAlta[2].value = equipo.marca;
-        this.inputsAlta[3].value = equipo.monitor;
-        this.inputsAlta[4].value = equipo.discoDuro;
-        this.inputsAlta[5].value = equipo.procesador;
-        this.inputsAlta[6].value = equipo.ubicacion;
-        this.inputsAlta[7].value = equipo.ram;
-        this.inputsAlta[8].value = equipo.grafica;
-        this.inputsAlta[9].value = equipo.fechaCompra;
-        this.inputsAlta[10].value = equipo.observaciones;
-        this.inputsAlta[11].value = equipo.valorEquipo;
+        this.inputsAlta[3].value = equipo.discoDuro;
+        this.inputsAlta[4].value = equipo.procesador;
+        this.inputsAlta[5].value = equipo.ubicacion;
+        this.inputsAlta[6].value = equipo.ram;
+        this.inputsAlta[7].value = equipo.grafica;
+        this.inputsAlta[8].value = equipo.fechaCompra;
+        this.inputsAlta[9].value = equipo.observaciones;
+        this.inputsAlta[10].value = equipo.valorEquipo;
 
         this.selectsAlta[0].value = equipo.idLinea;
         this.selectsAlta[1].value = equipo.idSistemaOperativo;
@@ -194,15 +193,14 @@ export class VistaGestionInventario extends Vista {
                 'codigoEquipo': this.inputsAlta[0].value,
                 'proveedor': this.inputsAlta[1].value,
                 'marca': this.inputsAlta[2].value,
-                'monitor': this.inputsAlta[3].value,
-                'discoDuro': this.inputsAlta[4].value,
-                'procesador': this.inputsAlta[5].value,
-                'ubicacion': this.inputsAlta[6].value,
-                'ram': this.inputsAlta[7].value,
-                'grafica': this.inputsAlta[8].value,
-                'fechaCompra': this.inputsAlta[9].value,
-                'observaciones': this.inputsAlta[10].value,
-                'valorEquipo': parseFloat(this.inputsAlta[11].value),
+                'discoDuro': this.inputsAlta[3].value,
+                'procesador': this.inputsAlta[4].value,
+                'ubicacion': this.inputsAlta[5].value,
+                'ram': this.inputsAlta[6].value,
+                'grafica': this.inputsAlta[7].value,
+                'fechaCompra': this.inputsAlta[8].value,
+                'observaciones': this.inputsAlta[9].value,
+                'valorEquipo': parseFloat(this.inputsAlta[10].value),
                 'idLinea': parseInt(this.selectsAlta[0].value),
                 'idSistemaOperativo': parseInt(this.selectsAlta[1].value),
                 'idTipoEquipo': parseInt(this.selectsAlta[2].value)
@@ -215,15 +213,14 @@ export class VistaGestionInventario extends Vista {
                 'codigoEquipo': this.inputsAlta[0].value,
                 'proveedor': this.inputsAlta[1].value,
                 'marca': this.inputsAlta[2].value,
-                'monitor': this.inputsAlta[3].value,
-                'discoDuro': this.inputsAlta[4].value,
-                'procesador': this.inputsAlta[5].value,
-                'ubicacion': this.inputsAlta[6].value,
-                'ram': this.inputsAlta[7].value,
-                'grafica': this.inputsAlta[8].value,
-                'fechaCompra': this.inputsAlta[9].value,
-                'observaciones': this.inputsAlta[10].value,
-                'valorEquipo': parseFloat(this.inputsAlta[11].value),
+                'discoDuro': this.inputsAlta[3].value,
+                'procesador': this.inputsAlta[4].value,
+                'ubicacion': this.inputsAlta[5].value,
+                'ram': this.inputsAlta[6].value,
+                'grafica': this.inputsAlta[7].value,
+                'fechaCompra': this.inputsAlta[8].value,
+                'observaciones': this.inputsAlta[9].value,
+                'valorEquipo': parseFloat(this.inputsAlta[10].value),
                 'idLinea': parseInt(this.selectsAlta[0].value),
                 'idSistemaOperativo': parseInt(this.selectsAlta[1].value),
                 'idTipoEquipo': parseInt(this.selectsAlta[2].value)
@@ -461,7 +458,7 @@ export class VistaGestionInventario extends Vista {
         const equipo = equipoConMantenimiento.equipo
 
         const propiedadesAMostrar = ['codigoEquipo', 'discoDuro', 'fechaCompra',
-         'grafica', 'marca', 'monitor', 'observaciones', 'procesador', 'proveedor', 'ram', 'ubicacion', 'valorEquipo'];
+         'grafica', 'marca', 'observaciones', 'procesador', 'proveedor', 'ram', 'ubicacion', 'valorEquipo'];
         
          const mantenimiento = equipoConMantenimiento.mantenimientos
         console.log(mantenimiento)

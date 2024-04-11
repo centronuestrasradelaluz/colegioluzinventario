@@ -18,8 +18,8 @@
                 header('HTTP/1.1 401 Unauthorized');
                 die();
             }
-               if (isset($queryParams['id'])){
-                $mantenimientos = DAOUsuario::obtenerMantenimientosUsuario($queryParams['id']);
+               if (isset($queryParams['nombreCreador'])){
+                $mantenimientos = DAOUsuario::obtenerMantenimientosUsuario($queryParams['nombreCreador']);
                 sleep(1);
                }
                else

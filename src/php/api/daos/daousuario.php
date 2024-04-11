@@ -207,14 +207,14 @@
                 throw new Exception('No es posible iniciar la transacción.');
            
             if($busqueda == "null"){
-                $sql = 'SELECT id, codigoEquipo, proveedor, marca, monitor, ram, discoDuro, ubicacion,';
+                $sql = 'SELECT id, codigoEquipo, proveedor, marca, ram, discoDuro, ubicacion,';
                 $sql .= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idSistemaOperativo';
                 $sql .= ' FROM Equipo';
                 $equipos = BD::seleccionar($sql, null);
 
             }else{
                
-                $sql = 'SELECT id, codigoEquipo, proveedor, marca, monitor, ram, discoDuro, procesador, ubicacion,';
+                $sql = 'SELECT id, codigoEquipo, proveedor, marca, ram, discoDuro, procesador, ubicacion,';
                 $sql .= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idTipoEquipo, idSistemaOperativo';
                 $sql .= ' FROM Equipo';
                 $sql .= ' WHERE codigoEquipo';
@@ -323,9 +323,9 @@
          * @return int ID de la fila insertada.
          */
         public static function altaEquipo($datos) {
-            $sql = 'INSERT INTO Equipo(codigoEquipo, proveedor, marca, monitor, ram, discoDuro, procesador, ubicacion,';
+            $sql = 'INSERT INTO Equipo(codigoEquipo, proveedor, marca, ram, discoDuro, procesador, ubicacion,';
             $sql .= ' grafica, fechaCompra, observaciones, valorEquipo, idLinea, idTipoEquipo, idSistemaOperativo)';
-            $sql .= ' VALUES(:codigoEquipo, :proveedor, :marca, :monitor, :ram, :discoDuro, :procesador, :ubicacion,';
+            $sql .= ' VALUES(:codigoEquipo, :proveedor, :marca, :ram, :discoDuro, :procesador, :ubicacion,';
             $sql .= ' :grafica, :fechaCompra, :observaciones, :valorEquipo, :idLinea, :idTipoEquipo, :idSistemaOperativo)';
 
 
@@ -333,7 +333,6 @@
                 'codigoEquipo'=> $datos->codigoEquipo,
                 'proveedor'=> $datos->proveedor,
                 'marca'=> $datos->marca,
-                'monitor'=> $datos->monitor,
                 'ram'=> $datos->ram,
                 'discoDuro'=> $datos->discoDuro,
                 'procesador'=> $datos->procesador,
@@ -361,7 +360,7 @@
 
         public static function modificarEquipo($datos) {
             $sql = 'UPDATE Equipo SET codigoEquipo=:codigoEquipo, proveedor=:proveedor, marca=:marca,';
-            $sql .= ' monitor=:monitor, ram=:ram, discoDuro=:discoDuro, procesador=:procesador, ubicacion=:ubicacion, grafica=:grafica,';
+            $sql .= ' ram=:ram, discoDuro=:discoDuro, procesador=:procesador, ubicacion=:ubicacion, grafica=:grafica,';
             $sql .= ' fechaCompra=:fechaCompra, observaciones=:observaciones, valorEquipo=:valorEquipo,';
             $sql .= ' idLinea=:idLinea, idTipoEquipo=:idTipoEquipo, idSistemaOperativo=:idSistemaOperativo';
             $sql .= ' WHERE id=:id';
@@ -372,7 +371,6 @@
                 'codigoEquipo'=> $datos->codigoEquipo,
                 'proveedor'=> $datos->proveedor,
                 'marca'=> $datos->marca,
-                'monitor'=> $datos->monitor,
                 'ram'=> $datos->ram,
                 'discoDuro'=> $datos->discoDuro,
                 'procesador'=> $datos->procesador,
@@ -395,19 +393,17 @@
             throw new Exception('No es posible iniciar la transacción.');
             
             if ($busqueda == "null"){
-                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo ,usuario.nombre, asunto.frase'; 
+                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo , nombreCreador, asunto.frase'; 
                 $sql .= ' FROM Mantenimiento';
                 $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
-                $sql .= ' INNER JOIN Usuario on usuario.id = mantenimiento.idusuario';
                 $sql .= ' INNER JOIN Asunto on asunto.id = mantenimiento.idAsunto';
 
                 return BD::seleccionar($sql, null);
             }
             else{
-                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo, usuario.nombre, asunto.frase'; 
+                $sql = 'SELECT mantenimiento.id, idEquipo, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo, nombreCreador, asunto.frase'; 
                 $sql .= ' FROM Mantenimiento';
                 $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
-                $sql .= ' INNER JOIN Usuario on usuario.id = mantenimiento.idusuario';
                 $sql .= ' INNER JOIN Asunto on asunto.id = mantenimiento.idAsunto';
                 $sql .= ' WHERE equipo.codigoEquipo';
                 $sql .= ' LIKE :busqueda';
@@ -418,17 +414,17 @@
            
         }
 
-        public static function obtenerMantenimientosUsuario($id){
+        public static function obtenerMantenimientosUsuario($nombreCreador){
             if (!BD::iniciarTransaccion())
             throw new Exception('No es posible iniciar la transacción.');
 
-            $sql = 'SELECT mantenimiento.id, idEquipo, idUsuario, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo, asunto.frase'; 
+            $sql = 'SELECT mantenimiento.id, idEquipo, nombreCreador, fechaIncidencia, descripcion, fechaArreglo, nombreArregla, solucion , equipo.codigoEquipo, asunto.frase'; 
             $sql .= ' FROM Mantenimiento';
             $sql .= ' INNER JOIN Equipo on equipo.id = mantenimiento.idequipo';
             $sql .= ' INNER JOIN Asunto on asunto.id = mantenimiento.idAsunto';
-            $sql .= ' WHERE idUsuario = :id';
+            $sql .= ' WHERE nombreCreador = :nombreCreador';
 
-            $params = array('id' => $id);
+            $params = array('nombreCreador' => $nombreCreador);
 
             return BD::seleccionar($sql, $params);
 
@@ -437,13 +433,13 @@
         public static function altaMantenimiento($datos){
 
 
-            $sql = 'INSERT INTO Mantenimiento(idEquipo, idUsuario, idAsunto, fechaIncidencia, descripcion)';
-            $sql .= ' VALUES(:idEquipo,:idUsuario,:idAsunto,CURDATE(),:descripcion)';
+            $sql = 'INSERT INTO Mantenimiento(idEquipo, idAsunto, nombreCreador, fechaIncidencia, descripcion)';
+            $sql .= ' VALUES(:idEquipo,:idAsunto, :nombreCreador, CURDATE(),:descripcion)';
 
 
             $params = array(
                 'idEquipo' => $datos->idEquipo,
-                'idUsuario'=>$datos->idUsuario,
+                'nombreCreador'=>$datos->nombreCreador,
                 'idAsunto'=>$datos->idAsunto,
                 'descripcion' =>$datos->descripcion
 

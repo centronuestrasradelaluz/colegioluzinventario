@@ -9,11 +9,11 @@ INSERT INTO `Usuario` (`nombre`, `correo`, `contrasenia`, `estado`, `rol`) VALUE
 
 INSERT INTO `Usuario` (`nombre`, `correo`, `contrasenia`, `estado`, `rol`) VALUES ('JuanJo Pizarro Pérez', 'email2@gmail.com', '123456789', 0, 'pro');
 
-INSERT INTO `Equipo` (`id`, `codigoEquipo`, `proveedor`, `marca`, `monitor`, `ram`, `discoDuro`, `procesador`, `ubicacion`, `grafica`, `fechaCompra`, `observaciones`,`valorEquipo`, `idLinea`, `idTipoEquipo`, `idSistemaOperativo`) 
-VALUES(1000, 'N7-09', 'nosesabe', 'nosesabe', 'nosesabe','nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'fecha','observaciones', 200, 1, 1, 1);
+INSERT INTO `Equipo` (`id`, `codigoEquipo`, `proveedor`, `marca`, `ram`, `discoDuro`, `procesador`, `ubicacion`, `grafica`, `fechaCompra`, `observaciones`,`valorEquipo`, `idLinea`, `idTipoEquipo`, `idSistemaOperativo`) 
+VALUES(1000, 'N7-09', 'nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'nosesabe', 'fecha','observaciones', 200, 1, 1, 1);
 
 
-INSERT INTO `Mantenimiento` (idEquipo, idUsuario, idAsunto, fechaIncidencia) VALUES (1000, 2, 1, '2024-03-05');
-INSERT INTO `Mantenimiento` (idEquipo, idUsuario, idAsunto, fechaIncidencia) VALUES (1000, 2, 1, '2024-02-05');
+INSERT INTO `Mantenimiento` (idEquipo, nombreCreador, idAsunto, fechaIncidencia) VALUES (1000, 'Sergio Rivera Salgado', 1, '2024-03-05');
+INSERT INTO `Mantenimiento` (idEquipo, nombreCreador, idAsunto, fechaIncidencia) VALUES (1000, 'Sergio Rivera Salgado', 1, '2024-02-05');
 
 --https://www.youtube.com/watch?v=n0bLPcR0JAc
