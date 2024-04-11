@@ -53,10 +53,6 @@ export class VistaGestionInventario extends Vista {
        this.paginaActual = 0;
        this.equipos = []
 
-
-      /* this.selectLinea = this.div.querySelector("#selectLinea")
-       this.selectOS = this.div.querySelector("#selectSistemaOperativo")
-       this.selectTE = this.div.querySelector("#selectTipoEquipo")*/
         this.controlador.dameEquipos("")
        
         this.mostrarOcultarCrud(true,false,false,false)
@@ -74,17 +70,16 @@ export class VistaGestionInventario extends Vista {
             { label: 'Gráfica', type: 'text', name: 'txtGrafica', id:'txtGrafica'},
             { label: 'Ram', type: 'text', name: 'txtRam', id:'txtRam'},
             { label: 'Observaciones', type: 'textarea', name: 'txtObservaciones', id:'txtObservaciones'},
-            { label: 'Fecha de Compra', type: 'date', name: 'txtFechaCompra', id:'txtFechaCOmpra'},
+            { label: 'Fecha de Compra', type: 'date', name: 'txtFechaCompra', id:'txtFechaCompra'},
             { label: 'Línea', type: 'select', name: 'selectLinea', id:'selectLinea', options:[{value:'-1', text:''}]},
             { label: 'Sistema Operativo', type: 'select', name: 'selectSistemaOperativo', id:'selectSistemaOperativo', options:[{value:'-1', text:''}]},
             { label: 'Tipo de Equipo', type: 'select', name: 'selectTipoEquipo', id:'selectTipoEquipo', options:[{value:'-1', text:''}]},
             { label: 'Valor del Equipo', type: 'number', name: 'txtValorEquipo', id:'txtValorEquipo'},
 
         ];
-        // Generar el formulario dinámico después de la creación de la fila de botones
-       // this.formulario.generarFormulario(this.items);
+     
 
-        
+     
     }
     
      /**
@@ -129,7 +124,7 @@ export class VistaGestionInventario extends Vista {
     }
     anadir() {
         this.mostrarOcultarCrud(false, true, false,false);
-       
+     
     }
     //modificar arrelo a los campos de los equipos
     modificar(equipo){
@@ -158,7 +153,7 @@ export class VistaGestionInventario extends Vista {
 
         this.mostrarOcultarCrud(true, false,false,false)
 
-        this.formulario.reset()
+        this.formulario.reseteo()
 
        /* if(this.divExitoAlta.style.display == 'block'){}
         
@@ -180,8 +175,8 @@ export class VistaGestionInventario extends Vista {
                 'ubicacion': this.formulario.getValue(("txtUbicacion")),
                 'ram': this.formulario.getValue(("txtRam")),
                 'grafica':this.formulario.getValue(("txtGrafica")),
-                'fechaCompra': this.formulario.getValue(("txtObservaciones")),
-                'observaciones': this.formulario.getValue(("txtFechaCompra")),
+                'fechaCompra': this.formulario.getValue(("txtFechaCompra")),
+                'observaciones': this.formulario.getValue(("txtObservaciones")),
                 'valorEquipo': this.formulario.getValue(("txtValorEquipo")),
 
                 'idLinea': this.formulario.getValue(("selectLinea")),

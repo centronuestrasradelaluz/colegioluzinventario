@@ -85,7 +85,7 @@ export class Formulario {
         formulario.classList.add('needs-validation');
         formulario.autocomplete = 'off';
         formulario.noValidate = true;
-        formulario.id = 'miFormulario'
+        formulario.classList.add('formulario') 
     
         items.forEach(item => {
             formulario.appendChild(this.crearFormItem(item.label, item.type, item.name, item.id, item.options, item.value));
@@ -179,9 +179,11 @@ export class Formulario {
         }
     }
 
-    reset() {
-        const form = document.getElementById('miFormulario'); // Suponiendo que el formulario tiene un ID 'miFormulario'
-        form.reset(); // Esto restablecerá todos los campos del formulario a sus valores predeterminados
+    reseteo() {
+        const formularios = document.getElementsByClassName('formulario');
+        for (let i = 0; i < formularios.length; i++) {
+            formularios[i].reset();
+        }
     }
 
     setChecked(fieldName, value) {

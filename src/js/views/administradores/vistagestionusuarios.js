@@ -107,7 +107,7 @@ export class VistaGestionUsuarios extends Vista {
     volver() {
 
         this.mostrarOcultarCrud(true, false,false)
-        this.formulario.reset()
+        this.formulario.reseteo()
     }
 
     ingresarDatos() {
